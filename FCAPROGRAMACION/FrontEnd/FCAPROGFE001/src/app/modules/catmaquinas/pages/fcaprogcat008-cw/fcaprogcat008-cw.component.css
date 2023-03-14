@@ -1,0 +1,42 @@
+.tripulaciones {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 15em;
+  }
+  .tripulaciones li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: rgb(252, 252, 252);
+    margin: .1em;
+    padding: 0 0;
+    height: 1.6em;
+    border-radius: 2px;
+  }
+  .tripulaciones li:hover {
+    color: #033f5e;
+    background-color: #DDD;
+    left: 0;
+  }
+  .tripulaciones li.selected {
+    background-color: #038ccc;
+    color: white;
+  }
+  .tripulaciones li.selected:hover {
+    background-color: #BBD8DC;
+    color: rgb(7, 7, 7);
+  }
+  .caja{
+      height: 150px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+  }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

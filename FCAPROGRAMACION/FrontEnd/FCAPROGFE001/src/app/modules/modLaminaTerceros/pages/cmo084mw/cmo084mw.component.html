@@ -1,0 +1,184 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">CMO084MW - Captura de Recepcion de Lamina Terceros.</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="fieldset">
+                            <legend>Datos Importantes</legend>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5 col-lg-5 form-group"> 
+                                    <label>ALMACEN: </label>
+                                    <select name ="xx" class="form-control form-control" [(ngModel)]="filtros.orialmacen"  >
+                                        <option value="undefined">Seleccione un Almacen</option>  
+                                        <option  [ngValue]="almacen.clave" *ngFor="let almacen of Almacen" >{{almacen.nombre}}</option>
+                                    </select> 
+                                    <!--[(ngModel)]="DatFormulario.tipoproveedor"
+                                    <select name ="strproveedor" class="form-control form-control"   >
+                                        <option value="undefined">Seleccione Almacen</option>
+                                        <option value="250">250 - ADJUNTO COMPRA DE LAMINA EXT</option>
+                                    </select> -->
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3 col-lg-3 form-group">
+                                    <label>OP: </label> 
+                                    <div class="input-group">
+                                        <input name="strfolio" type="text"  [(ngModel)]="filtros.oriop" class="form-control form-control-sm"  placeholder="OP a Buscar"/>
+                                        <span class="input-group-btn">
+                                            <button id="btnfolio" class="btn btn-primary" type="button" (click)="BuscarOp()"> 
+                                              <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
+                                      </div>
+                                    </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-10 form-group"> <label>CLIENTE: </label> <input name="strcliente"  [(ngModel)]="tbllamterresultado.nombrecli" disabled type="text" class="form-control form-control-sm"  placeholder="Nombre Cliente"   /> </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-10 col-lg-10 form-group"> <label>ARTICULO: </label> <input name="strarticulo" [(ngModel)]="tbllamterresultado.nombreart"  disabled type="text" class="form-control form-control-sm"  placeholder="Nombre Articulo"  /> </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                        <label>INDUSTRIA: </label> 
+                                        <input name="strindustria"  [(ngModel)]="tbllamterresultado.industria"  type="text" class="form-control form-control-sm" placeholder="Industria"  disabled/>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                        <label>RESISTENCIA: </label> 
+                                        <input name="strresistencia"  [(ngModel)]="tbllamterresultado.resistencia"  type="text" class="form-control form-control-sm"  placeholder="Resistencia"  disabled />
+                                    </div>
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                        <label>FLAUTA: </label> 
+                                        <input name="strflauta"  [(ngModel)]="tbllamterresultado.flauta" type="text" class="form-control form-control-sm"  placeholder="Flauta" disabled/>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                        <label>LARGO: </label> 
+                                        <input name="strlargo"  [(ngModel)]="tbllamterresultado.largolamina"  type="text" class="form-control form-control-sm" placeholder="Larco" disabled />
+                                    </div>
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                        <label>ANCHO: </label> 
+                                        <input name="strancho"  [(ngModel)]="tbllamterresultado.ancholamina"  type="text" class="form-control form-control-sm"  placeholder="Ancho" disabled />
+                                    </div>
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                        <label>SALDO: </label> 
+                                        <input name="strsaldo" [(ngModel)]="tbllamterresultado.saldo"   type="text" class="form-control form-control-sm"  placeholder="Saldo" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label>SOLICITADO: </label> 
+                                        <input name="strsolicitado"  [(ngModel)]="tbllamterresultado.cantidad" disabled type="text" class="form-control form-control-sm"  placeholder="Solicitado"  />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label>CANTIDAD: </label> 
+                                        <input name="strcantidad"  [(ngModel)]="filtros.cantransferir"  type="text" class="form-control form-control-sm"  placeholder="Cantidad"  />
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 10px;">
+                                </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-success float-right"    (click)="btnGuardar()"> Cancelar</button>
+                    </div>
+                    <div class="col-7">
+                        <button type="button" class="btn btn-success float-right"    (click)="btnGuardar()"> Guardar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <small>CMO084MW - Captura de Recepcion de Lamina Terceros.</small>
+                    <small> Versión: 07.03.2022.1</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+
+<ng-modal id="Modal" [Size]="'lg'" [Titulo]="'CAPTURA DE VELOCIDAD DE MAQUINAS'" [IconoTitulo] = "IconoTitulo" #mdlparomaquina>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px;">
+                <label>Maquina:</label>   
+                <select name ="xx" class="form-control form-control" [(ngModel)]="filtros.clavemaquina"  >
+                    <option value="undefined">Seleccione una Maquina</option>  
+                    <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+                <label>Velocidad:</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Velocidad" [(ngModel)]="intVelocidadStd" />
+            </div>            
+        </div>
+    </div>
+    
+    <div class="modal-footer ">
+        <button type="button " class="btn btn-danger" (click)="PopupbtnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+        <button type="button " class="btn btn-success" (click)="PopupbtnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+    </div>
+
+</ng-modal>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Busqueda de Articulos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3 form-group">
+                <label>Clave Articulo:</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Clave Cliente" [(ngModel)]="busquedaArticuloCodigo" >
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+                <label>Nombre Articulo:</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Nombre Cliente"  [(ngModel)]="busquedaArticuloNombre"/>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 form-group btnpading">
+                <button class="btn btn-info btn-sm" (click)="buscarArticulos()">
+                    <i class="fa fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div class="row ">
+                <div class="col-12 ">
+                    <grid-ss #gridBuscarArticulos  [serviceFunction]="articuloespserviceService.getArticulos" [rowsPerPage]="7" [columnDefs]="columnBuscar" [Filters]="filtros" [enablePagination]="true">
+                    </grid-ss>
+
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="modal-footer"></div>
+</ng-template>
+
+-->

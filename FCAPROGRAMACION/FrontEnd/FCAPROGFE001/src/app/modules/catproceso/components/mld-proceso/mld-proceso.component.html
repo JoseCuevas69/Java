@@ -1,0 +1,91 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <lista-tipomaquina [label]="'Tipo Máquina:'" [Value]="DatFormulario.tipoMaquina" (ValueChange)="ChangeTipoMaquina($event)" [disabled]="disTipoMaquina" ></lista-tipomaquina>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Clave Proceso:'" [type]="'text'" [(Data)]="DatFormulario.claveProceso" (keyup)="keyupSoloMayus($event)" [style]="'text-transform:uppercase;'" [maxlength]="'10'" [(required)]="CamposObligatorios.claveProceso"  [Disabled]="disClaveProceso"></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <input-camposobligatorios [Titulo]="'Descripción:'" [type]="'text'" [(Data)]="DatFormulario.descripcion"
+                [maxlength]="'40'" [(required)]="CamposObligatorios.descripcion" ></input-camposobligatorios>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <section>
+              <mat-checkbox [(ngModel)]="DatFormulario.tratamiento">Aplica TRATAMIENTO</mat-checkbox>
+              <mat-checkbox *ngIf="MosConSuaje" Style="margin-left: 15px;" [(ngModel)]="DatFormulario.conSuaje">Con Suaje</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <fieldset class="fieldset">
+                  <legend>Captura - Proceso Costo</legend>
+                  <div class="row">
+                      <div *ngIf="MosProceso1" class="col-12 col-sm-3 col-md-3 col-lg-3">
+                        <lista-procesocosto [(Value)]="subProceso1" [filtro]="DatFormulario.tipoMaquina" [label]="'Proceso 1:'" [nomOpcionDefault]="''"  [disabled]="true"></lista-procesocosto>
+                      </div>
+                      <div *ngIf="MosProceso2" class="col-12 col-sm-3 col-md-3 col-lg-3">
+                        <lista-procesocosto [(Value)]="subProceso2" [filtro]="DatFormulario.tipoMaquina" [label]="'Proceso 2:'" [nomOpcionDefault]="''" [disabled]="true"></lista-procesocosto>
+                      </div>
+                      <div *ngIf="MosProceso3" class="col-12 col-sm-3 col-md-3 col-lg-3">
+                        <lista-procesocosto [(Value)]="subProceso3" [filtro]="DatFormulario.tipoMaquina" [label]="'Proceso 3:'" [nomOpcionDefault]="''" [disabled]="true"></lista-procesocosto>
+                      </div>
+                      <div *ngIf="MosProceso4" class="col-12 col-sm-3 col-md-3 col-lg-3">
+                        <lista-procesocosto [(Value)]="subProceso4" [filtro]="DatFormulario.tipoMaquina" [label]="'Proceso 4:'" [nomOpcionDefault]="''" [disabled]="true"></lista-procesocosto>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div *ngIf="MosProcesoCost" class="col-12 col-sm-6 col-md-6 col-lg-6">
+                      <div class="form-group">
+                      <label>Proceso Costo:</label>
+                      <input name="ProcCosto" [(ngModel)]="DatFormulario.subProceso" class="form-control" disabled>
+                    </div>
+                    </div>
+                    <div *ngIf="MosCorrugado" class="col-12 col-sm-3 col-md-3 col-lg-3">
+                      <div class="form-group">
+                      <label>Corrugado:</label>
+                      <select [(ngModel)]="DatCorrugado" class="form-control" disabled>
+                        <option *ngFor="let item of ListaCorrugado" [ngValue]="item">{{item}}</option>
+                      </select>
+                      </div>
+                    </div>
+                    <div *ngIf="MosColores" class="col-12 col-sm-3 col-md-3 col-lg-3">
+                      <div class="form-group">
+                      <label>{{labelColores}}</label>
+                      <select [(ngModel)]="DatoSelCol" class="form-control" disabled>
+                        <option *ngFor="let item of ListaColores" [ngValue]="item">{{item}}</option>
+                      </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div  *ngIf="MosTintas" class="col-12 col-sm-6 col-md-6 col-lg-6 offset-md-6 offset-lg-6">
+                      <div class="form-group">
+                      <label>{{labelTintas}}</label>
+                      <input name="Titas" [(ngModel)]="DatFormulario.tintas" class="form-control" disabled>
+                      </div>
+                    </div>
+                  </div>
+              </fieldset>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>

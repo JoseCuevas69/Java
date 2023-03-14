@@ -1,0 +1,4 @@
+<label>Clasificación:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="ClasificacionValue" (ngModelChange)="change()" [disabled]="disabled">
+    <option *ngFor="let clasificacion of Clasificacion" [ngValue]="clasificacion.idClasificacion">{{clasificacion.clasificacion}}</option>
+</select>

@@ -1,0 +1,24 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <input-camposobligatorios [Titulo]="'Clave Área:'" [type]="'text'" [Data]="DatFormulario.clave" (DataChange)="changeClave($event)"
+                    [maxlength]="'3'" [min]="'0'" (keyup)="keyupClaveMayus($event)" [mayus]="true" [(required)]="CamposObligatorios.clave" [Disabled]="disClv" ></input-camposobligatorios>
+          </div>
+          <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+            <input-camposobligatorios [Titulo]="'Descripción Área:'" [type]="'text'" [Data]="DatFormulario.nombre" (DataChange)="changeNombre($event)"
+                    [maxlength]="'30'" [min]="'0'" (keyup)="keyupNombreMayus($event)" [style]="'text-transform:uppercase;'" [(required)]="CamposObligatorios.nombre" ></input-camposobligatorios>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>

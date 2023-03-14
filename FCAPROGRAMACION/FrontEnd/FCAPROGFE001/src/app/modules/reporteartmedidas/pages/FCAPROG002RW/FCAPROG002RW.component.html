@@ -1,0 +1,276 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <div class="row m-2">
+            <div class="col-sm-12 col-md-8">
+                <label>Consulta Master por Medidas</label>
+            </div>
+            <div class="col-sm-12 col-md-4 text-right">
+                <button type="button" class="btn btn-primary" (click)="ReporteArticulosMaster()">
+                    <i class='fas'>&#xf02f; Imprimir</i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+  <div class="contenido mt-3">
+      <div id="Contenido" class="container-fluid">
+
+        <!-- Botones de Impresión de reporte -->
+        <!-- <div class="row">
+            <div class="col-sm-12 col-md-4">
+              <button type="button" class="btn btn-light form-control" hidden>
+                  <i class='fab'>&#xf17a; Pantalla</i>
+              </button>
+          </div>
+          <div class="col-sm-12 col-md-4">
+
+          </div>
+          <div class="col-sm-12 col-md-4 text-right">
+              <button type="button" class="btn btn-primary form-control" (click)="ReporteArticulosMaster()">
+                  <i class='fas'>&#xf02f; Imprimir</i>
+                </button>
+              </div>
+        </div> -->
+
+          <form>
+            <div class="row font-small">
+
+                <!-- TIPO DE CONSULTA -->
+                <div class="col-md-4">
+                    <div class="card mt-1">
+                        <!-- <div class="card-header">
+                            Tipo de Consulta
+                        </div> -->
+                        <div class="card-body">
+                            <p class="h6">Tipo de Consulta</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="rbTipoConsulta" id="rbCajas" checked>
+                                <label class="form-check-label" for="rbCajas">
+                                  Cajas
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="rbTipoConsulta" id="rbLaminas">
+                                <label class="form-check-label" for="rbLaminas">
+                                  Laminas
+                                </label>
+                              </div>
+                        </div>
+                      </div>  
+                </div>
+
+                <!-- VALORES -->
+                <div class="col-md-4">
+                    <div class="card mt-1">
+                        <!-- <div class="card-header">
+                            Valores
+                        </div> -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="h6">Valores</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 50px;">Largo</td>
+                                                    <td class="pl-2"><input class="input-width-valores" type="number" name="txtLargo" id="txtLargo" [(ngModel)]="DatosParametros.Largo" disabled></td>
+                                                    <td class="pl-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="chkLargo" (change)="habiltarValores($event, 1)" >
+                                                            <label class="form-check-label" for="chkLargo">
+                                                                Valor Aprox
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 50px;">Ancho</td>
+                                                    <td class="pl-2"><input class="input-width-valores" type="number" name="txtAncho" id="txtAncho" [(ngModel)]="DatosParametros.Ancho" disabled></td>
+                                                    <td class="pl-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="chkAncho" (change)="habiltarValores($event, 2)">
+                                                            <label class="form-check-label" for="chkAncho">
+                                                                Valor Aprox
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </table>
+                                        </div>
+                                   
+                                    
+                                    </div>
+                        
+                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TIPO DE INDUSTRIA -->
+                <div class="col-md-4">
+                    <div class="card mt-1">
+                        <div class="card-header">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="chkTipoIndustria"
+                                    (change)="habiltarCboTipoIndustria($event)">
+                                <label class="form-check-label" for="chkTipoIndustria">
+                                    Tipo de Industria
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <select class="form-control form-control-sm" id="cboTipoIndustria" [(ngModel)]="DatosParametros.TipoIndustria" name="TipoIndustria" disabled >
+                                    <option *ngFor="let item of DataTipoIndustria" [ngValue]="item.clave" >{{item.descripcion}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+
+            
+            <div class="row font-small">
+                <!-- FECHAS DE PRODUCCION -->
+                <div class="col-md-4">
+                    <div class="card mt-1">
+                        <!-- <div class="card-header">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="chkFechas" 
+                                (change)="habiltarDatePickers($event)" hidden>
+                                <label class="form-check-label" for="chkFechas">
+                                    Filtra fecha de producción (Rango de Fechas)
+                                </label>
+                            </div>
+                        </div> -->
+                        <div class="card-body" id="idFechas">
+                            <p class="h6">Filtra fecha de producción</p>
+                            <table>
+                                <tr>
+                                    <td style="width: 50px;">Inicial</td>
+                                    <td class="pl-2"><input class="width-datepicker" type="date" id="dttfechaInicial" [(ngModel)]="DatosParametros.FechaIni" name="FechaIni"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50px;">Final</td>
+                                    <td class="pl-2"><input class="width-datepicker" type="date" id="dttfechaFinal" [(ngModel)]="DatosParametros.FechaFin" name="FechaFin"></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                      </div>  
+                </div>
+                
+                <!-- ORDENAR POR -->
+                <div class="col-md-4">
+                    <div class="card mt-1">
+                        <!-- <div class="card-header">
+                            Ordenar por
+                        </div> -->
+                        <!-- <div class="card-body">
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <p class="h6">Ordenar por</p>
+                                    <table>
+                                        <tr>
+                                            <td style="width: 50px;">1ro</td>
+                                            <td class="pl-2" style="width: 200px;">
+                                                <select class="form-control form-control-sm" id="cboOrdenarPor1" 
+                                                [(ngModel)]="DatosParametros.OrderByfiltro1" name="cboOrdenarPor1">
+                                                    <option *ngFor="let item of ordenarPor" [ngValue]="item.clave">{{item.descripcion}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">2do</td>
+                                            <td class="pl-2" style="width: 200px;">
+                                                <select class="form-control form-control-sm" id="cboOrdenarPor2" [(ngModel)]="DatosParametros.OrderByfiltro2" name="cboOrdenarPor2">
+                                                    <option [ngValue]="'vacio'"></option>
+                                                    <option *ngFor="let item of ordenarPor" [ngValue]="item.clave">{{item.descripcion}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 50px;">3ro</td>
+                                            <td class="pl-2" style="width: 200px;">
+                                                <select class="form-control form-control-sm" id="cboOrdenarPor3" [(ngModel)]="DatosParametros.OrderByfiltro3" name="cboOrdenarPor3">
+                                                    <option [ngValue]="'vacio'"></option>
+                                                    <option *ngFor="let item of ordenarPor" [ngValue]="item.clave">{{item.descripcion}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> -->
+                      </div>  
+                </div>
+
+                <!-- BOTONES -->
+                <div class="col-md-4">
+                    <div class="card mt-1 cabecera">
+                        <!-- <div class="card-header">
+                            Botones
+                        </div> -->
+                        <div class="card-body">
+                            <div class="row text-center ">
+                                
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-light" (click)="this.GetData();">
+                                        <i style='color:blue;' class='far'>&#xf058; Acepta</i>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-light">
+                                        <i class="far text-danger">X Cancela</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                   
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+              <div class="row mt-4">
+                  <div class="col-12">
+                      <ng-modal [Size]="'lg'" [Titulo]="'EDICION DE INFORMACION'" [IconoTitulo]="IconoTitulo" #mdl>
+                          <!-- <app-mdl-reporteartmedidas [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></app-mdl-reporteartmedidas> -->
+                      </ng-modal>
+                  </div>
+              </div>
+          </form>
+          <div class="row " id="divGridPrincipal">
+            <div class="col-12 ">
+              <grid-cs #gridPrincipal
+                [data]="Datos"
+                [columnDefs]="columnDefs"
+                [enablePagination]="false"
+                
+                >
+              </grid-cs>
+            </div>
+        </div>
+
+      </div>
+  </div>
+  <div class="Pie ">
+      <div class="container ">
+          <div class="row ">
+              <div class="col-xs-12 col-md-12 text-center ">
+                  <h5>Versión 06.10.2022.1</h5>
+                  <h5>FCAPROG002RW - REPORTE DE ARTICULOS DE MAQUINAS</h5>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

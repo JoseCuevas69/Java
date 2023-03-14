@@ -1,0 +1,258 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">CONSULTA DE OPS PARA APROVECHAMIENTO DE LÁMINA</label>
+  </div>
+  <div class="contenido mt-3">
+    <div id="Contenido" class="container-fluid">
+      <form class="mb-1">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Filtros</legend>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Orden de Producción:</label>
+                    <div class="input-group mb-3">
+                      <input [(ngModel)]="filtros.Op" name="Op" type="number" class="form-control">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" (click)="btnBuscarOrdenProduccion()"><i
+                            class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="selZona">Articulos:</label>
+                    <div class="input-group">
+                      <input [(ngModel)]="filtros.ClaveArticulo" [name]="'Articulo'" [class]="'form-control'"
+                        placeholder="Buscar por Clave o Nombre" maxlength="50" id="txtArticulo" type="text"
+                        class="form-control" disabled />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="btnArt" (click)="btnArtLimpiar()">
+                          <span class="fas fa-eraser"></span>
+                        </button>
+                        <button class="btn btn-outline-primary" type="button" id="btnArticulo"
+                          (click)="mdlAbrirArticulo()">
+                          <span class="fa fa-search"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <ng-modal [MostrarbtnAceptar]="true" [Size]="'lg'" Titulo="BUSCAR ARTICULOS"
+                      [IconoTitulo]="'far fa-address-card'" #modalArticulo>
+                      <mdlbuscararticulo (ItemData)="SelArticuloAgregar($event)"></mdlbuscararticulo>
+                    </ng-modal>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="fieldset">
+              <legend>Datos del Artículo</legend>
+              <div class="row">
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="form-group">
+                    <label>Flauta:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="form-group">
+                    <label>Diseño:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Combinación:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <label>Medidas Lámina:</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label>Largo:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label>Ancho:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Datos del Artículo</legend>
+              <div class="row">
+                <div class="col-12">
+                  <label>Resistencia:</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="form-group">
+                    <label>Arreglo:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="form-group">
+                    <label>Pzas. Suaje:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Tratamiento:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <label>Medidas Desarrollo:</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label>Largo:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label>Ancho:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Máquinas Procesadas:</label>
+                    <input [(ngModel)]="filtros.Op" name="filtro" type="text" class="form-control"
+                      (keypress)="KeyPressBuscar($event)" disabled>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <fieldset class="fieldset">
+              <legend>Consulta Secuencia de Impresoras:</legend>
+              <div class="row">
+                <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <fieldset class="fieldset">
+              <legend>Consulta Secuencia de Corrugadora:</legend>
+              <div class="row">
+                <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-tab-group>
+              <mat-tab label="Saldo Lámina por Artículo">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12">
+
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Saldo Lámina por Medidas">
+                <div class="container-fluid">
+                  <div class="row mt-2">
+                    <div class="col-12">
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Material Excedente">
+                <div class="container-fluid">
+                  <div class="row mt-2">
+                    <div class="col-12">
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Consulta OPs Por Representante">
+                <div class="container-fluid">
+                  <div class="row mt-2">
+                    <div class="col-12">
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregar()"><i
+                class="fa fa-plus"></i> Agregar</button>
+            <!--<ng-modal [Size]="'lg'" [Titulo]="'CONCEPTOS'" [IconoTitulo]="IconoTitulo" #mdl>
+                          <mdl-tipocaja [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mdl-tipocaja>
+                      </ng-modal>-->
+          </div>
+        </div>
+      </form>
+      <div class="row ">
+        <div class="col-12 ">
+          <!-- <grid-ss #gridPrincipal [serviceFunction]="Servicio.GetTipoCaja" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                </grid-ss> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center ">
+          <h5>Versión 23.11.2021.1</h5>
+          <h5>FCAPROG000MW - CONSULTA DE OPS PARA APROVECHAMIENTO DE LÁMINA</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <block-ui></block-ui>
+</div>

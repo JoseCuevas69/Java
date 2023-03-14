@@ -1,0 +1,57 @@
+
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 20px; margin-top: 3px;">FCAPROGCAT020CW - CATALOGO DE PAPELES</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="fieldset">
+                            <legend>Filtros</legend>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> <label>CLAVE PAPEL: </label> <input name="strclavepapel" type="text" class="form-control form-control-sm" [(ngModel)]="filtros.clavepapel" placeholder="clavepapel"  /> </div>
+                                    <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>NOMBRE: </label> <input name="strnombre"  type="text" class="form-control form-control-sm" [(ngModel)]="filtros.descripcion" placeholder="nombre"  /> </div>
+                                    <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 25px;"  >
+                                        <button type="button" class="btn btn-primary"  (click)="BuscarPapeles()" ><i class="fa fa-search"></i> Buscar</button>
+                                    </div>
+                                    <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 25px;"  >
+                                        <button type="button" class="btn btn-primary"  (click)="ReportePapeles()" > Reporte</button>
+                                    </div>
+                                </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row mt-4" style="margin-top: 0px;">
+                    <div class="col-12">
+                        <button type="button" hidden="true" class="btn btn-success float-right add-button"      (click)="btnAgregar()"> <i class="fa fa-plus"></i> Agregar</button>
+                        <ng-modal id="Modal" [Size]="'lg'" [Titulo]="'CAPTURA DE PAPELES'" [IconoTitulo] = "IconoTitulo" #mdlCaptura>
+                            <app-mdlpapeles [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"  (ClickbtnActualizarGridPopup)="btnActualizarGridPopup()" ></app-mdlpapeles>
+                        </ng-modal> 
+                    </div>
+                </div>
+            </form>
+
+            <div class="row ">
+                <div class="col-12 ">
+                    <grid-ss #gridPrincipal  [serviceFunction]="papelesserviceService.ListarPapeles" [rowsPerPage]="12" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                    </grid-ss>                                        
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <small>Versión 23.11.2021.1</small>
+                    <small>FCAPROG001MW - CATALOGO PAPELES</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

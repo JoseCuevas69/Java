@@ -1,0 +1,66 @@
+
+ <form class="mb-1">
+    <div class="row">
+        <div class="col-sm-12">
+            <fieldset class="fieldset">
+                <legend>FILTROS</legend>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <fieldset class="fieldset">
+                                <legend>TIPO</legend>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+                                    <div class="form-check form-check-inline">
+                                        <mat-radio-group name="Opciones" [(ngModel)]="strValueOpc">
+                                            <mat-radio-button aria-checked="true" value="1">Refile</mat-radio-button>
+                                            <mat-radio-button value="2">Cambio Combinacion</mat-radio-button>
+                                            <mat-radio-button value="3">Ambos</mat-radio-button>
+                                          </mat-radio-group>    
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 col-lg-3 form-group">
+                        <label>FOLIO: </label> 
+                        <div class="input-group">
+                            <input name="strfolio" type="text" class="form-control form-control-sm" [(ngModel)]="filtros.folio" placeholder="Folio a Buscar"/>
+                            <span class="input-group-btn">
+                                <button id="btnfolio" class="btn btn-primary" type="button" (click)="BuscarFolio()"> 
+                                  <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">                                   
+                        <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                            <label>PROGRAMA: </label>
+                            <div class="input-group">
+                                <input name="strprograma" type="text" [(ngModel)]="filtros.programa" class="form-control" placeholder="Programa a buscar"  /> 
+                                <span class="input-group-btn">
+                                    <button id="btnprograma" class="btn btn-primary" type="button" (click)="BuscarPrograma()"> 
+                                      <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                            </div>  
+                        </div> 
+                        <div class="col-sm-12 col-md-12 col-lg-12 form-group"> <label>SOLICITO: </label> <input name="strnombre"  type="text" class="form-control form-control-sm"  placeholder="Solicito"  /> </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-12 ">
+                            <grid-ss #gridPrincipal  [serviceFunction]="folioscombinacionestandarserviceService.getBuscarOPsxPrograma"  [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                            </grid-ss>                                        
+                        </div>
+                    </div>
+            </fieldset>
+
+           
+
+        </div>                    
+    </div>
+ </form>
+
+

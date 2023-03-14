@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Color Etiqueta:</label>
+    <select [(ngModel)]="ColorValue" [ngClass]="{'form-control':true, 'required':required}" (change)="ColorValueChange.emit(ColorValue)">
+            <option [ngValue]="0">SELECCIONAR...</option>
+            <option *ngFor="let item of ListaColor" [ngValue]="item.idColor">{{item.descripcion}}</option>
+    </select>
+</div>

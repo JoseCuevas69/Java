@@ -1,0 +1,12 @@
+
+/*
+.input-wrapper{
+z-index: 10000}
+*/
+
+.input-wrapper { 
+        
+        z-index:100000 !important; 
+}
+
+

@@ -1,0 +1,113 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12">
+            <fieldset class="fieldset">
+              <legend>Fecha</legend>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <mat-radio-group [ngModel]="rdoAntiguedad" (ngModelChange)="ChangeAntiguedad($event)" [name]="'GroupRad'">
+                      <mat-radio-button [value]="true">Antiguedad al Cierre de Mes </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+                    <div class="form-group">
+                      <label>Mes:</label>
+                      <select [(ngModel)]="DatFormulario.mes" class="form-control" name="mes" [disabled]="disMes">
+                        <option [ngValue]="1">01 Enero</option>
+                        <option [ngValue]="2">02 Febrero</option>
+                        <option [ngValue]="3">03 Marzo</option>
+                        <option [ngValue]="4">04 Abril</option>
+                        <option [ngValue]="5">05 Mayo</option>
+                        <option [ngValue]="6">06 Junio</option>
+                        <option [ngValue]="7">07 Julio</option>
+                        <option [ngValue]="8">08 Agosto</option>
+                        <option [ngValue]="9">09 Septiembre</option>
+                        <option [ngValue]="10">10 Octubre</option>
+                        <option [ngValue]="11">11 Noviembre</option>
+                        <option [ngValue]="12">12 Diciembre</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                    <div class="form-group">
+                      <label>Año:</label>
+                      <select [(ngModel)]="DatFormulario.anio" class="form-control" name="anio" [disabled]="disAnio">
+                        <option *ngFor="let item of Anios" [ngValue]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <mat-radio-group [ngModel]="rdoAntiguedad" (ngModelChange)="ChangeAntiguedad($event)" [name]="'GroupRad'">
+                      <mat-radio-button [value]="false">Antiguedad al Dia </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input [(ngModel)]="AtiguedadDia" type="date" class="form-control" [disabled]="disAntiguedadDia">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label>Con Antiguedad Mayor Igual a:</label>
+                      <select [(ngModel)]="DatFormulario.antiguedadIguala" class="form-control" name="Dias">
+                        <option [ngValue]="1">1</option>
+                        <option [ngValue]="15">15</option>
+                        <option [ngValue]="30">30</option>
+                        <option [ngValue]="60">60</option>
+                        <option [ngValue]="90">90</option>
+                        <option [ngValue]="120">120</option>
+                        <option [ngValue]="150">150</option>
+                        <option [ngValue]="180">180</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <fieldset class="fieldset">
+              <legend>Almacen</legend>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <prog-lista-almacen [(Value)]="DatFormulario.almacen"></prog-lista-almacen>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>No. de Rollos</label>
+              <input [(ngModel)]="DatFormulario.numRollo " class="form-control" type="number">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnAceptar()"><i class="far fa-check-circle "></i>
+    Aceptar</button>
+</div>
+<block-ui></block-ui>

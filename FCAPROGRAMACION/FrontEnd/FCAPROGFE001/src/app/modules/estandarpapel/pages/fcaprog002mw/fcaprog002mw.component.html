@@ -1,0 +1,411 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">COMBINACIÓN ESTÁNDAR PAPEL</label>
+  </div>
+  <div class="contenido mt-3">
+    <div id="Contenido" class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-2 col-lg-2">
+          <mat-radio-button name="filtroBusqueda" [checked]="busquedaXArticulo" (change)="onChangeBusquedaArticulo($event)"><strong>Búsqueda por Artículo</strong></mat-radio-button>
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2">
+          <mat-radio-button name="filtroBusqueda" [checked]="busquedaXResistencia" (change)="onChangeBusquedaResistencia($event)" [disabled]="bloqueaAccesoUsuarios"><strong>Búsqueda por Resistencia</strong></mat-radio-button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-8 col-md-8 col-lg-8" *ngIf="busquedaXArticulo">
+          <fieldset class="fieldset">
+            <legend>Búsqueda por Artículo</legend>
+            <div class="row mt-2">
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <label>Clave o Descipción Artículo</label>
+                <input type="text" class="form form-control form-control-sm" [(ngModel)]="filtroArticulo">
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3 CentrarBoton">
+                <mat-checkbox class="example-margin"> Mostrar Todo</mat-checkbox>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <button class="btn btn-primary btn-sm" (click)="GetCombinacionEstandarPapel()"><i class="fa fa-search"></i> Buscar</button>
+              </div>
+            </div>
+            <div class="row mt-3"></div>
+          </fieldset>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-8" *ngIf="busquedaXResistencia">
+          <fieldset class="fieldset">
+            <legend>Búsqueda por Resistencia</legend>
+            <div class="row mt-2">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Resistencia:</label>
+                <select class="form-control form-control-sm" [(ngModel)]="resistencia" (ngModelChange)="onchageResistencias($event)">
+                  <option value="sel">Seleccionar...</option>
+                  <option *ngFor="let obj of Resistencias" [ngValue]="obj.claveResistencia">{{obj.claveResistencia}}</option>
+                </select>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Liner 1:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Liner1" disabled>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Medium 1:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Medium1" disabled>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Liner 2:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Liner2" disabled>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Medium 2:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Medium2" disabled>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <button class="btn btn-success btn-lg" (click)="GuardarCombinacionPorResistencia()"><i class="fa fa-save"></i> Aplicar Combinación</button>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Liner 3:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Liner3" disabled>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Medium 3:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Medium3" disabled>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Liner 4:</label>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="Liner4" disabled>
+              </div>
+            </div>
+            <div class="row mt-3"></div>
+          </fieldset>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <fieldset class="fieldset">
+            <legend>Lista Precesos</legend>
+            <div class="row mt-2">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <grid-cs #gridProcesos [rowsPerPage]="5" [columnDefs]="columnGridListaProcesos" [(data)]="ListarProceso" [enablePagination]="true"></grid-cs>
+              </div>
+            </div>
+            <div class="row mt-3"></div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="row mt-3" *ngIf="busquedaXResistencia">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <mat-checkbox class="example-margin"> Seleccionar Todos</mat-checkbox>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <button class="btn btn-success btn-sm float-right add-button" (click)="openModalAgregar()" [disabled]="bloqueaAccesoUsuarios"><i class="fa fa-plus"></i> Nueva Combinación</button>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <grid-cs #gridCombinacion [rowsPerPage]="5" [columnDefs]="columnGridCombinacion" [(data)]="ArrayCombinacionEstandar" [enablePagination]="true"></grid-cs>
+        </div>
+      </div>
+      <div class="row mt-3" *ngIf="busquedaXArticulo">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Especificaciones de Proceso Corrugadora:</label>
+          <textarea class="form form-control form-control-sm" [(ngModel)]="lEspecificacionMaquina.Eprocesocorr" [disabled]="!bloqueaAccesoUsuarios"></textarea>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Especificaciones de Proceso Impresora:</label>
+          <textarea class="form form-control form-control-sm" [(ngModel)]="lEspecificacionMaquina.Eproceso" [disabled]="!bloqueaAccesoUsuarios"></textarea>
+        </div>
+      </div>
+      <div class="row mt-3" *ngIf="busquedaXArticulo">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Comentarios de Fabricación:</label>
+          <textarea class="form form-control form-control-sm" [(ngModel)]="lEspecificacionMaquina.ComentariosFabricacion" [disabled]="bloqueaAccesoUsuarios" [disabled]="ClaveArticuloSeleccionado === null"></textarea>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-checkbox class="example-margin float-right" [(ngModel)]="lEspecificacionMaquina.Paletizar" [disabled]="bloqueaAccesoUsuarios  || ClaveArticuloSeleccionado === null"> Paletizar</mat-checkbox>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <label>Ruta Proceso:</label>
+              <select class="form-control form-control-sm" [(ngModel)]="claveRutaProceso" [disabled]="bloqueaAccesoUsuarios || ClaveArticuloSeleccionado === null">
+                <option value="ZZZ">Ninguna []</option>
+                <option *ngFor="let obj of RutaProceso" [ngValue]="obj.claveRutaProceso">{{obj.nombreRutaProceso}} [{{obj.claveRutaProceso.trim()}}] </option>
+              </select>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 CentrarBoton">
+              <button class="btn btn-primary btn-sm float-right" (click)="openModalMultiplosPiezas()" [disabled]="bloqueaAccesoUsuarios || ClaveArticuloSeleccionado === null"><i class="fa fa-plus"></i> Múltiplos Piezas X Suaje</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <label>Proceso Especial:</label>
+              <select class="form-control form-control-sm" [(ngModel)]="lEspecificacionMaquina.Cproceso" [disabled]="bloqueaAccesoUsuarios || ClaveArticuloSeleccionado === null">
+                <option value="100">Ninguna []</option>
+                <option *ngFor="let obj of ProcesoEspecial" [ngValue]="obj.claveProcesoEspecial">{{obj.nombreProcesoEspecial}} [{{obj.claveProcesoEspecial.trim()}}] </option>
+              </select>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 CentrarBoton">
+              <button class="btn btn-success btn-sm float-right" (click)="GuardarEspecificaciones()"><i class="fa fa-save"></i> Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3"></div>
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center">
+          <h5>Versión 13.12.2021.1</h5>
+          <h5>FCAPROG002MW - MÓDULO COMBINACIÓN ESTÁNDAR PAPEL</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #modalCombinacion let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-plus"></i> AGREGAR COMBINACIÓN DE PAPEL</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeModalAgregar()"><i class="fas fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <div class="form-group">
+            <label><strong>Artículo</strong>:</label>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="articuloText" readonly placeholder="Seleccionar Artículo">
+              <div class="input-group-append">
+                <button class="btn btn-info btn-sm" type="button" (click)="openModalArticulos()"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <grid-cs #gridPapeles [rowsPerPage]="7" [columnDefs]="columnGridPapel" [(data)]="CombinacionPapeles"></grid-cs>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <label>Ancho STD:</label>
+              <input type="number" class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.anchoSTD" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <label>Trim STD:</label>
+              <input type="number" class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.trimSTD" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <label>Ancho Óptimo:</label>
+              <input type="number" class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.anchoOptimo" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <label>Trim Óptimo:</label>
+              <input type="number" class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.trimOptimo" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              Gramaje + Pegamento = PesoM2 -> {{StrGramajexFactor}} + {{StrPegamento}} = {{StrPesoM2}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.handHold"> Hand Hold</mat-checkbox>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.troquel"> Troquelado</mat-checkbox>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.parafinado"> Parafinado</mat-checkbox>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.aplicaSelloFecheroImp"> Aplica OP / Fechero Impreso</mat-checkbox>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <fieldset class="fieldset">
+            <legend>Otras Materias Primas</legend>
+            <div class="row">
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.stringKing"> StringKing</mat-checkbox>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.cintaRazgado"> Cinta Razgado</mat-checkbox>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.cintaRefuerzo"> Cinta Refuerzo</mat-checkbox>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Clave Preparación:</label>
+                <select class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.cvePreparacion">
+                  <option *ngFor="let obj of ClavePreparacion" [ngValue]="obj.claveProceso">{{obj.claveProceso}} {{obj.descripcionClavePreparacion}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.bolsa"> Bolsa</mat-checkbox>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.barniz"> Barniz</mat-checkbox>
+              </div>
+              <div class="col-sm-3 col-md-3 col-lg-3 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.pegamentoImper"> Pegamento Imperm.</mat-checkbox>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Impermeabilizado:</label>
+                <select class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.impermeabilizado">
+                  <option *ngFor="let obj of Impermeabilizado" [ngValue]="obj.claveImpremeabilizado">{{obj.claveImpremeabilizado}} {{obj.descripcionImpremeabilizado}}</option>
+                </select>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+                <mat-checkbox class="example-margin" [(ngModel)]="CombinacionEstandar.conScore"> Con Score</mat-checkbox>
+              </div>
+              <div class="col-sm-1 col-md-1 col-lg-1 CentrarBoton">
+                <input type="number" class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.nscore" [disabled]="!CombinacionEstandar.conScore">
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Tarimas:</label>
+                <select class="form form-control form-control-sm"></select>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Insumos:</label>
+                <select class="form form-control form-control-sm" [(ngModel)]="CombinacionEstandar.insumos">
+                  <option *ngFor="let obj of Insumos" [ngValue]="obj.codigoInsumo">{{obj.nombreInsumo}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <grid-cs #gridInsumos [rowsPerPage]="5" [columnDefs]="columnGridInsumos"></grid-cs>
+              </div>
+            </div>
+            <div class="row mt-3"></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="closeModalAgregar()"><i class="fas fa-times"></i> Cancelar</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="GuardarCombinacionEstandar()"><i class="fas fa-save"></i> {{Actualizar === false ? 'Guardar' : 'Actualizar'}} </button>
+  </div>
+</ng-template>
+
+<ng-template #modalArticulos let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-search"></i> Busqueda de Artículos</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeModalArticulos()"><i class="fas fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Clave / Nombre Artículo:</label>
+          <input type="text" class="form form-control form-control-sm" [(ngModel)]="filtroArticulo">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+          <button class="btn btn-primary btn-sm" (click)="GetArticulos()"><i class="fa fa-search"></i> Buscar</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <grid-cs #gridArticulos [rowsPerPage]="5" [columnDefs]="columnGridArticulos" [(data)]="Articulos" [enablePagination]="true"></grid-cs>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="closeModalArticulos()"><i class="fas fa-times"></i> Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalComentarioOP let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-plus"></i> Agregar Comentarios OP</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><i class="fas fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2">
+          <label>OP:</label>
+          <input type="text" class="form form-control form-control-sm">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Artículo:</label>
+          <input type="text" class="form form-control form-control-sm" disabled>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <label>Comentarios</label>
+          <textarea class="form form-control form-control-sm"></textarea>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12 CentrarBoton">
+          <button class="btn btn-success btn-sm float-right add-button"><i class="fa fa-save"></i> Guardar</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <grid-cs #gridComentariosOP [rowsPerPage]="5" [columnDefs]="columnGridComentariosOP"></grid-cs>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="closeModalArticulos()"><i class="fas fa-times"></i> Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalMultiplesPiezas let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-plus"></i> Procesos que Aplican Múltiplos Piezas x Suaje</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeModalMultiplosPiezas()"><i class="fas fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Ruta Proceso:</label>
+          <input type="text" class="form form-control form-control-sm" [(ngModel)]="mdlNombreProceso" disabled>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <grid-cs #gridRutaProceso [rowsPerPage]="5" [columnDefs]="columnGridRutaProceso" [(data)]="Proceso"></grid-cs>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="closeModalMultiplosPiezas()"><i class="fas fa-times"></i> Cancelar</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="AgragarListaProcesos()"><i class="fas fa-save"></i> Aplicar</button>
+  </div>
+</ng-template>
+
+<block-ui></block-ui>

@@ -1,0 +1,191 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">CAPTURA MEDIDAS DE HOJA</label>
+  </div>
+  <div class="contenido mt-3">
+    <div id="Contenido" class="container-fluid">
+      <form class="mb-1">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Medidas de Hoja</legend>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Articulos:</label>
+                    <div class="input-group">
+                      <input [(ngModel)]="DatosPagPrincipal.claveArticulo" [name]="'Articulo'" [class]="'form-control'"
+                        placeholder="Buscar por Clave o Nombre" maxlength="50" id="txtArticulo" type="text"
+                        class="form-control" disabled />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="btnArt" (click)="btnArtLimpiar()">
+                          <span class="fas fa-eraser"></span>
+                        </button>
+                        <button class="btn btn-outline-primary" type="button" id="btnArticulo"
+                          (click)="btnAbrirArticulo()">
+                          <span class="fa fa-search"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <label style="font-weight: bold">{{DatosPagPrincipal.articuloNombre}}</label>
+                    <ng-modal [MostrarbtnAceptar]="true" [Size]="'lg'" Titulo="BUSCAR ARTICULOS"
+                      [IconoTitulo]="'far fa-address-card'" #modalArticulo>
+                      <mdlbuscararticulo (ItemData)="SelArticuloAgregar($event)"></mdlbuscararticulo>
+                    </ng-modal>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Datos de Master</legend>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Flauta:</label>
+                    <input [(ngModel)]="DatosPagPrincipal.flauta" name="flauta" type="text" class="form-control" disabled>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Diseño:</label>
+                    <input [(ngModel)]="DatosPagPrincipal.claveDiseno" name="diseño" type="text" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                  <div class="form-group">
+                    <label>Resistencia:</label>
+                    <input [(ngModel)]="DatosPagPrincipal.resistencia" name="resistencia" type="text" class="form-control" disabled>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Desarrollo</legend>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4 offset-md-4">
+                    <label>Largo:</label>
+                    <input [(ngModel)]="DatosPagPrincipal.largoDes" name="largo" type="number" class="form-control" disabled>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                    <label>Ancho:</label>
+                    <input [(ngModel)]="DatosPagPrincipal.anchoDes" name="ancho" type="number" class="form-control" disabled>
+                  </div>
+                  <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                    <div
+                      class="DivDesarrollo">
+                      <label>DESARROLLO</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Arreglo</legend>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4 offset-md-4">
+                    <input-camposobligatorios [(Data)]="+DatosPagPrincipal.pzasxLargo" [min]="'0'" [Titulo]="'Largo:'" [type]="'number'" [maxlength]="'30'">
+                    </input-camposobligatorios>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                    <input-camposobligatorios [(Data)]="+DatosPagPrincipal.pzasxAncho" [min]="'0'" [Titulo]="'Ancho:'" [type]="'number'" [maxlength]="'30'">
+                    </input-camposobligatorios>
+                  </div>
+                  <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                    <div
+                      style="border: 1px solid #369 ; width: 300px; height: 100px; text-align: center; box-shadow: 2px 2px 5px #999;">
+                      <label>ARREGLO</label>
+                      <input [(ngModel)]="DatosPagPrincipal.piezasXHoja " name="Piezassuaje" type="text" class="form-control" disabled>
+                      <label>Pzas. Suaje</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+            <fieldset class="fieldset">
+              <legend>Hoja</legend>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4 offset-md-4">
+                    <input-camposobligatorios  [(Data)]="+DatosPagPrincipal.aumLargo" [min]="'0'" [Titulo]="'Aumento Largo:'" [type]="'number'"
+                      [maxlength]="'30'" [Disabled]="disAumLargo">
+                    </input-camposobligatorios>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" style="margin-top: 33px;">
+                      <input [(ngModel)]="+DatosPagPrincipal.largoHoja" name="aumlargo" type="text" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+                    <input-camposobligatorios [(Data)]="+DatosPagPrincipal.aumAncho" [min]="'0'" [Titulo]="'Aumento Ancho:'" [type]="'number'"
+                      [maxlength]="'30'" [Disabled]="disAumAncho">
+                    </input-camposobligatorios>
+                    <input [(ngModel)]="DatosPagPrincipal.anchoHoja" name="aumancho" type="number" class="form-control" disabled>
+                  </div>
+                  <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                    <div
+                      style="border: 1px solid #369 ; width: 300px; height: 100px; text-align: center; box-shadow: 2px 2px 5px #999;">
+                      <div [ngClass]="{'borderHoja': DatosPagPrincipal.conScore }">
+                        <section style="display: inline-grid;">
+                          <label>HOJA</label>
+                          <mat-checkbox name="conscore" [ngModel]="DatosPagPrincipal.conScore" (ngModelChange)="ChangeConscore($event)" [disabled]="disConScore">Con Score</mat-checkbox>
+                          <mat-checkbox name="lamina" [(ngModel)]="DatosPagPrincipal.soloLamina" [disabled]="disSoloLamin">Solo Lamina</mat-checkbox>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 15px;">
+            <button type="button" class="btn btn-success float-right add-button" (click)="btnGuardar()" [disabled]="disAgregar"><i
+                class="fa fa-plus"></i> Agregar</button>
+            <button type="button" [disabled]="disCalcular" style="margin-right: 5px;" class="btn btn-naranja float-right add-button" (click)="btnCalcular()"><i
+                class="fas fa-calculator"></i> Calcular</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+
+            <!--<ng-modal [Size]="'lg'" [Titulo]="'CONCEPTOS'" [IconoTitulo]="IconoTitulo" #mdl>
+                          <mdl-tipocaja [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mdl-tipocaja>
+                      </ng-modal>-->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center ">
+          <h5>Versión 23.11.2021.1</h5>
+          <h5>FCAPROG004MW - CAPTURA MEDIDAS DE HOJA</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<block-ui></block-ui>

@@ -1,0 +1,59 @@
+<div class="modal-body">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+            <input-camposobligatorios [Titulo]="'Flauta:'" [type]="'text'" [(Data)]="DatFormulario.flauta"
+            [maxlength]="'3'" [Disabled]="DesFlauta" ></input-camposobligatorios>
+        </div>
+      </div>
+        <div class="row justify-content-center">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+              <input-camposobligatorios [Titulo]="'Factor 1:'" [type]="'number'" [(Data)]="DatFormulario.factor1"
+              [maxlength]="'30'" ></input-camposobligatorios>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+              <input-camposobligatorios [Titulo]="'Factor 2:'" [type]="'number'" [(Data)]="DatFormulario.factor2"
+              [maxlength]="'30'" ></input-camposobligatorios>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+              <input-camposobligatorios [Titulo]="'Factor 3:'" [type]="'number'" [(Data)]="DatFormulario.factor3"
+              [maxlength]="'30'" ></input-camposobligatorios>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+              <input-camposobligatorios [Titulo]="'Pegamento:'" [type]="'number'" [(Data)]="DatFormulario.pegamento"
+              [maxlength]="'30'" ></input-camposobligatorios>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+            <label><strong>Corrugado</strong>:</label>
+              <select class="form-control form-control-sm" [(ngModel)]="DatFormulario.corrugado" >
+                <option *ngFor="let obj of corrugados" [ngValue]="obj.corrugados">{{obj.corrugados}}</option>
+              </select>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+            <input-camposobligatorios [Titulo]="'Laminas MT:'" [type]="'number'" [(Data)]="DatFormulario.laminasmt"
+            [maxlength]="'30'" ></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+            <input-camposobligatorios [Titulo]="'Factor Mts3:'" [type]="'number'" [(Data)]="DatFormulario.factormts"
+            [maxlength]="'30'" [Disabled]="DesFactorMTS" ></input-camposobligatorios>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-4">
+            <input-camposobligatorios [Titulo]="'Piezas Pulgadas:'" [type]="'number'" [(Data)]="DatFormulario.piezaspulgadas"
+            [maxlength]="'30'" ></input-camposobligatorios>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+    <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+  </div>
+  
+  <block-ui></block-ui>
+  

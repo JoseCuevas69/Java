@@ -1,0 +1,143 @@
+
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">FCAPROGCAT006CW - CATALOGO HORARIOS DE OPERACION DE MAQUINA</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px;">
+                                <label>Maquina:</label>                                          
+                                <select name ="xx" class="form-control form-control" [(ngModel)] = "filtros.ClaveMaquina"  (change)="getHorarioMaquina($event)" >
+                                    <option value="undefined">Seleccione una Maquina</option> 
+                                    <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>
+                                </select> 
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <button type="button"  class="btn btn-default float-right add-button" (click)="btnImprimir()"><i class="fa fa-print"></i> Imprimir</button>
+                                <button type="button" class="btn btn-success float-right add-button"    (click)="btnGuardar()"> <i class="fa fa-plus"></i> Guardar</button>
+                            </div>
+                        </div>
+                        
+
+                        <div class="row">
+                            <div class="col-sm-6" >
+                                <fieldset class="fieldset">
+                                    <legend>Turnos de Lunes a Viernes:</legend> 
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label>Inicio Primero:</label>   
+                                        <input name="strInicioPrimero" class="form-control form-control-sm"  type="time"    [ngModel] = "HorarioMaquina.inicioprimero | date:'HH:mm'" (ngModelChange)="ondateChangeddtInicioPrimero($event)" />
+                                        <label>Fin Primero:</label>   
+                                        <input name="strFinPrimero" class="form-control form-control-sm"  type="time"  [ngModel] = "HorarioMaquina.finprimero | date:'HH:mm'" (ngModelChange)= "ondateChangeddtFinPrimero($event)" />
+                                        <div class="form-check form-check-inline">
+                                            <mat-checkbox name="chkactivoprimero" [checked]="HorarioMaquina.activoprimero" [(ngModel)]="HorarioMaquina.activoprimero" (change)="OnChangeactivoprimero($event)" >Activo Primero</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label>Inicio Segundo:</label>   
+                                        <input name="strInicioSegundo" class="form-control form-control-sm"  type="time"   [ngModel] = "HorarioMaquina.iniciosegundo | date:'HH:mm'" (ngModelChange) = "ondateChangeddtiniciosegundo($event)" />
+                                        <label>Fin Segundo:</label>   
+                                        <input name="strFinSegundo" class="form-control form-control-sm"  type="time"   [ngModel] = "HorarioMaquina.finsegundo | date:'HH:mm'"  (ngModelChange) = "ondateChangeddtfinsegundo($event)" />
+                                        <div class="form-check form-check-inline">
+                                            <mat-checkbox name="chkactivosegundo" [checked]="HorarioMaquina.activosegundo"  [(ngModel)]="HorarioMaquina.activosegundo" (change)="OnChangeactivosegundo($event)" >Activo Segundo</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label>Inicio Tercero:</label>   
+                                        <input name="strInicioTercero" class="form-control form-control-sm"  type="time"  [ngModel] = "HorarioMaquina.iniciotercero | date:'HH:mm'" (ngModelChange) = "ondateChangeddtiniciotercero($event)" />
+                                        <label>Fin Tercero:</label>   
+                                        <input name="strFinTercero" class="form-control form-control-sm"  type="time"   [ngModel] = "HorarioMaquina.fintercero | date:'HH:mm'" (ngModelChange) = "ondateChangeddtfintercero($event)" />
+                                        <div class="form-check form-check-inline">
+                                            <mat-checkbox name="chkactivotercero" [checked]="HorarioMaquina.activotercero"  [(ngModel)]="HorarioMaquina.activotercero" (change)="OnChangeactivotercero($event)">Activo Tercero</mat-checkbox>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-sm-6" >
+                                <fieldset class="fieldset">
+                                    <legend>Turnos de Sabado y Domingo:</legend>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+                                        <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                            <label>Inicio Primero:</label>   
+                                            <input name="strinicioprimerosabado" class="form-control form-control-sm"  type="time"  [ngModel] = "HorarioMaquina.inicioprimerosabado | date:'HH:mm'"  (ngModelChange) = "ondateChangeddtinicioprimerosabado($event)" />
+                                            <label>Fin Primero:</label>   
+                                            <input name="strfinprimerosabado" class="form-control form-control-sm"  type="time"   [ngModel] = "HorarioMaquina.finprimerosabado | date:'HH:mm'"   (ngModelChange) = "ondateChangeddtfinprimerosabado($event)" />
+                                        </div>
+                                        <div class="col-12 col-sm-10 col-md-10 col-lg-10" style="margin-top: 5px;">
+                                            <div class="form-check form-check-inline">
+                                                <mat-checkbox name="chkactivoprimerosabado" [checked]="HorarioMaquina.activoprimerosabado" class="checkbox-label" (change)="OnChangeactivoprimerosabado($event)">A. Primero Sabado</mat-checkbox>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <mat-checkbox name="chkactivoprimerodomingo" [checked]="HorarioMaquina.activoprimerodomingo" class="checkbox-label" (change)="OnChangeactivoprimerodomingo($event)">A. Primero Domingo</mat-checkbox>
+                                            </div>                                     
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+                                        <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                            <label>Inicio Segundo:</label>   
+                                            <input name="striniciosegundosabado" class="form-control form-control-sm"  type="time"  [ngModel] = "HorarioMaquina.iniciosegundosabado | date:'HH:mm'" (ngModelChange) = "ondateChangeddtiniciosegundosabado($event)" />
+                                            <label>Fin Segundo:</label>   
+                                            <input name="strfinsegundosabado" class="form-control form-control-sm"  type="time"  [ngModel] = "HorarioMaquina.finsegundosabado | date:'HH:mm'" (ngModelChange) = "ondateChangeddtfinsegundosabado($event)" />
+                                        </div>
+                                        <div class="col-12 col-sm-10 col-md-10 col-lg-10" style="margin-top: 5px;">
+                                            <div class="form-check form-check-inline">
+                                                <mat-checkbox name="chkactivosegundosabado" [checked]="HorarioMaquina.activosegundosabado" (change)="OnChangeactivosegundosabado($event)">A. Segundo Sabado</mat-checkbox>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <mat-checkbox name="chkactivosegundodomingo" [checked]="HorarioMaquina.activosegundodomingo" (change)="OnChangeactivosegundodomingo($event)">A. Segundo Domingo</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+                                        <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                            <label>Inicio Tercero:</label>   
+                                            <input name="striniciotercerosabado" class="form-control form-control-sm"  type="time"    [ngModel] = "HorarioMaquina.iniciotercerosabado | date:'HH:mm'"  (ngModelChange) = "ondateChangeddtiniciotercerosabado($event)" />
+                                            <label>Fin Tercero:</label>   
+                                            <input name="strfintercerosabado" class="form-control form-control-sm"  type="time"   [ngModel] = "HorarioMaquina.fintercerosabado | date:'HH:mm'" (ngModelChange) = "ondateChangeddtfintercerosabado($event)" />
+                                        </div>
+                                        <div class="col-12 col-sm-10 col-md-10 col-lg-10" style="margin-top: 5px;">
+                                            <div class="form-check form-check-inline">
+                                                <mat-checkbox name="chkactivotercerosabado" [checked]="HorarioMaquina.activotercerosabado" (change)="OnChangeactivotercerosabado($event)">A. Tercero Sabado</mat-checkbox>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <mat-checkbox name="chkactivotercerdomingo" [checked]="HorarioMaquina.activotercerdomingo" (change)="OnChangeactivotercerdomingo($event)">A. Tercero Domingo</mat-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                </fieldset>
+                            </div>
+                          </div>
+
+                    </div>                    
+                </div>
+
+               
+            </form>
+
+            <div class="row ">
+                <div class="col-12 ">
+                                        
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 06.12.2021.1</h5>
+                    <h5>FCAPROGCAT006CW - CATALOGO HORARIOS DE OPERACION DE MAQUINA</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

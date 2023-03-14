@@ -1,0 +1,4 @@
+<label>Moneda:</label>
+<select class="form form-control" [(ngModel)]="_MonedaValue" (ngModelChange)="MonedaValueChange.emit(_MonedaValue)" [disabled]="disabled">
+    <option *ngFor="let Moneda of Monedas" [ngValue]="Moneda.moneda">{{Moneda.moneda}} - {{Moneda.nombre}}</option>
+</select>

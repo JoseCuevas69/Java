@@ -1,0 +1,238 @@
+<div class="contenedor">
+  <app-cabecera-pagina [pTitulo]="tituloCabecera"></app-cabecera-pagina>
+
+  <div class="contenido">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-5 mt-2">
+
+          <div class="form-check form-check-inline">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="checkbox" name="chkAllOps" id="chkAllOps"
+                    [(ngModel)]="chkAllOps" (change)="changeChkAllOps()"
+                  />
+                </div>
+              </div>
+              <label class="form-control" for="chkAllOps">Usar Todas OPs</label>
+            </div>
+          </div>
+          <div class="form-check form-check-inline">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="checkbox" name="chkValRef" id="chkValRef"
+                    [(ngModel)]="chkValRef" (change)="changeChkValRef()"
+                  />
+                </div>
+              </div>
+              <label class="form-control" for="chkValRef">Valida Refile</label>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-7 mt-2">
+          <div class="row justify-content-end">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-6 col-xl-5">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="OP" [(ngModel)]="txtOP" [value]="txtOP | uppercase" (change)="changeTxtOP()">
+                <button class="btn btn-info" type="button" (click)="filtrarOPGrid()">
+                  <span class="fas fa-search"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row mt-2 justify-content-end">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6 text-left text-sm-left text-md-right text-lg-right text-xl-right">
+          <button class="btn btn-info" type="button" (click)="actualizarPantalla()">
+            <span class="fas fa-redo"></span>
+            Actualizar pantalla
+          </button>
+          <button class="btn btn-primary mx-2" type="button" (click)="openMdlCap002()">
+            <span class="fas fa-plus"></span>
+            Adicionar OP
+          </button>
+          <button class="btn btn-success mt-2 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0" type="button" (click)="btnAplicar()">
+            <span class="fas fa-check"></span>
+            Aplicar
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+          <grid-cs #gridDatos
+            [columnDefs]="columnasGrid"
+            [(data)]="listaDatosSearch"
+            [rowsPerPage]="100"
+            [autoHeight]="false"
+            [height]="'480px'"
+            [enablePagination]="true">
+          </grid-cs>
+
+        </div>
+      </div>
+
+      <div class="row my-2">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">Total Kilogramos</span>
+            <input type="text" class="form-control" placeholder="Total Kilogramos" [(ngModel)]="totKG" disabled>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4 mt-2 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">Metros Cuadrados</span>
+            <input type="text" class="form-control" placeholder="Metros Cuadrados" [(ngModel)]="totMts" disabled>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<ng-template #Cap002 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> AGREGAR UNA ORDEN DE PRODUCCIÓN A LA LISTA</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <span class="input-group-text">Orden de Producción</span>
+            <input type="text" class="form-control" placeholder="Orden de Producción" [(ngModel)]="mdlTxtOp">
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-danger mr-1" (click)="modal.close()">
+            <span class="fas fa-angle-double-left"></span> Regresar
+          </button>
+          <button type="button" class="btn btn-success ml-1" (click)="mdlAgregar()">
+            <span class="fas fa-angle-double-right"></span> Agregar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #mdlVariacion let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> VARIACION</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <label style="color: red;">Las siguiente OP's ya se produjeron, ¿desea volver a producirlas?</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #gridDatosVariacion
+            [columnDefs]="columnasGridVariacion"
+            [(data)]="listaDatosVariacion"
+            [rowsPerPage]="10"
+            [enablePagination]="true">
+          </grid-cs>
+        </div>
+      </div>
+
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-danger mr-1" (click)="continuarBtnAplicar()">
+            <span class="fas fa-check"></span> Continuar
+          </button>
+          <button type="button" class="btn btn-success ml-1" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #mdlCambioArticulos let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> ARTÍCULOS NUEVOS O CON CAMBIOS RECIENTES</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #gridArticulos
+            [columnDefs]="columnasGridArticulos"
+            [(data)]="listaDatosArticulos"
+            [rowsPerPage]="10"
+            [enablePagination]="true">
+          </grid-cs>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-2 mt-xl-2"
+        >
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-check"></span> Entendido
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<block-ui></block-ui>

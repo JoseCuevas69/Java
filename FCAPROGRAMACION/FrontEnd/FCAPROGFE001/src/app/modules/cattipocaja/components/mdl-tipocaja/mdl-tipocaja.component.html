@@ -1,0 +1,41 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <input-camposobligatorios [Titulo]="'Clave Diseño:'" [type]="'text'" [(Data)]="DatFormulario.claveDiseno"
+                [maxlength]="'10'" [(required)]="CamposObligatorios.ClaveDiseno" [Disabled]="disClvDiseno"></input-camposobligatorios>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Descripción:'" [type]="'text'" [(Data)]="DatFormulario.descripcion"
+              [maxlength]="'30'" [(required)]="CamposObligatorios.Descripcion"></input-camposobligatorios>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Registro de Exportación:'" [type]="'text'"
+              [(Data)]="DatFormulario.regExporta" [maxlength]="'15'"></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <section style="display: inline-grid;">
+              <mat-checkbox [(ngModel)]="DatFormulario.conSuaje">Con Suaje</mat-checkbox>
+              <mat-checkbox [(ngModel)]="DatFormulario.permiteCotDirecta">Permite cotización directa en el sistema de
+                solicitud múltiple</mat-checkbox>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>

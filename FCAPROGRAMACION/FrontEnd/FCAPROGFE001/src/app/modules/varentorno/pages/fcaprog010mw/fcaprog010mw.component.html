@@ -1,0 +1,30 @@
+<div class="contenedor">
+    <div class="cabecera">
+      <label style="margin-left: 30px; margin-top: 10px;">Variables de Entorno</label>
+    </div>
+    <div class="contenido mt-3">
+      <div id="Contenido" class="container-fluid">
+          <div class="row ">
+              <div class="col-12 ">
+                <grid-cs #gridVarEntorno [(data)]='Datos' [rowsPerPage]="7" [columnDefs]="columnDefs" [enablePagination]="true" >
+                </grid-cs>
+              </div>
+          </div>
+          <div>
+            <div class="col-12">
+                <button type="button" class="btn btn-success float-right add-button" (click)="btnGuardar()" ><i class="fa fa-save"></i> Guardar</button>
+            </div>
+        </div>
+      </div>
+  </div>
+    <div class="Pie">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 text-center ">
+            <h5>Versión 25.03.2022.1</h5>
+            <h5>ERPGRALFE001 - Variables de Entorno</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

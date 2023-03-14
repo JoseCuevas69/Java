@@ -1,0 +1,57 @@
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.min.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-bootstrap.min.css";
+@import "./assets/css/base.css";
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow: hidden;
+    height: 100% !important;
+}
+
+.required {
+    box-shadow: 0 0 0 .2rem #f71717b5;
+}
+.btn-morado {
+  color: #fff;
+  background-color: #563d7c;
+  border-color: #563d7c
+}
+.Mayus {
+  text-transform:uppercase
+}
+
+@media (min-width: 992px) {
+    .modal-xxl {
+        width: 100%;
+    }
+}
+
+input[id='imagen'] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+input[id='Expediente'] {
+    width: 100%;
+    display: block;
+}
+
+.mat-checkbox-layout {
+    display: block !important;
+    white-space: normal !important;
+}
+
+/* .ag-theme-bootstrap .ag-header {
+  background-color: red;
+} */

@@ -1,0 +1,45 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <lista-clavepreparacion [Value]="Preparacion" (ValueChange)="ChangeClavePrepa($event)"></lista-clavepreparacion>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <button type="button " class="btn btn-naranja" (click)="btnCalculaDatos()"><i class="fas fa-calculator"></i> Calcular</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Metros Lieales:</label>
+              <input [(ngModel)]="MetrosLineales"  type="number"  min="1"  class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Min. Aprox de Producc.:</label>
+              <input [(ngModel)]="HorasProd"  type="number"  min="1"  class="form-control" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>
+

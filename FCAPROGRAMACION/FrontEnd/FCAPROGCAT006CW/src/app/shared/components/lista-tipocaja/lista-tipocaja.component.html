@@ -1,0 +1,10 @@
+<label>Tipo Caja:</label>
+<div class="input-group mb-3">
+    <select id="Control" [ngClass]="{'form':true,'custom-select': true, 'form-control':true, 'required':required}" [(ngModel)]="TipoCajaValue" (change)="change(TipoCajaValue)">
+        <option [ngValue]="0">SELECCIONAR...</option>
+        <option *ngFor="let tipoCaja of TipoCaja" [ngValue]="tipoCaja.idTipoCaja">{{tipoCaja.claveDiseno}}</option>
+    </select>
+    <div *ngIf="MostrarConSuaje" class="input-group-append">
+        <label style="color: cornflowerblue;" class="input-group-text" for="Control">{{TipoCajaConSuaje}}</label>
+    </div>
+</div>

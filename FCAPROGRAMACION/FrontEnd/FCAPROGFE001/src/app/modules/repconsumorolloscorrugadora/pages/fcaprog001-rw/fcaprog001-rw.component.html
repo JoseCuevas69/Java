@@ -1,0 +1,241 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <div class="row m-2">
+            <div class="col-sm-12 col-md-8">
+                <label>Reporte de consumo de rollos Corrugadora</label>
+            </div>
+            <div class="col-sm-12 col-md-4 text-right">
+                <button type="button" class="btn btn-primary" (click)="ReporteConsumoRollos()">
+                    <i class='fas'>&#xf02f; Imprimir</i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--  (click)="ReporteArticulosMaster()" -->
+
+    <div class="contenido m-3">
+        <div id="Contenido" class="container-fluid">
+
+            <form>
+
+                <div class="row mt-1 border pb-1">
+                    <div class="col-12"><h6>Opciones Rollo</h6></div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioRollos" id="rbRollosConsumidos"
+                                checked>
+                            <label class="form-check-label" for="rbRollosConsumidos">
+                                Rollos Consumidos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioRollos" id="rbRollosOP">
+                            <label class="form-check-label" for="rbRollosOP">
+                                Rollos por OP
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioRollos" id="rbRollosOPTijuana">
+                            <label class="form-check-label" for="rbRollosOPTijuana">
+                                Rollos por Op (Zona Tijuana)
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                <div class="row mt-1 p-1 border">
+                    <div class="col-12">
+                        <h6>Filtros Fechas</h6>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Del: </span>
+                            <input class="form-control" type="date" id="dttfechaInicial"
+                                [(ngModel)]="DatosParametros.FechaIni" name="dttfechaInicial">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Al: </span>
+                            <input class="form-control" type="date" id="dttfechaFinal"
+                                [(ngModel)]="DatosParametros.FechaFin" name="dttfechaFinal">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Turno: </span>
+                            <select class="form-control form-control" 
+                                [(ngModel)]="DatosParametros.Turno" id="cmbTripulaciones" 
+                                name="Turno" disabled>
+                                <option *ngFor="let item of DataTripulacion" [ngValue]="item.valor">{{item.valor}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="chkTodosTurnos" id="chkTodosTurnos" checked="{{this.isTodosTurnos}}"
+                            checked (click)="HabilitarTurnos()">
+                            <label class="form-check-label" for="chkTodosTurnos">
+                                Todos los turnos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row mt-1 p-1 border">
+                    <div class="col-12"><h6>Datos Rollo</h6></div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Código de Rollo: </span>
+                            <input class="form-control" type="text" name="txtCodigoRollo" id="txtCodigoRollo"
+                                [(ngModel)]="DatosParametros.CodigoRollo">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="chkOps" id="chkOps">
+                            <label class="form-check-label" for="chkOps">
+                                Solo las que tengan OP
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Clase: </span>
+                            <select class="form-control form-control" id="cboClases" name="cboClases"  [(ngModel)]="DatosParametros.Clase">
+                                <!-- <option [ngValue]="'sel'">Seleccione Clase</option> -->
+                                <option *ngFor="let item of DataClases" [ngValue]="item.cl">{{item.cl}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">SubClase: </span>
+                            <select class="form-control form-control" id="cboSubClases" name="cboSubClases"  [(ngModel)]="DatosParametros.SubClase">
+                                <!-- <option [ngValue]="'sel'">Seleccione SubClase</option> -->
+                                <option *ngFor="let item of DataSubClases" [ngValue]="item.scl">{{item.scl}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Ancho: </span>
+                            <input class="form-control" type="text" name="TxtAncho" id="TxtAncho"
+                                [(ngModel)]="DatosParametros.Ancho">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Peso Inicial: </span>
+                            <input class="form-control" type="text" name="TxtPesoInicial" id="TxtPesoInicial"
+                                [(ngModel)]="DatosParametros.PesoInicial">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-1 p-1 border">
+                    <div class="col-12"><h6>Radio</h6></div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Radio Final: </span>
+                            <input class="form-control" type="text" name="TxtRadioFinal" id="TxtRadioFinal"
+                                [(ngModel)]="DatosParametros.RadioFinal">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Peso Resto Del: </span>
+                            <input class="form-control" type="text" name="TxtPesoInicio" id="TxtPesoInicio"
+                                [(ngModel)]="DatosParametros.PesoInicio">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Peso Final: </span>
+                            <input class="form-control" type="text" name="TxtPesoFinal" id="TxtPesoFinal"
+                                [(ngModel)]="DatosParametros.PesoFinal">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row mt-1 p-1 border">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="chkTodosTurnos" id="chkOrden" 
+                            checked>
+                            <label class="form-check-label" for="chkOrden">
+                                Orden por Fecha de Entrada
+                            </label>
+                        </div>
+                    </div>
+                </div> -->
+
+                    <div class="row mt-1 p-1 border">
+                        <div class="col-12">
+                            <h6>Ordenación</h6>
+                        </div>
+
+                        <div class="col-md-12 col-lg-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioOrden" id="rbFechaEntrada" checked>
+                                <label class="form-check-label" for="rbFechaEntrada">
+                                    Fecha de Entrada
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioOrden" id="rbGramajeAncho" >
+                                <label class="form-check-label" for="rbGramajeAncho">
+                                    Gramaje y Ancho
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioOrden" id="rbFechaProgOp" >
+                                <label class="form-check-label" for="rbFechaProgOp">
+                                    Fecha Programada y OP
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioOrden" id="rbFechaOpRollo" >
+                                <label class="form-check-label" for="rbFechaOpRollo">
+                                    Programa OP y #Rollo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                
+
+            </form>
+
+
+        </div>
+    </div>
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 18.04.2022.1</h5>
+                    <h5>FCAPROG101MW - REPORTE DE CONSUMO DE ROLLOS</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

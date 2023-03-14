@@ -1,0 +1,152 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">ASIGNACIÓN DE MÁQUINA</label>
+  </div>
+  <div class="contenido mt-3">
+    <div id="Contenido" class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <mat-checkbox class="example-margin" [(ngModel)]="checkArtivar"> Activar o Desactivar Rutas de Proceso</mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <label><strong>Rutas:</strong></label>
+          <select class="form-control form-control-sm" [(ngModel)]="cmbRutasProceso" [disabled]="!checkArtivar">
+            <option value="sel">Seleccionar...</option>
+            <option *ngFor="let obj of ltsRutaProceso" [ngValue]="obj.claveRutaProceso">{{obj.claveRutaProceso}} - {{obj.nombreRutaProceso}}</option>
+          </select>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+            <button class="btn btn-sm btn-success" (click)="openModalArticulosProcesos()" [disabled]="!checkArtivar"><i class="fa fa-edit"></i> Activar/Desactivar</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <fieldset class="fieldset">
+            <legend>Procesos del Artículo</legend>
+            <div class="row mt-2">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label><strong>Artículo</strong>:</label>
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control form-control-sm" readonly placeholder="Seleccionar Cliente" [(ngModel)]="ArticuloText">
+                      <div class="input-group-append">
+                        <button class="btn btn-info btn-sm" (click)="openModalArticulos()" type="button"><i class="fas fa-search"></i></button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label><strong>Proceso 1:</strong></label>
+                <select class="form-control form-control-sm" [(ngModel)]="Selproceso1" [disabled]="!proceso1">
+                  <option value="sin">Sin Establecer</option>
+                  <option *ngFor="let obj of ltsMaquina" [ngValue]="obj.claveMaquina">{{obj.claveMaquina}} - {{obj.nombre}}</option>
+                </select>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label><strong>Proceso 2:</strong></label>
+                <select class="form-control form-control-sm" [(ngModel)]="Selproceso2" [disabled]="!proceso2">
+                  <option value="sin">Sin Establecer</option>
+                  <option *ngFor="let obj of ltsMaquina" [ngValue]="obj.claveMaquina">{{obj.claveMaquina}} - {{obj.nombre}}</option>
+                </select>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2">
+                <label><strong>Proceso 3:</strong></label>
+                <select class="form-control form-control-sm" [(ngModel)]="Selproceso3" [disabled]="!proceso3">
+                  <option value="sin">Sin Establecer</option>
+                  <option *ngFor="let obj of ltsMaquina" [ngValue]="obj.claveMaquina">{{obj.claveMaquina}} - {{obj.nombre}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <button class="btn btn-primary btn-sm float-right add-button" (click)="GuardarProcesosArticulos()"><i class="fa fa-save"></i> Guardar</button>
+              </div>
+            </div>
+            <div class="row mt-3"></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center">
+          <h5>Versión 13.12.2021.1</h5>
+          <h5>FCAPROG007MW - MÓDULO ASIGNACIÓN DE MÁQUINA</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalArticulos let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-search"></i> Busqueda de Artículos</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeModalArticulos()"><i class="fas fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <label>Clave / Nombre Artículo:</label>
+          <input type="text" class="form form-control form-control-sm" [(ngModel)]="filtroArticulo">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+          <button class="btn btn-primary btn-sm" (click)="GetArticulos()"><i class="fa fa-search"></i> Buscar</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <grid-cs #gridArticulos [rowsPerPage]="5" [columnDefs]="columnGridArticulos" [(data)]="Articulos" [enablePagination]="true"></grid-cs>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="closeModalArticulos()"><i class="fas fa-times"></i> Cancelar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalArticulosProcesos let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-edit"></i> Activar / Desactivar Procesos</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeModalArticulosProcesos()"><i class="fas fa-times" aria-hidden="true"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <label><strong>Ruta:</strong></label><strong>{{rutaProcesoSeleccionado}}</strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+          <label>Clave / Nombre Artículo:</label>
+          <input type="text" class="form form-control form-control-sm" [(ngModel)]="filtroArticulo">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 CentrarBoton">
+          <button class="btn btn-primary btn-sm" (click)="GetArticulosProcesos()"><i class="fa fa-search"></i> Buscar</button>
+        </div>
+        <div class="col-sm-5 col-md-5 col-lg-5 CentrarBoton">
+          <mat-checkbox class="example-margin float-right" [(ngModel)]="seleccionartodos" (change)="SeleccionarTodos()"> Seleccionar Todos los Artículos</mat-checkbox>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <grid-cs #gridArticulos [rowsPerPage]="5" [columnDefs]="columnGridArticulosProcesos" [(data)]="ltsArticulosPorProceso" [enablePagination]="true"></grid-cs>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="closeModalArticulosProcesos()"><i class="fas fa-times"></i> Cancelar</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="ActulizarProcesos()"><i class="fas fa-save"></i> Guardar</button>
+  </div>
+</ng-template>
+
+<block-ui></block-ui>

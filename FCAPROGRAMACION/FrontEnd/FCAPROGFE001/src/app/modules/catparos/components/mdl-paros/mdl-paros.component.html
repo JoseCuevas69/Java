@@ -1,0 +1,57 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Clave:'" [type]="'text'" [(Data)]="DatFormulario.claveParo"
+              [maxlength]="'4'" (keyup)="keyupClaveMayus($event)" [style]="'text-transform:uppercase;'"  [(required)]="CamposObligatorios.claveParo" [Disabled]="disClvParo">
+            </input-camposobligatorios>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 35px;">
+            <mat-checkbox name="resistenciasAfines" [(ngModel)]="DatFormulario.aplicaPareto">Aplica Pareto</mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <input-camposobligatorios [Titulo]="'Descripción:'" [type]="'text'" [(Data)]="DatFormulario.tipoParo"
+              [maxlength]="'30'" (keyup)="keyupDescripcionMayus($event)" [style]="'text-transform:uppercase;'" [(required)]="CamposObligatorios.Descripcion"></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Observaciones</label>
+              <textarea [(ngModel)]="DatFormulario.observaciones" class="form-control">
+              </textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label>Tipos de Paros</label>
+              <select [ngModel]="DatFormulario.tipoParoValida" (ngModelChange)="ChangeTipoValida($event)" name="estatus" [ngClass]="{'form-control':true, 'required': CamposObligatorios.tipoParoValida}">
+                <option [ngValue]="''">SELECCIONAR...</option>
+                <option [ngValue]="'G'">General</option>
+                <option [ngValue]="'PJ'">Autorizar Paro</option>
+                <option [ngValue]="'OT'">Requiere O.T.</option>
+                <option [ngValue]="'MP'">Mant. Programado</option>
+                <option [ngValue]="'FT'">Falta de Trabajo</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <lista-tipomaquina [Value]="DatFormulario.tipoMaquina" (ValueChange)="ChangeTipoMaquina($event)" [label]="'Tipo Maquina:'" [required]="CamposObligatorios.tipoMaquina" [disabled]="disTipoMaq"></lista-tipomaquina>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+    <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+  </div>
+
+  <block-ui></block-ui>

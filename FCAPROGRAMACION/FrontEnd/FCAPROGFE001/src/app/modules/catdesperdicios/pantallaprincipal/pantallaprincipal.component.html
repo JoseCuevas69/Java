@@ -1,0 +1,71 @@
+<div class="contenedor">
+  <div class="cabecera">
+      <label style="margin-left: 30px; margin-top: 10px;">CATALOGO DE DESPERDICIOS</label>
+  </div>
+  <div class="contenido mt-3">
+      <div id="Contenido" class="container-fluid">
+          <form class="mb-1">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <fieldset class="fieldset">
+                          <legend>Filtros</legend>
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                <label>Desperdicio:</label>
+                                <input [(ngModel)]="filtros.Desperdicio" name="AreaDesp" type="text" class="form-control" maxlength="30" min="0" (keyup.enter)="btnBuscar()"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-1 col-md-1 col-lg-1" style="margin-top: 30px;">
+                              <button type="button" class="btn btn-primary" (click)="btnBuscar()"><i class="fa fa-search"></i></button>
+                            </div>
+                            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                              <div class="form-group">
+                              <fieldset class="fieldset">
+                                <legend>Aplica En</legend>
+                                <div class="row">
+                                  <div class="col-6" style="display: grid">
+                                    <mat-checkbox name="Imp" [(ngModel)]="filtros.aplicaImpresora"> Impresoras</mat-checkbox>
+                                    <mat-checkbox name="corr" [(ngModel)]="filtros.aplicaCorrugadora" > Corrugadora</mat-checkbox>
+                                  </div>
+                                  <div class="col-6" style="display: grid">
+                                    <mat-checkbox name="aca" [(ngModel)]="filtros.aplicaAcabados"> Acabados</mat-checkbox>
+                                    <mat-checkbox name="apli" [(ngModel)]="filtros.aplicaRecuperacionCaja"> Recuperacion Caja</mat-checkbox>
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+                            </div>
+                          </div>
+                      </fieldset>
+                  </div>
+              </div>
+
+              <div class="row mt-1">
+                  <div class="col-12">
+                      <button type="button" class="btn btn-success float-right add-button" style="margin-left: 4px;" (click)="btnAgregar()" ><i class="fa fa-plus"></i> Agregar Desperdicio</button>
+                      <button type="button" class="btn btn-success float-right add-button" (click)="btnCatAreaDes()" ><i class="fas fa-external-link-alt"></i> Catalogo de Área Desperdicio</button>
+                      <ng-modal [Size]="'xl'" [Titulo]="'DESPERDICIO'" [IconoTitulo]="IconoTitulo" #mdl>
+                          <mdl-desperdicios [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mdl-desperdicios>
+                      </ng-modal>
+                  </div>
+              </div>
+          </form>
+          <div class="row ">
+              <div class="col-12 ">
+                <grid-ss #gridPrincipal [serviceFunction]="Servicio.GetDesperdicios" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                </grid-ss>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="Pie ">
+      <div class="container ">
+          <div class="row ">
+              <div class="col-xs-12 col-md-12 text-center ">
+                  <h5>VERSIÓN 23.11.2021.1 FCAPRODCAT011CW - CATALOGO DE DESPERDICIOS</h5>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

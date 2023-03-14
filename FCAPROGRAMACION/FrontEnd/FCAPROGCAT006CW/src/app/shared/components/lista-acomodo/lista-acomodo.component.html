@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label>{{texto}}</label>
+  <select [ngModel]="AcomodoValue" [ngClass]="{'form-control':true, 'required':required}"
+    (ngModelchange)="AcomodoValueChange.emit(AcomodoValue)" [disabled]="Disabled">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option *ngFor="let item of ListaAcomodo" [ngValue]="item.idAcomodo">{{item.acomodo}}</option>
+  </select>
+</div>

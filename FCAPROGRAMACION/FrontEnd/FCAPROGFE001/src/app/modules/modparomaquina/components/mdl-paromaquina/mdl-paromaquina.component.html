@@ -1,0 +1,32 @@
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+            <label>Maquina:</label>   
+            <input name="inClaveMaquina" readonly="true" type="text" class="form-control form-control-sm" [(ngModel)]="inClaveMaquina"  >
+        </div>
+
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+            <label>Inicio Paro:</label>   
+            <input name="strInicioParo" class="form-control form-control-sm"  type="datetime-local"  [value]="dtInicio" [ngModel] = "dtInicio | date:'yyyy-MM-ddTHH:mm'" (change) = "ondateChangeddtInicio($event)"  />
+        </div>
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+            <label>Fin Paro:</label>   
+            <input name="strFinParo" class="form-control form-control-sm"  type="datetime-local" [value]="dtFin" [ngModel]= "dtFin | date:'yyyy-MM-ddTHH:mm'"  (change) = "ondateChangeddtFin($event)" />
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+            <label>Duracion:</label>
+            <input name="strDuracionParo" readonly="true" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.tiempomin" placeholder="Duracion Minutos"  />
+        </div>                 
+    </div>  
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 form-group">
+            <label for="strComentarioParo">Comnetario:</label>
+            <textarea class="form-control form-control-sm rounded-0" id="strComentarioParo" rows="5"  [(ngModel)]="DatFormulario.comentario" placeholder="Comentarios"></textarea>
+          </div>     
+    </div>   
+</div>
+<div class="modal-footer ">
+    <button type="button " class="btn btn-danger" (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+    <button type="button " class="btn btn-success" (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>

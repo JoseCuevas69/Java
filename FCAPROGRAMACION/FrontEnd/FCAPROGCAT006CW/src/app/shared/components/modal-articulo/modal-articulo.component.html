@@ -1,0 +1,49 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="selZona">Archivo:</label>
+              <input [(ngModel)]="filtros.filtro" (keypress)="KeyPressBuscar($event)" id="txtNombre" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <lista-tipoproducto [TipoProductoValue]="filtros.TipoProducto" (TipoProductoValueChange)="ChangeTipoProducto($event)"></lista-tipoproducto>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="selZona">Resistencia:</label>
+              <input [(ngModel)]="filtros.Resistencia" (keypress)="KeyPressBuscar($event)" id="txtNombre" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="selZona">Suaje:</label>
+              <div class="input-group">
+                <input [(ngModel)]="filtros.Suaje" id="txtNombre" (keypress)="KeyPressBuscar($event)" type="text" class="form-control">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary" type="button" id="btnBuscar" (click)="btnBuscar()"><span
+                      class="fa fa-search"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-12">
+            <grid-ss #gridPrincipal [serviceFunction]="Service.ListarArticulos" [rowsPerPage]="7"
+              [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+            </grid-ss>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

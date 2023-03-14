@@ -1,0 +1,7 @@
+<label>Clave Preparación:</label>
+<div class="input-group mb-3">
+    <select id="Control" [ngClass]="{'form':true, 'form-control':true, 'required':required}" [(ngModel)]="seleccionar" (change)="change(seleccionar)" [disabled]="Disabled">
+      <option [ngValue]="''">SELECCIONAR...</option>
+        <option *ngFor="let proceso of Proceso" [ngValue]="proceso.claveProceso">{{proceso.descripcion}}</option>
+    </select>
+</div>

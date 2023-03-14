@@ -1,0 +1,24 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title"><i [class]="iconClass"></i> {{title}}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()"><i class="fas fa-times"
+            aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 mt-4 mb-1">
+                    <grid-cs #grid
+                        [rowsPerPage]="5"
+                        [columnDefs]="columnDefs"
+                        [(data)]="contactos"
+                        (onReady)="gridReady($event)">
+                    </grid-cs>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModal()"><i class="fas fa-times"></i> Cancelar</button>
+    </div>
+</ng-template>

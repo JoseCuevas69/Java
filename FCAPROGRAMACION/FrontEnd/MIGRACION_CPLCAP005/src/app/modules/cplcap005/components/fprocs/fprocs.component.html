@@ -1,0 +1,26 @@
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">&nbsp;{{titulo}}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="d-flex align-items-center">
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            <strong>&nbsp;{{texto}}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close()">
+      <i class="fas fa-times"></i> Cancelar
+    </button>
+  </div> -->
+</ng-template>

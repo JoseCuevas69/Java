@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Tipo de Pallet:</label>
+    <select [(ngModel)]="TipopalletValue" [ngClass]="{'form-control':true, 'required':required}" (change)="TipopalletValueChange.emit(TipopalletValue)" [disabled]="Disabled">
+            <option [ngValue]="''">SELECCIONAR...</option>
+            <option *ngFor="let item of ListaTipopallet" [ngValue]="item.tipo.trim()">{{item.descripcion}}</option>
+    </select>
+</div>

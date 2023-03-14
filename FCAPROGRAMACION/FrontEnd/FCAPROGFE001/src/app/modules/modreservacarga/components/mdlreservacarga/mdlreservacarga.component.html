@@ -1,0 +1,26 @@
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+            <label>Fecha Inicio:</label>   
+            <input name="strInicio" class="form-control form-control-sm"  type="date"  [value]="dtInicio" [ngModel] = "dtInicio | date:'yyyy-MM-dd'" (change) = "ondateChangeddtInicio($event)"  />
+        </div>
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+            <label>Fecha Fin:</label>   
+            <input name="strFin" class="form-control form-control-sm"  type="date" [value]="dtFin" [ngModel]= "dtFin | date:'yyyy-MM-dd'"  (change) = "ondateChangeddtFin($event)" />
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+            <label>Volumen (M2):</label>
+            <input name="strVolumen"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.volumen" placeholder="Volumen"  />
+        </div> 
+    </div>  
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 form-group">
+            <label for="strComentario">Comentario:</label>
+            <textarea class="form-control form-control-sm rounded-0" id="strComentario" rows="5"  [(ngModel)]="DatFormulario.comentario" placeholder="Comentarios"></textarea>
+          </div>
+    </div>   
+</div>
+<div class="modal-footer ">
+    <button type="button " class="btn btn-danger" (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+    <button type="button " class="btn btn-success" (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>

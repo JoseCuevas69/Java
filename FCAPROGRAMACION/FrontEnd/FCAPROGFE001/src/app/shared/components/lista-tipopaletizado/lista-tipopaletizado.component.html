@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Tipo Paletizado:</label>
+    <select [(ngModel)]="TipopaletizadoValue" [ngClass]="{'form-control':true, 'required':required}" (change)="TipopaletizadoValueChange.emit(TipopaletizadoValue)" [disabled]="Disabled">
+            <option [ngValue]="0">SELECCIONAR...</option>
+            <option *ngFor="let item of ListaTipopaletizado" [ngValue]="item.clave">{{item.tipoPaletizado}}</option>
+    </select>
+</div>

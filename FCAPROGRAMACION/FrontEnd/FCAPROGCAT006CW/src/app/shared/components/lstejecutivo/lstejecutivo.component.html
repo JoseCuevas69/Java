@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        <label>Ejecutivos:</label>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregarEjecutivo()"><i class="fa fa-user-plus"></i> Agregar</button>
+    </div>
+</div>
+<div class="row mt-1">
+    <div class="col-12">
+        <grid-cs #GridEjecutivo [rowsPerPage]="7 " [columnDefs]="columnDefs" [enablePagination]=true [data]="this.Datos"></grid-cs>
+    </div>
+</div>
+
+<app-mldejecutivo #mldejecutivo (ItemData)="GetEjecutivos($event)"></app-mldejecutivo>

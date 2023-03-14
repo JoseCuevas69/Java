@@ -1,0 +1,4 @@
+<label>Ciudad:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="seleccionar" [compareWith]="comparar" (ngModelChange)="ChangeCiudad($event)">
+    <option *ngFor="let obj of Ciudad" [ngValue]="obj">{{obj.ciudad}}</option>
+</select>

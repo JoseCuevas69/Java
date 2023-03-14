@@ -1,0 +1,39 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <input-camposobligatorios [Titulo]="'Clave Maquina:'" [type]="'text'" [(Data)]="DatFormulario.claveMaquina"
+                [Disabled]="true"></input-camposobligatorios>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Turnos:'" type="number" [(Data)]="DatFormulario.turnos"></input-camposobligatorios>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Carga Pendiente:'" type="number" [(Data)]="DatFormulario.m2CargaPendiente"></input-camposobligatorios>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Promedio:'" type="number" [(Data)]="DatFormulario.m2PromTurno"></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+
+<block-ui></block-ui>

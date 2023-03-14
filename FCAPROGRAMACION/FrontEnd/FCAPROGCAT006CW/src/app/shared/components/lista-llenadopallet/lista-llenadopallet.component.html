@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Llenado de Pallet:</label>
+    <select [(ngModel)]="LlenadoPalletValue" [ngClass]="{'form-control':true, 'required':required}" (change)="LlenadoPalletValueChange.emit(LlenadoPalletValue)" [disabled]="Disabled">
+            <option [ngValue]="0">SELECCIONAR...</option>
+            <option *ngFor="let item of ListaLlenadoPallet" [ngValue]="item.clave">{{item.llenadoPallet}}</option>
+    </select>
+</div>

@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Tipo Grabado:</label>
+    <select [(ngModel)]="TipoGrabadoValue" [ngClass]="{'form-control':true, 'required':required}" (change)="TipoGrabadoValueChange.emit(TipoGrabadoValue)">
+            <option [ngValue]="''">SELECCIONAR...</option>
+            <option *ngFor="let item of ListaTipoGrabado" [ngValue]="item.codTipoIndustria">{{item.descripcion}}</option>
+    </select>
+</div>

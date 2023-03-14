@@ -1,0 +1,4 @@
+<label>IVA(%): </label>
+<select class="form form-control" [(ngModel)]="seleccionar" [compareWith]="comparar" (ngModelChange)="ChangeIva($event)">
+    <option *ngFor="let iva of IVA" [ngValue]="iva">{{iva.valorIVA}}</option>
+</select>

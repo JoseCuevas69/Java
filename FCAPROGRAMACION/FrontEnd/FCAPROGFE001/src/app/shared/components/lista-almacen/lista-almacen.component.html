@@ -1,0 +1,5 @@
+<label *ngIf="VisibleLabel">Almacén:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="AlmacenValue" (ngModelChange)="AlmacenValueChange.emit(AlmacenValue)" [disabled]="!AlmacenDisabled">
+    <option [ngValue]="'sel'">SELECCIONAR...</option>
+    <option *ngFor="let obj of Almacen" [ngValue]="obj.cod">{{obj.nombre}}</option>
+</select>

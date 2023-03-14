@@ -1,0 +1,31 @@
+<div class="modal-body">
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+          <div class="col-12">
+              <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                      <label>Responsable:</label>
+                      <custom-textbox
+                          textBoxId="txtResponsable"
+                          placeholder="Clave o Nombre del Responsable"
+                          [enableSearch]="true"
+                          buttonClass="btn btn-outline-primary"
+                          closeClass="color-primary"
+                          (clearClick)="buscar()"
+                          (searchClick)="buscar()"
+                          [(text)]="filtros.filtro"
+                      ></custom-textbox>
+                  </div>
+              </div>
+              <div class="row mt-1">
+                  <div class="col-12">
+                      <grid-ss #grid [serviceFunction]="Service.ListaResponsable" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true"></grid-ss>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="cancelar()"><i class="fas fa-times"></i> Cancelar</button>
+</div>

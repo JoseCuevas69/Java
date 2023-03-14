@@ -1,0 +1,465 @@
+
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 2px; margin-bottom: 2px;">Captura programación normal</label>
+  </div>
+
+  <div class="contenido mt-2 mb-2">
+    <div class="container-fluid">
+
+      <!-- Cuchillas -->
+      <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12">
+
+          <div class="form-check form-check-inline">
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="radio" name="rbtnCuchillas" id="rbtn2Cuchillas" value="2"
+                    [(ngModel)]="rbtnCuchillas" (change)="changeChkCuchillas()"
+                  />
+                </div>
+              </div>
+              <label class="form-control" for="rbtn2Cuchillas">A 2 Cuchillas</label>
+            </div>
+
+          </div>
+
+          <div class="form-check form-check-inline">
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="radio" name="rbtnCuchillas" id="rbtn3Cuchillas" value="3"
+                    [(ngModel)]="rbtnCuchillas" (change)="changeChkCuchillas()"
+                  />
+                </div>
+              </div>
+              <label class="form-control" for="rbtn3Cuchillas">A 3 Cuchillas</label>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-2 mt-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="cbxResistencias" class="input-group-text">Resistencia Programando</label>
+            </div>
+            <select name="cbxResistencias" id="cbxResistencias" class="form-control"
+              [(ngModel)]="cbxResistenciaSeleccionada" (change)="changeCbxResistencia()"
+            >
+              <option *ngFor="let dato of listaResistencias" value="{{dato.clave}}">
+                {{dato.clave}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Opciones -->
+      <div class="row mt-2">
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6">
+          <button id="btnArreglosOptimos" type="button" class="btn btn-primary w-100" [disabled]="disabledBtnArreglosOptimos" (click)="clickBtnArreglosOptimos()">
+            <span class="fas fa-wrench"></span>
+            Arreglos Optimos
+          </button>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6">
+          <button id="btnValidarArreglo" type="button" class="btn btn-primary w-100" [disabled]="disabledBtnValidarArreglo" (click)="clickBtnValidarArreglo()">
+            <span class="fas fa-check"></span>
+            Validar Arreglo
+          </button>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6 mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0 mt-2">
+          <button id="btnValidarTodo" type="button" class="btn btn-primary w-100" [disabled]="disabledBtnValidarTodo" (click)="clickBtnValidarTodo()">
+            <span class="fas fa-check-double"></span>
+            Validar Todo
+          </button>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6 mt-xl-0 mt-lg-2 mt-md-2 mt-sm-2 mt-2">
+          <button id="btnCalculos" type="button" class="btn btn-primary w-100" [disabled]="disabledBtnCalculos" (click)="clickBtnCalculos()">
+            <span class="fas fa-cog"></span>
+            Cálculos
+          </button>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6 mt-xl-0 mt-lg-2 mt-md-2 mt-sm-2 mt-2">
+          <button id="btnCalculadora" type="button" class="btn btn-primary w-100" [disabled]="disabledBtnCalculadora" (click)="clickBtnCalculadora()">
+            <span class="fas fa-calculator"></span>
+            Calculadora
+          </button>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6 mt-xl-0 mt-lg-2 mt-md-2 mt-sm-2 mt-2">
+          <button id="btnConfVariacion" type="button" class="btn btn-primary w-100" [disabled]="disabledBtnConfVariacion" (click)="clickBtnConfVariacion()">
+            <span class="fas fa-cogs"></span>
+            Conf. Variación
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <!-- <div class="col-12" [ngStyle]="{display: displayArreglosOptimos ? 'block' : 'none'}">
+          <div class="d-flex align-items-start">
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            <strong [innerHtml]="mdlFProcsTexto"></strong>
+          </div>
+        </div> -->
+        <div class="col-12 mt-2"  [ngStyle]="{display: displayArreglosOptimos ? 'block' : 'none'}">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <grid-cs #gridDatosResData
+                [columnDefs]="columnasGridResDataPrincipal"
+                [(data)]="listaResData"
+                [rowsPerPage]="10"
+                [enablePagination]="true">
+              </grid-cs>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8">
+              <div class="row">
+
+                <div class="col-7 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Refile Prom</span>
+                    <input type="text" class="form-control" placeholder="Refile Promedio" [(ngModel)]="txtRefileProm" disabled>
+                  </div>
+                </div>
+                <div class="col-7 col-sm-6 col-md-4 col-lg-4 col-xl-4 my-2 my-sm-0 my-md-0 my-lg-0 my-xl-0">
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">M2</span>
+                    <input type="text" class="form-control" placeholder="Metros Cuadrados" [(ngModel)]="txtM2" disabled>
+                  </div>
+                </div>
+                <div class="col-7 col-sm-6 col-md-4 col-lg-4 col-xl-4 mt-0 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Total ML</span>
+                    <input type="text" class="form-control" placeholder="Total Metros Lineales" [(ngModel)]="txtTotML" disabled>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-2" [ngStyle]="{display: displayValidarArreglo ? 'block' : 'none'}">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <grid-cs #gridDatosCPLDAT009
+                [columnDefs]="columnasGridCPLDAT009TD_002"
+                [(data)]="listaCPLDAT009"
+                [rowsPerPage]="10"
+                [enablePagination]="true">
+              </grid-cs>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-2" [ngStyle]="{display: displayValidarTodo ? 'block' : 'none'}">
+          <p>Validar Todo</p>
+        </div>
+        <div class="col-12 mt-2" [ngStyle]="{display: displayCalculos ? 'block' : 'none'}">
+          <!-- <p>Cálculos</p> -->
+
+          <mat-tab-group
+            [selectedIndex]="tabSelected"
+            (selectedIndexChange)="changeTab($event)"
+            mat-align-tabs="center"
+            animationDuration="300ms"
+            mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+              <mat-tab label="Captura de Anchos">
+                <app-cplcap001></app-cplcap001>
+              </mat-tab>
+              <mat-tab label="Consulta de Combinaciones Posibles">
+                <app-cplcap002 #CplCap002></app-cplcap002>
+              </mat-tab>
+              <mat-tab label="Param. de Valaución y Cálculo de Arreglos">
+                <app-cplcap003></app-cplcap003>
+              </mat-tab>
+              <mat-tab label="Ordenes de Producción Analizadas">
+                <app-cplcap009 #CplCap009></app-cplcap009>
+              </mat-tab>
+          </mat-tab-group>
+
+        </div>
+        <div class="col-12 mt-2" [ngStyle]="{display: displayCalculadora ? 'block' : 'none'}">
+          <iframe src="https://www.desmos.com/scientific?lang=es" frameborder="0" width="50%" height="400px"></iframe>
+        </div>
+        <div class="col-12 mt-2" [ngStyle]="{display: displayConfVariacion ? 'block' : 'none'}">
+          <!-- <p>Conf. Variación</p> -->
+
+          <div class="container-fluid">
+            <legend>Porcentaje de variación</legend>
+
+            <div class="row">
+              <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+
+                <div class="row">
+                  <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mr-0 pr-0">
+                    <span class="input-group-text pr-5">{{txtPorcentajeVar1}}</span>
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ml-0 pl-0">
+                    <input type="number" [(ngModel)]="txtVariacion1" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mr-0 pr-0">
+                    <span class="input-group-text pr-5">{{txtPorcentajeVar2}}</span>
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ml-0 pl-0">
+                    <input type="number" [(ngModel)]="txtVariacion2" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mr-0 pr-0">
+                    <span class="input-group-text pr-5">{{txtPorcentajeVar3}}</span>
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ml-0 pl-0">
+                    <input type="number" [(ngModel)]="txtVariacion3" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mr-0 pr-0">
+                    <span class="input-group-text pr-5">{{txtPorcentajeVar4}}</span>
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ml-0 pl-0">
+                    <input type="number" [(ngModel)]="txtVariacion4" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mr-0 pr-0">
+                    <span class="input-group-text pr-5">{{txtPorcentajeVar5}}</span>
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ml-0 pl-0">
+                    <input type="number" [(ngModel)]="txtVariacion5" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mr-0 pr-0">
+                    <span class="input-group-text pr-5">{{txtPorcentajeVar6}}</span>
+                  </div>
+                  <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 ml-0 pl-0">
+                    <input type="number" [(ngModel)]="txtVariacion6" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+                <button id="btnConfVariacion" type="button" class="btn btn-success w-50" [disabled]="disabledBtnConfVariacion" (click)="actualizarVariaciones()">
+                  <span class="fas fa-check"></span>
+                  Aplicar
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="Pie">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-12 text-center">
+          <small style="margin-top: 2px; margin-bottom: 2px;">Versión {{VERSION}}</small>
+          <small style="margin-top: 2px; margin-bottom: 2px;">CPLCAP005 - CAPTURA PROGRAMACIÓN NORMAL</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #mdlValidacion let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> CANCELAR OPS</h5>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button> -->
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <label style="color: red; font-weight: bold;">Se encontraron OP's con Producción Completa y/o Producción Adicional </label>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="chkSelAllCancelar" (change)="clickSelAll()" type="checkbox" value="" id="chkSelAllCancelar">
+            <label class="form-check-label" for="chkSelAllCancelar">
+              Seleccionar todos
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+          <grid-cs #gridDatosValidacion
+            [columnDefs]="columnasGridResDataTmp"
+            [(data)]="listaResDataTmp"
+            [rowsPerPage]="8"
+            [enablePagination]="true">
+          </grid-cs>
+
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-end">
+          <button type="button" class="btn btn-success" (click)="clickContinuar()">
+            <span class="fas fa-check"></span>
+            Continuar
+          </button>
+          <!-- <button type="button" class="btn btn-danger ml-2" (click)="closeModal()">
+            <span class="fas fa-times"></span>
+            Cerrar
+          </button> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+<ng-template #fValidarArregloResistencia let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Validación</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <label>Favor de validar las resistencias y flautas de los siguientes arreglos:</label>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+          <grid-cs #gridValidarResistencias
+            [columnDefs]="columnasGridResistencia"
+            [(data)]="listaGridValidaResistencia"
+            [rowsPerPage]="10"
+            [enablePagination]="true">
+          </grid-cs>
+
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-end">
+          <button type="button" class="btn btn-success" (click)="modal.close()">
+            <span class="fas fa-check"></span>
+            Entendido
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</ng-template>
+
+
+
+
+
+<ng-template #fValidarArregloPresentacionPintado let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Validación</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <label>Favor de verificar la presentacion de artículo, papel y la configuración de pintado de corrugadora o papel:</label>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+          <grid-cs #gridValidarResistencias
+            [columnDefs]="columnasGridPresentacionPintado"
+            [(data)]="listaGridValidaPresentacionPintado"
+            [rowsPerPage]="10"
+            [enablePagination]="true">
+          </grid-cs>
+
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-end">
+          <button type="button" class="btn btn-success" (click)="clickAceptarPintado()">
+            <span class="fas fa-check"></span>
+            Aceptar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</ng-template>
+
+
+
+
+<block-ui></block-ui>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MODAL CARGAR -->
+<!-- <app-fprocs #modalFProcs [titulo]="mdlFProcsTitulo" [texto]="mdlFProcsTexto"></app-fprocs> -->

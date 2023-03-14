@@ -1,0 +1,1265 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <h6 style="margin-left: 30px; margin-top: 2px; margin-bottom: 2px;">Modificación Secuencias de Impresoras</h6>
+  </div>
+
+  <div class="contenido my-2">
+    <div class="container-fluid mx-0">
+
+      <div class="row mt-2">
+        <!-- Seccción Izquierda -->
+        <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+
+          <div class="row d-flex justify-content-end">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-5">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label for="txtFechaProgramadaSecuencia" class="input-group-text">Secuencia Programada para Fabricación:</label>
+                </div>
+                <input class="form-control" type="date" id="txtFechaProgramadaSecuencia" [(ngModel)]="objCamposGeneral.fechaSecuencia">
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 px-0 mx-0 float-right">
+              <div class="input-group">
+                <!-- <div class="input-group-prepend">
+                  <label for="txtFechaProgramadaSecuencia" class="input-group-text">Tipo de máquina:</label>
+                </div> -->
+
+                <div class="form-check form-check-inline">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input class="form-check-input" type="radio" name="rbtnTipoMaquina" id="rbtnImpresoras" value="0"
+                          [(ngModel)]="objCbxMaquinas.rbtnTipoMaquina" (change)="changeRbtnTipoMaquina()"
+                        />
+                      </div>
+                    </div>
+                    <label class="form-control" for="rbtnImpresoras">Impresoras</label>
+                  </div>
+                </div>
+
+                <div class="form-check form-check-inline ml-0 pl-0">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input class="form-check-input" type="radio" name="rbtnTipoMaquina" id="rbtnAcabados" value="1"
+                          [(ngModel)]="objCbxMaquinas.rbtnTipoMaquina" (change)="changeRbtnTipoMaquina()"
+                        />
+                      </div>
+                    </div>
+                    <label class="form-control" for="rbtnAcabados">Acabados</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-3 pl-0 ml-0">
+              <div class="input-group pl-0">
+                <div class="input-group-prepend">
+                  <label for="cbxMaquina" class="input-group-text">Máquina:</label>
+                </div>
+                <select name="cbxMaquina" id="cbxMaquina" class="form-control w-25"
+                  [(ngModel)]="objCbxMaquinas.selected" (change)="changeCbxMaquina()"
+                >
+                  <option *ngFor="let dato of objCbxMaquinas.listMaquinas" value="{{dato.claveMaquina}}">
+                    {{dato.claveMaquina}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Grid -->
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <grid-cs #gridPrincipal
+                [columnDefs]="columnasGridSecuencias"
+                [(data)]="dataGridSecuencias"
+                [rowsPerPage]="0"
+                [autoHeight]="false"
+                [height]="'420px'"
+                [headerHeight]="34"
+                [rowHeight]="30"
+                [rowSelection]="'single'"
+                (onReady)="gridPrincipal_OnReady($event)"
+                (onLoad)="gridSecuenciasPrincipal = $event"
+                (selectionChanged)="gridPrincipal_Change()"
+                [enablePagination]="false">
+              </grid-cs>
+            </div>
+          </div>
+
+          <!-- Totales de Cantidad y Tiempo -->
+          <div class="row mt-1">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label for="txtProgramaCorrug" class="input-group-text">Programa Corrug:</label>
+                </div>
+                <input class="form-control" type="text" id="txtProgramaCorrug" [(ngModel)]="objCamposGeneral.txtProgramaCorrug" disabled>
+              </div>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+              <input type="text" class="form-control" [(ngModel)]="objCamposGeneral.txtTotalCantidad" disabled>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center">
+              <h4 style="color: #0054E3;" *ngIf="objVisible.lblSuspendida">**SUSPENDIDA**</h4>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+              <input type="text" class="form-control" [(ngModel)]="objCamposGeneral.txtTotalTiempo" disabled>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+              <button class="btn btn-secondary" *ngIf="objVisible.btnOrdenarOP">
+                <span class="fas fa-sort"></span> Ordenar por OP
+              </button>
+            </div>
+          </div>
+
+          <!-- Notas -->
+          <div class="row mt-1">
+            <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+              <div class="input-group">
+                <label class="input-group-text" for="txtNotas">NOTAS:</label>
+                <textarea id="txtNotas" class="form-control" [(ngModel)]="objCamposGeneral.notas"></textarea>
+              </div>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 px-0">
+              <button class="btn btn-primary mx-0" [disabled]="objDisabled.btnAceptarNotas" (click)="clickAceptarNotas()">
+                <span class="fas fa-check"></span> Aceptar
+              </button>
+            </div>
+          </div>
+
+          <!-- Opciones -->
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+              <div class="form-check form-check-inline">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input class="form-check-input" type="checkbox" name="chkPintado" id="chkPintado"
+                        [(ngModel)]="objCamposGeneral.pintado"
+                      />
+                    </div>
+                  </div>
+                  <label class="form-control" for="chkPintado">Pintado</label>
+                </div>
+              </div>
+
+              <!-- <button class="btn btn-secondary" title="Traspasar Programas" (click)="abrirMdlTraspasarProgramas()">
+                <span class="fa fa-reply-all"></span>
+              </button> -->
+              <button class="btn btn-secondary mx-1" title="Suspender OP" (click)="suspenderOP()">
+                <span class="fa fa-ban"></span>
+              </button>
+              <button class="btn btn-secondary" title="Visualizar Maestra de Producción">
+                <span class="fas fa-eye"></span>
+              </button>
+              <button class="btn btn-secondary mx-1" title="Agregar OP" [disabled]="objDisabled.btnAgregarOP" (click)="openMdlAgregarOP()">
+                <span class="fas fa-plus"></span>
+              </button>
+              <button class="btn btn-secondary" title="Programar Impresora" (click)="openMdlCap009()">
+                <span class="fas fa-share"></span>
+              </button>
+              <button class="btn btn-secondary mx-1" title="Balanceo de Tiempo Muerto">
+                <span class="fas fa-retweet"></span>
+              </button>
+              <button class="btn btn-secondary" title="Eliminar OP" (click)="eliminarOP()">
+                <span class="fas fa-trash"></span>
+              </button>
+              <button class="btn btn-secondary mx-1" title="Cambiar OP de Máquina" (click)="cambiarOpMaquina()">
+                <span class="fas fa-edit"></span>
+                <!-- this.objCamposGeneral.esCapAut -->
+              </button>
+              <button class="btn btn-secondary" title="Cortar OP" (click)="cortarOPMaquina(false)">
+                <img src="../../../../../assets/images/cut.ico" alt="">
+              </button>
+              <button class="btn btn-secondary mx-1" title="Cortar OP" (click)="cortarOPMaquina(true)">
+                <img src="../../../../../assets/images/cut2.ico" alt="">
+              </button>
+              <button class="btn btn-secondary" title="Termina la programación de la OP" (click)="terminaProgramacionOP()">
+                <span class="fas fa-check"></span>
+              </button>
+              <button class="btn btn-secondary mx-1" title="Sube una posición" (click)="secuenciaSubeBaja(true)" [disabled]="objDisabled.btnSubePosicion">
+                <span class="fas fa-arrow-up"></span>
+              </button>
+              <button class="btn btn-secondary" title="Baja una posición" (click)="secuenciaSubeBaja(false)" [disabled]="objDisabled.btnBajaPosicion">
+                <span class="fas fa-arrow-down"></span>
+              </button>
+              <button class="btn btn-secondary mx-1" title="Fija Fecha y Hora de Fabricación" (click)="fijarFecha()">
+                <span class="fas fa-clock"></span>
+              </button>
+              <button class="btn btn-secondary" title="Organiza Secuencia en Tiempo de Corrugadora">
+                <span class="fas fa-sitemap"></span>
+              </button>
+              <button class="btn btn-secondary ml-1" title="Graba Secuencia" (click)="aplicarCambios()">
+                <span class="fas fa-save"></span>
+              </button>
+              <button class="btn btn-secondary ml-5 mr-1" title="Imprime Reporte Operación">
+                <span class="fas fa-print"></span>
+              </button>
+              <button class="btn btn-secondary" title="Buscar OP" (click)="openMdlCap013()">
+                <span class="fas fa-binoculars"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Otra Sección -->
+          <div class="row mt-1">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+
+              <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                  <div class="input-group">
+                    <label class="input-group-text" for="txtComentarioProd">Comentarios Producción:</label>
+                    <textarea id="txtComentarioProd" class="form-control" [(ngModel)]="objCamposGeneral.comentariosProduccion"></textarea>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+              <div class="row">
+
+                <div class="input-group">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <label style="color: red;" for="cbxMaquinaCancelada" class="input-group-text">Máquinas con OP's Canceladas</label>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <select name="cbxMaquinaCancelada" id="cbxMaquinaCancelada" class="form-control w-100"
+                      [(ngModel)]="objMaquinasCanceladas.selected"
+                    >
+                      <option *ngFor="let dato of objMaquinasCanceladas.data" value="{{dato.claveMaquina}}">
+                        {{dato.claveMaquina}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="input-group">
+                <label class="input-group-text" for="txtEspecificacionesProceso">Especificaciones de Proceso:</label>
+                <textarea id="txtEspecificacionesProceso" class="form-control">{{objCamposGeneral.especificacionesProceso}}</textarea>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Estatus -->
+          <div class="row mt-1">
+            <div class="col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+              <div class="input-group">
+                <label class="input-group-text">
+                  <div class="estatusOpAccionCorrectiva"></div>
+                  &nbsp;Folio de Acción Correctiva
+                </label>
+                <label class="input-group-text mx-1">
+                  <div class="estatusOpCancelada"></div>
+                  &nbsp;OP's Canceladas
+                </label>
+                <label class="input-group-text">
+                  <div class="estatusOpSuspendida"></div>
+                  &nbsp;OP's Suspendidas
+                </label>
+              </div>
+
+              <!-- <div class="input-group">
+                <label class="input-group-text">
+                  <div class="estatusOpCancelada"></div>
+                  &nbsp;OP's Canceladas
+                </label>
+              </div>
+
+              <div class="input-group">
+                <label class="input-group-text">
+                  <div class="estatusOpSuspendida"></div>
+                  &nbsp;OP's Suspendidas
+                </label>
+              </div> -->
+            </div>
+            <!-- <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+
+            </div> -->
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+              <div class="input-group">
+                <label class="input-group-text pb-0 w-100">
+                  <label *ngIf="objCamposGeneral.lblSiguienteProrgama"><b>N</b>&nbsp;Siguiente Programa Capturar Producción&nbsp;</label>
+                  <label *ngIf="!objCamposGeneral.lblSiguienteProrgama">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </label>
+                  <label>{{objCamposGeneral.programaSeleccionado}}</label>
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <!-- Maquina en Mantenimiento -->
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="form-check form-check-inline">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <input class="form-check-input" type="checkbox" name="chkMaquinaMantenimiento" id="chkMaquinaMantenimiento"
+                        [(ngModel)]="objMaquinaMto.mantenimiento" disabled="disabled"
+                      />
+                    </div>
+                  </div>
+                  <label class="form-control" for="chkMaquinaMantenimiento">{{objMaquinaMto.texto}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Derecha -->
+        <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 text-center">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <button type="button" class="btn btn-info" title="Traspasar Programa" (click)="abrirMdlTraspasarProgramas()">
+                <span class="fas fa-paper-plane"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <button type="button" class="btn btn-info" title="Definicion de AQL Clientes" [disabled]="!validaUsuarioCalidad(pUser)">
+                <span class="fas fa-user-check"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <h3 class="font-weight-bold" style="color: #0000FF;" *ngIf="objVisible.aql">
+                A <br> Q <br> L
+              </h3>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="objCamposGeneral.imgAtencionVisible">
+            <div class="col-12">
+              <p class="fa fa-exclamation-triangle"></p>
+            </div>
+          </div>
+
+          <div class="row mt-1">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <h3 class="font-weight-bold" style="color: #0000FF;" *ngIf="objVisible.articuloNuevo">
+                <span class="fas fa-archive"></span> <br> N <br> U <br> E <br> V <br> O
+              </h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="Pie">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-12 text-center">
+          <small style="margin-top: 2px; margin-bottom: 2px;">Versión {{VERSION}}</small>
+          <small> | </small>
+          <small style="margin-top: 2px; margin-bottom: 2px;">CPLCAP012 - MODIFICACION SECUENCIAS DE IMPRESORAS</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Agregar OP -->
+<ng-template #mdlCap003 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Agregar OP</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-1">
+          <div class="input-group">
+            <label for="mdlCap003TxtOP" class="input-group-text">OP</label>
+            <input class="form-control" type="text" id="mdlCap003TxtOP" />
+            <button class="btn btn-info" >
+              <span class="fas fa-search"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtAreaUnit" class="input-group-text">Área Unit.</label>
+            <input class="form-control" type="text" id="mdlCap009TxtAreaUnit" [(ngModel)]="objMdlCap009.txtAreaUnit" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtLargoLamina" class="input-group-text">Largo Lámina</label>
+            <input class="form-control" type="text" id="mdlCap009TxtLargoLamina" [(ngModel)]="objMdlCap009.txtLargoLam" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtAnchoLamina" class="input-group-text">Ancho Lámina</label>
+            <input class="form-control" type="text" id="mdlCap009TxtAnchoLamina" [(ngModel)]="objMdlCap009.txtAnchoLam" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-1">
+          <div class="input-group pl-0">
+            <div class="input-group-prepend">
+              <input type="text" [(ngModel)]="objMdlCap009.proceso" hidden>
+              <label for="mdlCap009CbxProceso" class="input-group-text">Proceso:</label>
+            </div>
+            <select name="mdlCap009CbxProceso" id="mdlCap009CbxProceso" [(ngModel)]="objMdlCap009.cbxProcesoSelected" class="form-control w-25">
+              <option *ngFor="let dato of objMdlCap009.cbxProceso" value="{{dato.tProceso}}">
+                {{dato.descripcion}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtPzasSuaje" class="input-group-text">Pzas. Suaje</label>
+            <input class="form-control" type="text" id="mdlCap009TxtPzasSuaje" [(ngModel)]="objMdlCap009.txtPzasSuaje" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtLargoDesarollo" class="input-group-text">Largo Des.</label>
+            <input class="form-control" type="text" id="mdlCap009TxtLargoDesarollo" [(ngModel)]="objMdlCap009.txtLargoDes" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtAnchoDesarrollo" class="input-group-text">Ancho Des.</label>
+            <input class="form-control" type="text" id="mdlCap009TxtAnchoDesarrollo" [(ngModel)]="objMdlCap009.txtAnchoDes" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-1">
+
+          <div class="form-check form-check-inline w-100" *ngIf="true">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="objMdlCap009.chkModificaProceso" name="mdlCap009ChkModificaProceso" id="mdlCap009ChkModificaProceso"/>
+                </div>
+              </div>
+              <label class="form-control" for="mdlCap009ChkModificaProceso">Modifica Proceso</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 px-1">
+          <select name="mdlCap009CbxProceso" id="mdlCap009CbxProceso" [(ngModel)]="objMdlCap009.cbxModificaProcesoSelected" class="form-control w-100" [disabled]="!objMdlCap009.chkModificaProceso">
+            <option *ngFor="let dato of objMdlCap009.cbxModificaProceso" value="{{dato.claveProceso}}">
+              {{dato.descripcion}}
+            </option>
+          </select>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtArticulo" class="input-group-text">Artículo</label>
+            <input class="form-control" type="text" id="mdlCap009TxtArticulo" [(ngModel)]="objMdlCap009.txtArticulo" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label class="input-group-text justify-content-center w-100">{{objMdlCap009.txtIndustria}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtCliente" class="input-group-text">Cliente</label>
+            <input class="form-control" type="text" id="mdlCap009TxtCliente" [(ngModel)]="objMdlCap009.txtCliente" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtSolicitado" class="input-group-text">Solicitado</label>
+            <input class="form-control" type="text" id="mdlCap009TxtSolicitado" [(ngModel)]="objMdlCap009.txtSolicitado" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtProducido" class="input-group-text">Producido</label>
+            <input class="form-control" type="text" id="mdlCap009TxtProducido" [(ngModel)]="objMdlCap009.txtProducido" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtProgramado" class="input-group-text">Programado</label>
+            <input class="form-control" type="text" id="mdlCap009TxtProgramado" [(ngModel)]="objMdlCap009.txtProgramado" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtExistencia" class="input-group-text">Existencia</label>
+            <input class="form-control" type="text" id="mdlCap009TxtExistencia" [(ngModel)]="objMdlCap009.txtExistencia" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtColores" class="input-group-text">Colores</label>
+            <input class="form-control" type="text" id="mdlCap009TxtColores" [(ngModel)]="objMdlCap009.txtColores" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+
+        </div>
+      </div>
+
+      <fieldset class="mt-2">
+        <legend></legend>
+
+        <div class="row mt-2">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="input-group pl-0">
+              <div class="input-group-prepend">
+                <label for="mdlCap009CbxRutaProceso" class="input-group-text">Ruta de proceso</label>
+              </div>
+              <select name="mdlCap009CbxRutaProceso" id="mdlCap009CbxRutaProceso" [(ngModel)]="objMdlCap009.cbxRutaProcesoSelected" class="form-control">
+                <option *ngFor="let dato of objMdlCap009.cbxRutaProceso" value="{{dato.clave}}">
+                  {{dato.descripcion}}
+                </option>
+              </select>
+              <input class="form-control" type="text" id="mdlCap009TxtRutaProceso" [(ngModel)]="objMdlCap009.txtDescripcionRuta" disabled />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <div class="input-group">
+              <label for="mdlCap009TxtCantidad" class="input-group-text">Cantidad</label>
+              <input class="form-control" type="text" id="mdlCap009TxtCantidad" [(ngModel)]="objMdlCap009.txtCantidad"
+                (change)="mdlCap009TxtCantidad_Change()" (keypress)="mdlCap009TxtCantidad_KeyPress($event)" />
+            </div>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-0">
+            <div class="input-group">
+              <label for="mdlCap009TxtDuración" class="input-group-text">Duración</label>
+              <input class="form-control" type="text" id="mdlCap009TxtDuración" [(ngModel)]="objMdlCap009.txtDuracion" disabled />
+            </div>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+            <button type="button" class="btn btn-success">
+              <span class="fas fa-check"></span> Aceptar
+            </button>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="input-group">
+              <label class="input-group-text" for="mdlCap009TxtComentarios">Comentarios:</label>
+              <textarea id="mdlCap009TxtComentarios" class="form-control" [(ngModel)]="objMdlCap009.txtComentarios"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="input-group">
+              <label class="input-group-text" for="mdlCap009TxtEspecificacionProceso">Especificacion de Proceso:</label>
+              <textarea id="mdlCap009TxtEspecificacionProceso" class="form-control" [(ngModel)]="objMdlCap009.txtEspProceso"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="mt-3">
+        <legend>Justificación de Programación Automática</legend>
+        <div class="row mt-2">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <textarea id="mdlCap009TxtJustificacionProceso" class="form-control" [(ngModel)]="objMdlCap009.txtJustificacion"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal Fijar Fecha -->
+<ng-template #mdlCap004 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Fijar Fecha y Hora de Fabricación</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <label for="mdlCap004TxtOP" class="input-group-text">OP:</label>
+            <input class="form-control" type="text" id="mdlCap004TxtOP" [(ngModel)]="objMdlCap004.op" [value]="objMdlCap004.op | uppercase" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="mdlCap004TxtFecha" class="input-group-text">Fecha:</label>
+            </div>
+            <input class="form-control" type="date" id="mdlCap004TxtFecha" [(ngModel)]="objMdlCap004.fecha">
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="mdlCap004TxtHora" class="input-group-text">Hora:</label>
+            </div>
+            <input class="form-control" type="time" id="mdlCap004TxtHora" [(ngModel)]="objMdlCap004.hora" [value]="objMdlCap004.hora">
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2" *ngIf="objMdlCap004.quitarVisible">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="objMdlCap004.quitar" name="mdlCap004ChkQuitar" id="mdlCap004ChkQuitar"/>
+              </div>
+            </div>
+            <label class="form-control" for="mdlCap004ChkQuitar">Quitar</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-success mr-2" (click)="clickMdlCap004_BtnAceptar()">
+            <span class="fas fa-check"></span> Aceptar
+          </button>
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal Cambio de Maquina -->
+<ng-template #mdlCap005 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Cambio de máquina</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #gridMdlCap005
+            [columnDefs]="objMdlCap005.columnasGridMdlCap005"
+            [(data)]="objMdlCap005.dataGridMdlCap005"
+            [rowsPerPage]="0"
+            [autoHeight]="false"
+            [height]="'120px'"
+            [headerHeight]="34"
+            [rowHeight]="30"
+            [enablePagination]="false">
+          </grid-cs>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="mdlCap005CbxMaquina" class="input-group-text">Máquina:</label>
+            </div>
+            <select name="mdlCap005CbxMaquina" id="mdlCap005CbxMaquina" class="form-control w-25"
+              [(ngModel)]="objMdlCap005.selectedMaquina"
+            >
+              <option *ngFor="let dato of objMdlCap005.listMaquinas" value="{{dato.claveMaquina}}">
+                {{dato.claveMaquina}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="form-check form-check-inline w-100" *ngIf="true">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="objMdlCap005.modificaProceso" name="mdlCap005ChkModificaProceso" id="mdlCap005ChkModificaProceso"/>
+                </div>
+              </div>
+              <label class="form-control" for="mdlCap005ChkModificaProceso">Modifica Proceso</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
+          <select name="mdlCap005CbxProceso" id="mdlCap005CbxProceso" [(ngModel)]="objMdlCap005.selectedModificaProceso" class="form-control w-100" [disabled]="!objMdlCap005.modificaProceso">
+            <option *ngFor="let dato of objMdlCap005.listModificaProceso" value="{{dato.claveProceso}}">
+              {{dato.descripcion}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <label for="mdlCap005CbxJustificacion">Justificación del Cambio:</label>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-0 pt-0">
+          <select name="mdlCap005CbxJustificacion" id="mdlCap005CbxJustificacion" (change)="mdlCap005CbxJustificacion_Change()"
+              [(ngModel)]="objMdlCap005.selectedJustificacionCambio" class="form-control w-100">
+            <option *ngFor="let dato of objMdlCap005.listJustiticacionCambio" value="{{dato.id}}" title="{{dato.descripcion}}">
+              {{dato.descripcion}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-2" *ngIf="objMdlCap005.divCantidadVisible">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="mdlCap005CbxMaquina" class="input-group-text">Cantidad a Traspasar:</label>
+            </div>
+            <input class="form-control" type="number" id="mdlCap005TxtCantidad" [(ngModel)]="objMdlCap005.cantidad" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-success mr-2" (click)="clickMdlCap005_BtnAceptar()">
+            <span class="fas fa-check"></span> Aceptar
+          </button>
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<!-- Programa Impresoras -->
+<ng-template #mdlCap009 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Programa Impresoras</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtOP" class="input-group-text">OP</label>
+            <input class="form-control" type="text" id="mdlCap009TxtOP" [(ngModel)]="objMdlCap009.txtOP" [value]="objMdlCap009.txtOP | uppercase" (keypress)="mdlCap009TxtOP_KeyPress($event)" />
+            <button class="btn btn-info" (click)="mdlCap009_BusquedaOP()">
+              <span class="fas fa-search"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtAreaUnit" class="input-group-text">Área Unit.</label>
+            <input class="form-control" type="text" id="mdlCap009TxtAreaUnit" [(ngModel)]="objMdlCap009.txtAreaUnit" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtLargoLamina" class="input-group-text">Largo Lámina</label>
+            <input class="form-control" type="text" id="mdlCap009TxtLargoLamina" [(ngModel)]="objMdlCap009.txtLargoLam" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtAnchoLamina" class="input-group-text">Ancho Lámina</label>
+            <input class="form-control" type="text" id="mdlCap009TxtAnchoLamina" [(ngModel)]="objMdlCap009.txtAnchoLam" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-1">
+          <div class="input-group pl-0">
+            <div class="input-group-prepend">
+              <input type="text" [(ngModel)]="objMdlCap009.proceso" hidden>
+              <label for="mdlCap009CbxProceso" class="input-group-text">Proceso:</label>
+            </div>
+            <select name="mdlCap009CbxProceso" id="mdlCap009CbxProceso" [(ngModel)]="objMdlCap009.cbxProcesoSelected" class="form-control w-25">
+              <option *ngFor="let dato of objMdlCap009.cbxProceso" value="{{dato.tProceso}}">
+                {{dato.descripcion}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtPzasSuaje" class="input-group-text">Pzas. Suaje</label>
+            <input class="form-control" type="text" id="mdlCap009TxtPzasSuaje" [(ngModel)]="objMdlCap009.txtPzasSuaje" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtLargoDesarollo" class="input-group-text">Largo Des.</label>
+            <input class="form-control" type="text" id="mdlCap009TxtLargoDesarollo" [(ngModel)]="objMdlCap009.txtLargoDes" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtAnchoDesarrollo" class="input-group-text">Ancho Des.</label>
+            <input class="form-control" type="text" id="mdlCap009TxtAnchoDesarrollo" [(ngModel)]="objMdlCap009.txtAnchoDes" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-1">
+
+          <div class="form-check form-check-inline w-100" *ngIf="true">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="objMdlCap009.chkModificaProceso" name="mdlCap009ChkModificaProceso" id="mdlCap009ChkModificaProceso"/>
+                </div>
+              </div>
+              <label class="form-control" for="mdlCap009ChkModificaProceso">Modifica Proceso</label>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 px-1">
+          <select name="mdlCap009CbxProceso" id="mdlCap009CbxProceso" [(ngModel)]="objMdlCap009.cbxModificaProcesoSelected" class="form-control w-100" [disabled]="!objMdlCap009.chkModificaProceso">
+            <option *ngFor="let dato of objMdlCap009.cbxModificaProceso" value="{{dato.claveProceso}}">
+              {{dato.descripcion}}
+            </option>
+          </select>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtArticulo" class="input-group-text">Artículo</label>
+            <input class="form-control" type="text" id="mdlCap009TxtArticulo" [(ngModel)]="objMdlCap009.txtArticulo" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label class="input-group-text justify-content-center w-100">{{objMdlCap009.txtIndustria}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtCliente" class="input-group-text">Cliente</label>
+            <input class="form-control" type="text" id="mdlCap009TxtCliente" [(ngModel)]="objMdlCap009.txtCliente" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtSolicitado" class="input-group-text">Solicitado</label>
+            <input class="form-control" type="text" id="mdlCap009TxtSolicitado" [(ngModel)]="objMdlCap009.txtSolicitado" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtProducido" class="input-group-text">Producido</label>
+            <input class="form-control" type="text" id="mdlCap009TxtProducido" [(ngModel)]="objMdlCap009.txtProducido" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtProgramado" class="input-group-text">Programado</label>
+            <input class="form-control" type="text" id="mdlCap009TxtProgramado" [(ngModel)]="objMdlCap009.txtProgramado" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtExistencia" class="input-group-text">Existencia</label>
+            <input class="form-control" type="text" id="mdlCap009TxtExistencia" [(ngModel)]="objMdlCap009.txtExistencia" disabled />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 px-1">
+          <div class="input-group">
+            <label for="mdlCap009TxtColores" class="input-group-text">Colores</label>
+            <input class="form-control" type="text" id="mdlCap009TxtColores" [(ngModel)]="objMdlCap009.txtColores" disabled />
+          </div>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1">
+
+        </div>
+      </div>
+
+      <fieldset class="mt-2">
+        <legend></legend>
+
+        <div class="row mt-2">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="input-group pl-0">
+              <div class="input-group-prepend">
+                <label for="mdlCap009CbxRutaProceso" class="input-group-text">Ruta de proceso</label>
+              </div>
+              <select name="mdlCap009CbxRutaProceso" id="mdlCap009CbxRutaProceso" [(ngModel)]="objMdlCap009.cbxRutaProcesoSelected" class="form-control">
+                <option *ngFor="let dato of objMdlCap009.cbxRutaProceso" value="{{dato.clave}}">
+                  {{dato.descripcion}}
+                </option>
+              </select>
+              <input class="form-control" type="text" id="mdlCap009TxtRutaProceso" [(ngModel)]="objMdlCap009.txtDescripcionRuta" disabled />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <div class="input-group">
+              <label for="mdlCap009TxtCantidad" class="input-group-text">Cantidad</label>
+              <input class="form-control" type="text" id="mdlCap009TxtCantidad" [(ngModel)]="objMdlCap009.txtCantidad"
+                (change)="mdlCap009TxtCantidad_Change()" (keypress)="mdlCap009TxtCantidad_KeyPress($event)" />
+            </div>
+          </div>
+          <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-0">
+            <div class="input-group">
+              <label for="mdlCap009TxtDuración" class="input-group-text">Duración</label>
+              <input class="form-control" type="text" id="mdlCap009TxtDuración" [(ngModel)]="objMdlCap009.txtDuracion" disabled />
+            </div>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+            <button type="button" class="btn btn-success" onclick="cap009ClickProgramacionAuto()">
+              <span class="fas fa-check"></span> Aceptar
+            </button>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="input-group">
+              <label class="input-group-text" for="mdlCap009TxtComentarios">Comentarios:</label>
+              <textarea id="mdlCap009TxtComentarios" class="form-control" [(ngModel)]="objMdlCap009.txtComentarios"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="input-group">
+              <label class="input-group-text" for="mdlCap009TxtEspecificacionProceso">Especificacion de Proceso:</label>
+              <textarea id="mdlCap009TxtEspecificacionProceso" class="form-control" [(ngModel)]="objMdlCap009.txtEspProceso"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="mt-3">
+        <legend>Justificación de Programación Automática</legend>
+        <div class="row mt-2">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <textarea id="mdlCap009TxtJustificacionProceso" class="form-control" [(ngModel)]="objMdlCap009.txtJustificacion"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+
+
+      <div class="row mt-3">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <!-- <button type="button" class="btn btn-success mr-2" (click)="cap009ClickProgramacionAuto()">
+            <span class="fas fa-check"></span> Aceptar
+          </button> -->
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal Buscar OP -->
+<ng-template #mdlCap013 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Búsqueda de Op's</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <fieldset>
+            <legend>Buscar en: </legend>
+            <div class="form-check form-check-inline ml-0">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input class="form-check-input" type="radio" name="rbtnFiltroMaquina" id="mdlCap013RbtnMdlMaquinaActual" value="1"
+                      [(ngModel)]="objMdlCap013.rbtnFiltroMaquina"
+                    />
+                  </div>
+                </div>
+                <label class="form-control px-2" for="mdlCap013RbtnMdlMaquinaActual">Máquina Actual</label>
+              </div>
+            </div>
+
+            <div class="form-check form-check-inline mr-0">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input class="form-check-input" type="radio" name="rbtnFiltroMaquina" id="rbtnMdlAllMaquinas" value="0"
+                      [(ngModel)]="objMdlCap013.rbtnFiltroMaquina"
+                    />
+                  </div>
+                </div>
+                <label class="form-control px-2" for="rbtnMdlAllMaquinas">Todas las Máquinas</label>
+              </div>
+            </div>
+
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <label for="mdlCap013TxtOP" class="input-group-text">O.P.</label>
+            <input class="form-control" type="text" id="mdlCap013TxtOP" [(ngModel)]="objMdlCap013.txtOP" [value]="objMdlCap013.txtOP | uppercase" (keypress)="mdlCap013TxtOP_KeyPress($event)" />
+            <button class="btn btn-info" (click)="mdlCap013_BusquedaOP()">
+              <span class="fas fa-search"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1" *ngIf="objMdlCap013.rbtnFiltroMaquina === '0'">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #mdlCap013GridDatosResData
+            [columnDefs]="objMdlCap013.columns"
+            [(data)]="objMdlCap013.listResultadoMaquinas"
+            [rowsPerPage]="0"
+            [autoHeight]="false"
+            [height]="'220px'"
+            [headerHeight]="40"
+            [rowHeight]="38"
+            [enablePagination]="false">
+          </grid-cs>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<!-- Transpaso de programas -->
+<ng-template #mdlCap016 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> Traspaso de programas</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+          <div class="input-group">
+            <label for="mdlCap016MaquinaOrigen" class="input-group-text">Máquina Origen:</label>
+            <input class="form-control" type="text" id="mdlCap016MaquinaOrigen" [(ngModel)]="objCbxMaquinas.selected" disabled />
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-1 mt-sm-1 mt-md-0 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label for="mdlCap016MaquinaDestino" class="input-group-text">Máquina Destino:</label>
+            </div>
+            <select name="mdlCap016MaquinaDestino" id="mdlCap016MaquinaDestino" class="form-control w-25"
+                [(ngModel)]="objMdlCap016.selected">
+              <option *ngFor="let dato of objMdlCap016.listMaquinas" value="{{dato.claveMaquina}}">
+                {{dato.claveMaquina}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="form-check form-check-inline">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input class="form-check-input" type="checkbox" name="cap016ChkTodos" id="cap016ChkTodos"
+                    [(ngModel)]="objMdlCap016.selectAll" (change)="cap016Change_ChkSelectAll()"
+                  />
+                </div>
+              </div>
+              <label class="form-control" for="cap016ChkTodos">Seleccionar Todos</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #mdlCap016GridDatos
+            [columnDefs]="objMdlCap016.columns"
+            [(data)]="objMdlCap016.dataGrid"
+            [rowsPerPage]="0"
+            [autoHeight]="false"
+            [height]="'300px'"
+            [headerHeight]="40"
+            [rowHeight]="38"
+            [enablePagination]="false">
+          </grid-cs>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-success mr-2" (click)="cap016ClickTraspasarOPs()">
+            <span class="fas fa-check"></span> Aceptar
+          </button>
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+
+<block-ui></block-ui>

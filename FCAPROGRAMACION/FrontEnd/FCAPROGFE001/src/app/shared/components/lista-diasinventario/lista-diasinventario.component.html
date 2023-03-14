@@ -1,0 +1,5 @@
+<label *ngIf="VisibleLabel">Inventario:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="DiasInventarioValue" (ngModelChange)="DiasInventarioValueChange.emit(DiasInventarioValue)" [disabled]="!Disabled">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option *ngFor="let obj of DiasInventario" [ngValue]="obj.clave">{{obj.diasMaxInventario}}</option>
+</select>

@@ -1,0 +1,4 @@
+<label>Forma de Pago:</label>
+<select [ngClass]="{'form':true, 'form-control':true, 'required':required}" [(ngModel)]="seleccionar" [compareWith]="comparar" (ngModelChange)="changeFormaPago($event)">
+    <option *ngFor="let formaPago of FormasPago" [ngValue]="formaPago">{{formaPago.descripcionFormasPago}}</option>
+</select>

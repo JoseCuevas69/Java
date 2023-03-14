@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-12">
+        <ng-modal [Size]="'lg'" [Titulo]="'BUSCAR PROVEEDOR'" [IconoTitulo]="'far fa-user-circle'" #mdlProveedor>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>Proveedor:</label>
+                                        <div class="input-group">
+                                            <input id="txtNombre" [(ngModel)]="filtros.filtro" type="text" class="form-control" placeholder="Buscar por Codigo o Nombre" (keypress)="KeyPressBuscarUsuarioERP($event)" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-primary" type="button" id="btnBuscar" (click)="BuscarUsuarioERP()">
+                                                  <span class="fa fa-search"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <label> Proveedor:</label>
+                                    <grid-ss #Grid [serviceFunction]="Service.ListaProveedor" [columnDefs]="columnDefs" [enablePagination]="true" [Filters]="filtros" [rowsPerPage]="7">
+                                    </grid-ss>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-times"></i> Cancelar</button>
+            </div>
+        </ng-modal>
+    </div>
+</div>
