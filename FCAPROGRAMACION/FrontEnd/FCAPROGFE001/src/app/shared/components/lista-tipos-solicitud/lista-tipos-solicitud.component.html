@@ -1,0 +1,4 @@
+<select id="{{selectId ? selectId : ''}}" [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="value">
+    <option *ngIf="default" [ngValue]="default.idTipoSolicitud">{{default.nombreTipoSolicitud}}</option>
+    <option *ngFor="let tipoSolicitud of data" [ngValue]="tipoSolicitud.idTipoSolicitud">{{tipoSolicitud.nombreTipoSolicitud}}</option>
+</select>

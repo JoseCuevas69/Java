@@ -1,0 +1,6 @@
+<div class="form-group">
+    <label>Tipo:</label>
+    <select [(ngModel)]="seleccionar" [compareWith]="comparar" [ngClass]="{'form-control':true, 'required':required}" (ngModelChange)="Change($event)">
+            <option *ngFor="let item of TipoDato" [ngValue]="item">{{item.tipoDato}}</option>
+    </select>
+</div>

@@ -1,0 +1,241 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">CAPTURA ESTANDARES DE IMPRESORAS</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-5">
+                        <fieldset class="fieldset">
+                            <legend>Tipo Maquina</legend>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                        <label><input type="radio" name="tipomaquina" [checked]="true" value="IM" (change)="rbTipoMaquina_change($event)">Impresora</label>
+                                    <!--</div>
+                                    <div class="col-3">-->
+                                        <label class="ml-3"><input type="radio" name="tipomaquina" value="CO" (change)="rbTipoMaquina_change($event)">Corrugadora</label>
+                                    <!--</div>
+                                    <div class="col-2">-->
+                                        <label class="ml-3"><input type="radio" name="tipomaquina" value="AC" (change)="rbTipoMaquina_change($event)">Acabados</label>
+                                    <!--</div>
+                                    <div class="col-5">-->
+                                        <label class="ml-3"><input type="radio" name="tipomaquina" value="ES" (change)="rbTipoMaquina_change($event)">Especialidades</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-4">
+                        <fieldset class="fieldset">
+                            <legend>Captura</legend>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <label><input type="radio" name="captura" value="TP" [checked]="true" [disabled]="rbVelEstnadar_disabled" (change)="rbTipoCaptura_onChange($event)">Tiempo Std. Preparacion</label>
+                                <!--</div>
+                                <div class="col-6">-->
+                                    <label class="ml-3"><input type="radio" name="captura" value="VE" [disabled]="rbVelEstnadar_disabled" (change)="rbTipoCaptura_onChange($event)">Velocidad Estandar</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-3">
+                        <fieldset class="fieldset">
+                            <legend>Maquina</legend>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <select class="form-control" [(ngModel)]="filtros.claveMaquina" [ngModelOptions]="{standalone: true}" (change)="cbMaquinas_onChange($event)">
+                                        <option *ngFor="let maq of maquinas" [value]="maq.claveMaquina">{{maq.claveMaquina}}-{{maq.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <button type="button"  class="btn btn-success float-left add-button" (click)="abreModalCapturas()" ><i class="fa fa-plus"></i> Agregar</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button"  class="btn btn-primary float-right add-button" (click)="abreModalTurno()" [disabled]="btnHorarios_disabled" ><i class="fa fa-clock"></i>Cap. Horario Comida</button>
+                    </div>
+                </div>
+                <div class="row mt-2" [hidden]="!GridTiempoStd_visible">
+                    <div class="col-12">
+                        <grid-ss #gridTiempoStd [serviceFunction]="estandaresService.ListarEstandares" [rowsPerPage]="10" [columnDefs]="columnDefs" [Filters]="filtros"[enablePagination]="true"></grid-ss>
+                    </div>
+                </div>
+                <div class="row mt-2" [hidden]="!GridTiempoStdCo_visible">
+                    <div class="col-12">
+                        <grid-ss #gridTiempoStdCo [serviceFunction]="estandaresService.ListarEstandares" [rowsPerPage]="10" [columnDefs]="columnDefsCo" [Filters]="filtros"[enablePagination]="true"></grid-ss>
+                    </div>
+                </div>
+                <div class="row mt-2" [hidden]="!GridVelocidadStd_visible">
+                    <div class="col-12">
+                        <grid-ss #gridVelocidadStd [serviceFunction]="estandaresService.ListarVelocidadEstandar" [rowsPerPage]="10" [columnDefs]="columnDefsVelStd" [Filters]="filtros"[enablePagination]="true"></grid-ss>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> 
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 05.01.2022.1</h5>
+                    <h5>FCAPROD002MW - CAPTURA ESTANDARES IMPRESORAS</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #mdlCapTep let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Captura Tiempo Estandar de Preparacion</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">              
+                    <label>CLave Maquina <input type="text" class="form-control" [disabled]="true" [(ngModel)]="tiempoEstandarPre.claveMaquina"></label>
+                </div>
+                <div class="col-8">
+                    <label>Proceos
+                    <select class="form-control" [(ngModel)]="tiempoEstandarPre.claveProceso">
+                        <option *ngFor="let pro of procesos" [ngValue]="pro.claveProceso">{{pro.claveProceso}}-{{pro.descripcion}}</option>
+                    </select></label>                        
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">              
+                    <label>Tiempo Actual<input type="number" class="form-control" [(ngModel)]="tiempoEstandarPre.tiempoStd"></label>
+                </div>
+                <div class="col-6">   
+                    <label>{{lblEficiencia}}<input type="number" class="form-control" [(ngModel)]="tiempoEstandarPre.eficiencia" [disabled]="txtEficiencia_disabled" ></label>                 
+                </div>
+            </div>
+            <div class="row" [hidden]="!txtVelObj_visible">
+                <div class="col-6">              
+                    <label>Velocidad Objetivo<input type="number" class="form-control" [(ngModel)]="tiempoEstandarPre.velocidadObjetivo" ></label>
+                </div>
+                <div class="col-6">   
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success float-right add-button" (click)="guardaTiempoEstPre()"><i class="fas fa-save"></i>Guarda</button>
+    </div>
+</ng-template>
+
+<ng-template #mdlCapVs let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Captura Velocidad Estandar</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">              
+                    <label>CLave Maquina <input type="text" class="form-control" [disabled]="true" [(ngModel)]="velocidadEstandar.claveMaquina"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">              
+                    <label>Area Inicial<input type="number" class="form-control" [(ngModel)]="velocidadEstandar.areaInicial"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">              
+                    <label>Area Final<input type="number" class="form-control" [(ngModel)]="velocidadEstandar.areaFinal" ></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">              
+                    <label>Velocidad Estandar<input type="number" class="form-control" [(ngModel)]="velocidadEstandar.velocidadStd" ></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success float-right add-button" (click)="guardaVelocidadEstandar()"><i class="fas fa-save"></i>Guarda</button>
+    </div>
+</ng-template>
+
+<ng-template #mdlTurno let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Capture Turno</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">              
+                    
+                    <div class="input-group">
+                        <label class="mt-2">Turno</label>
+                        <input type="text" class="form-control ml-1"  [(ngModel)]="turno">
+                       
+                            <button type="button" class="btn btn-primary ml-1" (click)="ExisteTurno()">Aceptar</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+    </div>
+</ng-template>
+
+<ng-template #mdlHorarios let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Captura Horarios</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">              
+                    <label>Tipo</label>
+                     <input type="text" class="form-control" [disabled]="true"  [(ngModel)]="horarioComida.descripcion">
+                </div>
+                <div class="col-6">              
+                    <label>Maquina</label>
+                     <input type="text" class="form-control" [disabled]="true"  [(ngModel)]="horarioComida.claveMaquina">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">              
+                    <label>Hr. Inicio</label>
+                     <input type="time" class="form-control"  [(ngModel)]="horarioComida.horaInicio">
+                </div>
+                <div class="col-4">              
+                    <label>Hr.Fin</label>
+                     <input type="time" class="form-control"  [(ngModel)]="horarioComida.horaFinal">
+                </div>
+                <div class="col-4">              
+                    <label>Turno</label>
+                     <input type="text" class="form-control"  [(ngModel)]="horarioComida.turno">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success float-right add-button" (click)="guardaHorarioComida()"><i class="fas fa-save"></i>Guarda</button>
+    </div>
+</ng-template>
+
+<block-ui></block-ui>
+
+
+   

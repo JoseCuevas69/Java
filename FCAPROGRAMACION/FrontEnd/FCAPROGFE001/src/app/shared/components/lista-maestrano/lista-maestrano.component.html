@@ -1,0 +1,5 @@
+<label *ngIf="mosLabel">Maestra No.:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="MaestraNoValue" (ngModelChange)="MaestraNoValueChange.emit(MaestraNoValue)">
+    <option [ngValue]="''">SELECCIONAR...</option>
+    <option *ngFor="let obj of MaestraNo" [ngValue]="obj.maestraNo">{{obj.maestraNo}}</option>
+</select>

@@ -1,0 +1,57 @@
+<div class="contenedor">
+  <div class="cabecera">
+      <label style="margin-left: 30px; margin-top: 10px;">CATÁLOGO DE ÁREA DESPERDICIOS</label>
+  </div>
+  <div class="contenido mt-3">
+      <div id="Contenido" class="container-fluid">
+          <form class="mb-1">
+            <div class="row mt-1">
+              <div class="col-12">
+                  <button type="button" class="btn btn-secondary float-left add-button" (click)="btnRegresar()" ><i class="fas fa-reply"></i> Regresar</button>
+              </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-12">
+                      <fieldset class="fieldset">
+                          <legend>Filtros</legend>
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                              <div class="form-group">
+                              <label>Área Desperdicio:</label>
+                              <input [(ngModel)]="filtros.Desperdicio" name="AreaDesp" type="text" class="form-control" maxlength="30" min="0" (keyup.enter)="btnBuscar()"/>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                                  <button type="button" class="btn btn-primary" (click)="btnBuscar()"><i class="fa fa-search"></i></button>
+                            </div>
+                          </div>
+                      </fieldset>
+                  </div>
+              </div>
+              <div class="row mt-4">
+                  <div class="col-12">
+                      <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregar()" ><i class="fa fa-plus"></i> Agregar Área Desperdicio</button>
+                      <ng-modal [Size]="'md'" [Titulo]="'AGREGAR AREAS DESPERDICIO'" [IconoTitulo]="IconoTitulo" #mdl>
+                        <mldagregarareadesperdicio [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mldagregarareadesperdicio>
+                      </ng-modal>
+                  </div>
+              </div>
+          </form>
+          <div class="row ">
+              <div class="col-12 ">
+                <grid-ss #gridPrincipal [serviceFunction]="Servicio.GetAreaDesperdicios" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                </grid-ss>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="Pie ">
+      <div class="container ">
+          <div class="row ">
+              <div class="col-xs-12 col-md-12 text-center ">
+                  <h5>VERSIÓN 12.08.2022.1 FCAPRODCAT014CW - CATALOGO DE ÁREA DESPERDICIOS</h5>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

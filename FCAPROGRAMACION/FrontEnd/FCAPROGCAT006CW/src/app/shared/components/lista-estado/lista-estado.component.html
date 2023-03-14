@@ -1,0 +1,5 @@
+<label>Estado:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="EstadoValue" (ngModelChange)="EstadoValueChange.emit(EstadoValue)" [disabled]="!Disabled">
+    <option [ngValue]="'sel'">SELECCIONAR...</option>
+    <option *ngFor="let obj of Estado" [ngValue]="obj.claveEstado">{{obj.nombreEstado}}</option>
+</select>

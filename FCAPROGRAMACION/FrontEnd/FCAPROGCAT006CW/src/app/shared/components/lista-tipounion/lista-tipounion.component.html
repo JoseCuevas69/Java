@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Tipo Unión:</label>
+    <select [(ngModel)]="TipoUnionValue" [ngClass]="{'form-control':true, 'required':required}" (change)="TipoUnionValueChange.emit(TipoUnionValue)" [disabled]="Disabled">
+            <option [ngValue]="''">SELECCIONAR...</option>
+            <option *ngFor="let item of TipoUnion" [ngValue]="item.tunion.trim()">{{item.tunion}}</option>
+    </select>
+</div>

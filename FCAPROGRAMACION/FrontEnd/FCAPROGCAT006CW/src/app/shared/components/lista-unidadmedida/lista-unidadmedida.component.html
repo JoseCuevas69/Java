@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Unidad :</label>
+    <select [(ngModel)]="UnidadMedidaValue" [ngClass]="{'form-control':true, 'required':required}" (change)="Change(UnidadMedidaValue)">
+            <option [ngValue]="0">SELECCIONAR...</option>
+            <option *ngFor="let item of this.ListaUnidadMedida" [ngValue]="item.idUnidadMedida">{{item.unidadMedida}}</option>
+    </select>
+</div>

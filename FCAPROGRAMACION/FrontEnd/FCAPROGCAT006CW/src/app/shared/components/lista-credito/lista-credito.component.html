@@ -1,0 +1,5 @@
+<label>Credito:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="CreditoValue" (ngModelChange)="CreditoValueChange.emit(CreditoValue)">
+    <option [ngValue]="'sel'">SELECCIONAR...</option>
+    <option *ngFor="let obj of Credito" [ngValue]="obj.claveCondicion">{{obj.tipo}}</option>
+</select>

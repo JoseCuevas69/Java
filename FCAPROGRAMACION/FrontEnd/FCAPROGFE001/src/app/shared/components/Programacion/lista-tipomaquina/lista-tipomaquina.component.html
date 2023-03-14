@@ -1,0 +1,7 @@
+<div class="form-group">
+  <label>{{label}}</label>
+  <select [(ngModel)]="Value" [ngClass]="{'form-control':true, 'required':required}" (change)="ValueChange.emit(Value)" [disabled]="disabled">
+          <option [ngValue]="''">SELECCIONAR...</option>
+          <option *ngFor="let item of Lista" [ngValue]="item.idTipoMaquina">{{item.idTipoMaquina}} , {{item.nombre}}</option>
+  </select>
+</div>

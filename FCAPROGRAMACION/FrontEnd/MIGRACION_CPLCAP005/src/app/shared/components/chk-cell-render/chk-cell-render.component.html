@@ -1,0 +1,9 @@
+<div *ngIf="displayHandler()" [class]="containerClass">
+    <input
+        type="checkbox"
+        [class]="class"
+        (click)="checkedHandler($event)"
+        [checked]="params.value"
+        [disabled]="disabled"
+    />
+</div>

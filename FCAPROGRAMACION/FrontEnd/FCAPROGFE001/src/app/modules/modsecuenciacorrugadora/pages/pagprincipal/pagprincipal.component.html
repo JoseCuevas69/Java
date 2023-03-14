@@ -1,0 +1,223 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">SECUENCIA DE CORRUGADORA</label>
+  </div>
+  <div class="contenido mt-1">
+    <div id="Contenido" class="container-fluid">
+      <form class="mb-1">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="btn-group me-1">
+                  <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle-split" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button ngbDropdownItem (click)="btnFoliocombinacion()">Folio combinacion</button>
+                      <button ngbDropdownItem (click)="btnVerificadorPapeles()">Verificador de Papeles</button>
+                    </div>
+                  </div>
+                  <button *ngIf="visAplicar" type="button" class="btn btn-secondary" (click)=" btnAplica()" [disabled]="disBtnAplica"><i class="fa fa-check"></i>
+                    Aplicar</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="GridMdlDetalle()" [disabled]="disBtnVerOp"><i class="far fa-eye"></i>
+                    Ver OPs</button>
+                  <button *ngIf="visSubeReg" type="button" class="btn btn-secondary btn-sm" (click)="GridSubeReg()"  [disabled]="disBtnSubeReg"><i
+                      class="fas fa-arrow-alt-circle-up"></i>
+                    Sube Reg</button>
+                  <div *ngIf="visSubeReg" class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button [disabled]="disBtnSubeReg" class="btn btn-secondary btn-sm dropdown-toggle-split" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button ngbDropdownItem (click)="GridSubeRegPosEspecifica()">Posicion Especifica</button>
+                      <button ngbDropdownItem (click)="GridSubeReg()">Mueve Bloque</button>
+                    </div>
+                  </div>
+                  <button *ngIf="visBajaReg" type="button" class="btn btn-secondary btn-sm" (click)="GridBajaReg()" [disabled]="disBtnBajaReg"><i
+                      class="fas fa-arrow-alt-circle-down"></i>
+                    Baja Reg</button>
+                  <div  *ngIf="visBajaReg" class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button [disabled]="disBtnBajaReg" class="btn btn-secondary btn-sm dropdown-toggle-split" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button ngbDropdownItem (click)="GridBajaRegPosEspecifica()">Posicion Especifica</button>
+                      <button ngbDropdownItem (click)="GridBajaReg()">Mueve Bloque</button>
+                    </div>
+                  </div>
+                  <button *ngIf="visEliminar" type="button" class="btn btn-secondary btn-sm" (click)="GridEliminar()"><i class="fa fa-trash"></i>
+                    Eliminar</button>
+                  <button *ngIf="visAgregarProg" type="button" class="btn btn-secondary btn-sm" (click)=" btnAddPrograma()" [disabled]="disBtnAgregaProg"><i class="fa fa-plus"></i>
+                    Agregar Prog</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)=" btnTraerMaestra()" [disabled]="disBtnTraerMaster"><i class="fas fa-download"></i>
+                      Traer Maestra</button>
+                  <button type="button" class="btn btn-secondary btn-sm" [disabled]="disImprimir"><i class='far fa-file-alt'></i> Imprimir</button>
+                  <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button  [disabled]="disImprimir" class="btn btn-secondary btn-sm dropdown-toggle-split" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button ngbDropdownItem (click)="btnImprimir('A')">Programas Corrugadora</button>
+                      <button ngbDropdownItem (click)="btnImprimir('B')">Programas Operadores</button>
+                      <button ngbDropdownItem (click)="btnImprimir('C')">Exportarn Programa a Excel</button>
+                      <button ngbDropdownItem (click)="btnImprimir('D')">Prog. Opers Resto de Rollos</button>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="btnBuscarOp()"><i class="fa fa-search"></i>
+                    Buscar OPs</button>
+                  <button *ngIf="VisTransLam" type="button" class="btn btn-secondary btn-sm"><i class='far fa-file-alt'></i>
+                    Envios Lam.</button>
+                  <div *ngIf="VisTransLam" class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle-split" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                      <button ngbDropdownItem (click)="btnEnviosLam(0)">Todos</button>
+                      <button ngbDropdownItem (click)="btnEnviosLam(5)">Hermosillo</button>
+                      <button ngbDropdownItem (click)="btnEnviosLam(2)">Tijuana</button>
+                      <button ngbDropdownItem (click)="btnEnviosLam(1)">Navojoa</button>
+                    </div>
+                  </div>
+                  <button *ngIf="VisTransferirSec" type="button" class="btn btn-secondary btn-sm"
+                    (click)="btnTranferirSecuencia()"><i class="fas fa-clipboard-check"></i> Tranferir
+                    Secuencia</button>
+                  <button *ngIf="VisBtnAntiguo" type="button" class="btn btn-secondary btn-sm" (click)="btnFiltrosRep()"><i
+                      class="fas fa-file"></i> Antiguo</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="btnRevicionExistencia()"><i
+                      class="fas fa-clipboard-check"></i> Revicion Existencia</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-12">
+            <ng-modal [Size]="'lg'" [Titulo]="'DETALLE'" [IconoTitulo]="IconoTitulo" #mdl>
+              <mdldetalles [TipoAccion]="TipoAccion" [Datos]="DatosDetalles" (ClickbtnCerrar)="btnCerrarModalDetalle()">
+              </mdldetalles>
+            </ng-modal>
+            <ng-modal [Size]="'lg'" [Titulo]="'BUSCADOR DE OPs'" [IconoTitulo]="IconoTitulo" #mdlbuscarop>
+              <mdlbuscarop (filtrar)="mdlBuscarOpFiltrarGrid($event)" (ClickbtnCerrar)="btnCerrarModalBuscarOp()">
+              </mdlbuscarop>
+            </ng-modal>
+            <ng-modal [Size]="'sm'" [Titulo]="'REGISTRO A LA POSICION DECEADA'" [IconoTitulo]="IconoTitulo"
+              #mdlPosicionEsp>
+              <mdlposicion-esp [Datos]="DatosPosEspecifica" [TipoAccion]="TipoAccionPosicionReg"
+                (filtrar)="mdlBuscarOpFiltrarGrid($event)" (ClickbtnCerrar)="btnCerrarModalPosEspecifica()">
+              </mdlposicion-esp>
+            </ng-modal>
+            <ng-modal [Size]="'lg'" [Titulo]="'AGREGAR PROGRAMA'" [IconoTitulo]="IconoTitulo" #mdlAddPrograma>
+              <mdladdprograma [Datos]="DatosAddProg" (ClickbtnCerrar)="btnCerrarModalAddPrograma($event)"
+                (wProgramaAutChange)="ChangeWprogramaAut($event)"></mdladdprograma>
+            </ng-modal>
+            <ng-modal [Size]="'sm'" [Titulo]="'CONFIRMACIÓN DE ELIMINACIÓN'" [IconoTitulo]="IconoTitulo"
+              #mdlConfiEliminacion>
+              <mdlconfieliminacion [Datos]="DatosEliminar" (ClickbtnCerrar)="btnCerrarModalConfiEliminacion()">
+              </mdlconfieliminacion>
+            </ng-modal>
+            <ng-modal [Size]="'md'" [Titulo]="'IMPRIMIR'" [IconoTitulo]="IconoTitulo" #mdlimprimir>
+              <mdlimprimir [TipoReporte]="TipoReporte" (ClickbtnCerrar)="btnCerrarModalLimprimir()"></mdlimprimir>
+            </ng-modal>
+            <ng-modal [Size]="'md'" [Titulo]="'FILTROS REPORTE'" [IconoTitulo]="IconoTitulo" #mdlfiltroreporte>
+              <mdlfiltroreporte [Datos]="DatosReporteFil" (ClickbtnCerrar)="btnCerrarModalFiltroRep()"
+                (DatosLisSecuenciasOut)="DatosLisSecuenciasOut($event)"></mdlfiltroreporte>
+            </ng-modal>
+            <ng-modal [Size]="'lg'" [Titulo]="'OBSERVACIONES PROG. OPs IMPRESORAS'" [IconoTitulo]="IconoTitulo"
+              #mdlObsProgImpresora>
+              <mdlobservacionesprogimpresora [Datos]="DatosObsProgImpresora"
+                (ClickbtnCerrar)="btnCerrarModalObsProgImpresora()"></mdlobservacionesprogimpresora>
+            </ng-modal>
+            <ng-modal [Size]="'md'" [Titulo]="'VERIFICADOR DE PAPELES'" [IconoTitulo]="IconoTitulo"
+              #mdlverificadorpapeles>
+              <mdlverificadorpapeles [Datos]="DatosVerificadorpapeles"
+                (ClickbtnCerrar)="btnCerrarModalVerificadorpapeles()"></mdlverificadorpapeles>
+            </ng-modal>
+            <ng-modal [Size]="'md'" [Titulo]="'FOLIO COMBINACIÓN'" [IconoTitulo]="IconoTitulo"
+            #mdlfoliocombinacion>
+            <mdlfoliocombinacion [Datos]="DatosVerificadorpapeles"
+              (ClickbtnCerrar)="btnCerrarModalfoliocombinacion()"></mdlfoliocombinacion>
+            </ng-modal>
+          </div>
+        </div>
+      </form>
+      <div class="row ">
+        <div class="col-12 ">
+          <grid-cs [data]="DatosGrid" #gridPrincipal [rowsPerPage]="7" [columnDefs]="columnDefs" [autoHeight]="false"
+            [height]="'350px'" [enablePagination]="false" [rowSelection]="rowSelection" [rowHeight]="20"
+            (selectionChanged)="ChangeSelectionGrid()">
+          </grid-cs>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-12">
+          <label class="lbldatos" style="font-size: 14px;"><i style="color:blue" class='fas fa-square'></i> OP's NO Liberadas X D y S </label>
+          <label class="lbldatos" style="font-size: 14px;"><i style="color:red" class='fas fa-square'></i> OP's Canceladas </label>
+          <label class="lbldatos" style="font-size: 14px;"><i style="color: mediumturquoise" class='fas fa-square'></i> Op's Suspendidas </label>
+          <label *ngIf="VisFolioCorrectivo" class="lbldatos" style="font-size: 14px;"><i style="color: darkcyan" class='fas fa-square'></i> Folio
+            de Acción Correctiva </label>
+          <label class="lbldatos" style="font-size: 14px;"><i style="color: darkorange" class='fas fa-square'></i> Sin Existencia 501 </label>
+
+          <!-- <ng-modal [Size]="'lg'" [Titulo]="'CONCEPTOS'" [IconoTitulo]="IconoTitulo" #mdl>
+                        <mdl-tipocaja [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mdl-tipocaja>
+                    </ng-modal> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <label style="font-size: 14px;">Comentario:</label>
+          <textarea [(ngModel)]="Comentario" class="form-control form-control-sm"></textarea>
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+          <label style="font-size: 14px;">Fecha Inicio:</label>
+          <input name="FechaProd" [(ngModel)]="FecInicioProd" (ngModelChange)="ChangeFecInicioProd($event)" class="form-control form-control-sm"
+            type="date">
+        </div>
+        <div class="col-12 col-sm-1 col-md-1 col-lg-1" style="margin-top: 29px;">
+          <button type="button" class="btn btn-secondary btn-sm" (click)="btnFijaFechaEvent()" [disabled]="disBtnAgregaProg">{{btnFijaFecha}}</button>
+        </div>
+      </div>
+      <div *ngIf="VisAntiguo" class="row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <label style="font-size: 14px;">Información de Rollos:</label>
+          <textarea [(ngModel)]="ComRollosAntiguos" class="form-control form-control-sm"></textarea>
+        </div>
+      </div>
+      <div *ngIf="visComentariosMVT" class="row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <label>Comentarios de MVT, Caja nueva o Modificacion capturados por Ventas:</label>
+          <textarea [(ngModel)]="ComentariosMVT" class="form-control form-control-sm"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <label>Especificación de Proceso Corrugadora:</label>
+          <textarea [(ngModel)]="EspProd" class="form-control form-control-sm" disabled></textarea>
+        </div>
+        <div *ngIf="VisGridPesoUnit" class="col-12 col-sm-4 col-md-4 col-lg-4">
+          <label>Peso Unitario</label>
+          <grid-cs [data]="DatosGridPesoUnit" #gridPesoUnitario [rowsPerPage]="7" [columnDefs]="columnPesoUnit"
+            [enablePagination]="true">
+          </grid-cs>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div *ngIf="VisComentarios" class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <label></label>
+          <grid-cs [data]="DatosGridComentarios" #gridComentarios [rowsPerPage]="7" [columnDefs]="columnComentarios"
+            [enablePagination]="true">
+          </grid-cs>
+        </div>
+      </div>
+      <div *ngIf="disAtencion"  class="row">
+        <div class="col-12 col-sm-8 col-md-8 col-lg-8">
+          <label style="font-size: 24px;"><i style="color: yellow;  font-size: 24px;" class="fas fa-exclamation-triangle"></i> Favor de Eliminar de la Lista de Secuencia las OP's Canceladas</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center ">
+          <h5>Versión 18.03.2022.1</h5>
+          <h5>FCAPROGCAT000MW - SECUENCIA DE CORRUGADORA</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<block-ui></block-ui>

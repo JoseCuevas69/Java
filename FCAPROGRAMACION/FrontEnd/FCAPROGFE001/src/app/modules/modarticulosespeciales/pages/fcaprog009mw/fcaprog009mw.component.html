@@ -1,0 +1,146 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">FCAPROG009MW - CATALOGO DE ARTICULOS ESPECIALES</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="fieldset">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-2 form-group">
+                                        <label><strong>Clave Articulo:</strong></label>                               
+                                        <input name="strClaveArticulo" type="text" class="form-control form-control-sm" placeholder="Clave Articulo" [(ngModel)]="filtrosenc.clavearticulo" disabled/>
+                                    </div>
+                                    <div class="col-sm-12 col-md-5 col-lg-5">
+                                        <label><strong>Nombre Articulo:</strong></label>
+                                        <div class="input-group">                                            
+                                            <input name="strDescripcion" type="text" class="form-control form-control-sm" placeholder="Nombre Articulo" [(ngModel)]="filtrosenc.descripcion"  disabled> 
+                                            <div class="input-group-append">
+                                                <button class="btn btn-info btn-sm" (click)="mostrarModal(content)">
+                                                    <i class="fa fa-search"></i> Buscar
+                                                </button>                                                    
+                                            </div>
+                                            
+                                          </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group">
+                                        <label>Velocidad Estandar (Corrugadora)</label>
+                                        <input name="intVelocidadStd"  id="intVelocidadStd" type="text" class="form-control form-control-sm" placeholder="Velocidad" [(ngModel)]="intVelocidad" />
+                                    </div>            
+                                    <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+                                        <div class="form-check form-check-inline">
+                                            <mat-checkbox name="chkSeleccionada"  [(ngModel)]="boochkSeleccionada" (change)="OnChangechkSeleccionada($event)" >Seleccionada</mat-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-4" style="margin-top: 10px;">
+                                    <div class="col-sm-7">
+                                        <button type="button" class="btn btn-success float-right add-button"    (click)="btnGuardar()"> <i class="fa fa-plus"></i> Guardar</button>
+                                        <button type="button"  class="btn btn-default float-right add-button" (click)="btnImprimir()"><i class="fa fa-print"></i> Imprimir</button>
+                                    </div>
+                                </div>
+                                
+
+                        </fieldset>
+                    </div>                    
+                </div>
+
+                <div class="row mt-4" style="margin-top: 10px;">
+                    <div class="col-7">
+                        <!-- [disabled]="booHabilitarBoton" -->
+                        <button type="button" class="btn btn-success float-right add-button"    (click)="btnAgregar()"> <i class="fa fa-plus"></i> Agregar</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row ">
+                <div class="col-7 ">
+                    <grid-ss #gridPrincipal  [serviceFunction]="articuloespserviceService.listarDetalleArticuloEsp" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtrosenc" [enablePagination]="true">
+                    </grid-ss>
+                                        
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 23.11.2021.1</h5>
+                    <h5>FCAPROG009MW - CATALOGO DE ARTICULOS ESPECIALES</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-modal id="Modal" [Size]="'lg'" [Titulo]="'CAPTURA DE VELOCIDAD DE MAQUINAS'" [IconoTitulo] = "IconoTitulo" #mdlparomaquina>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-3 col-md-3 col-lg-3" style="margin-top: 10px;">
+                <label>Maquina:</label>   
+                <select name ="xx" class="form-control form-control" [(ngModel)]="filtros.clavemaquina"  >
+                    <option value="undefined">Seleccione una Maquina</option>  
+                    <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+                <label>Velocidad:</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Velocidad" [(ngModel)]="intVelocidadStd" />
+            </div>            
+        </div>
+    </div>
+    
+    <div class="modal-footer ">
+        <button type="button " class="btn btn-danger" (click)="PopupbtnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+        <button type="button " class="btn btn-success" (click)="PopupbtnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+    </div>
+
+</ng-modal>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Busqueda de Articulos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3 form-group">
+                <label>Clave Articulo:</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Clave Cliente" [(ngModel)]="busquedaArticuloCodigo" >
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+                <label>Nombre Articulo:</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Nombre Cliente"  [(ngModel)]="busquedaArticuloNombre"/>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 form-group btnpading">
+                <button class="btn btn-info btn-sm" (click)="buscarArticulos()">
+                    <i class="fa fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div class="row ">
+                <div class="col-12 ">
+                    <grid-ss #gridBuscarArticulos  [serviceFunction]="articuloespserviceService.getArticulos" [rowsPerPage]="7" [columnDefs]="columnBuscar" [Filters]="filtros" [enablePagination]="true">
+                    </grid-ss>
+
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="modal-footer"></div>
+</ng-template>

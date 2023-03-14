@@ -1,0 +1,269 @@
+<div class="contenedor">
+  <app-cabecera-pagina [pTitulo]="tituloCabecera"></app-cabecera-pagina>
+
+  <div class="contenido my-2">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
+
+          <h5>Parámetros de Búsqueda de Arreglos</h5>
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-4">Resistencia Afines:</span>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-7 col-xl-7 mx-0 px-0">
+              <input type="text" [(ngModel)]="txtResistenciaAfines" class="form-control" placeholder="Resistencia Afines" disabled>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 ml-0 pl-0">
+              <input type="checkbox" [(ngModel)]="chkResistenciaAfines" class="ml-2" (click)="clickChkResistenciaAfines()">
+            </div>
+          </div>
+          <!-- <div class="input-group">
+
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-5">Refile Máximo:</span>
+            </div>
+            <div class="col-5 col-sm-5 col-md-5 col-lg-6 col-xl-6 mx-0 px-0">
+              <input type="number" [(ngModel)]="txtRefileMaximo" class="form-control" placeholder="Refile Máximo">
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 ml-0 pl-0">
+              <span class="input-group-text">m.m.</span>
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-5">Refile Máximo:</span>
+            <input type="number" [(ngModel)]="txtRefileMaximo" class="form-control" placeholder="Refile Máximo">
+            <span class="input-group-text">m.m.</span>
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-5">Refile Minimo:&nbsp;</span>
+            </div>
+            <div class="col-5 col-sm-5 col-md-5 col-lg-6 col-xl-6 mx-0 px-0">
+              <input type="number" [(ngModel)]="txtRefileMinimo" class="form-control" placeholder="Refile Minimo">
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 ml-0 pl-0">
+              <span class="input-group-text">m.m.</span>
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-5">Refile Minimo:&nbsp;</span>
+            <input type="number" [(ngModel)]="txtRefileMinimo" class="form-control" placeholder="Refile Minimo">
+            <span class="input-group-text">m.m.</span>
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text">Días Adelantado F.E.</span>
+            </div>
+            <div class="col-7 col-sm-7 col-md-7 col-lg-8 col-xl-8 ml-0 pl-0">
+              <input type="number" [(ngModel)]="txtDiasAdelantadoFE" class="form-control" placeholder="Días Adelantado F.E.">
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text">Días Adelantado F.E.</span>
+            <input type="number" [(ngModel)]="txtDiasAdelantadoFE" class="form-control" placeholder="Días Adelantado F.E.">
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-5">Todos Anchos:&nbsp;</span>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-7 col-xl-7 mx-0 px-0">
+              <input type="text" [(ngModel)]="txtTodosAnchos" class="form-control" placeholder="Todos Anchos" disabled>
+            </div>
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 ml-0 pl-0">
+              <input type="checkbox" [(ngModel)]="chkTodosAnchos" class="ml-2" (click)="clickChkTodosAnchos()">
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-5">Todos Anchos:&nbsp;</span>
+            <input type="text" [(ngModel)]="txtTodosAnchos" class="form-control" placeholder="Todos Anchos" disabled>
+            <input type="checkbox" [(ngModel)]="chkTodosAnchos" class="ml-2" (click)="clickChkTodosAnchos()">
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-4">Anchos Cálculo:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <div class="col-7 col-sm-7 col-md-7 col-lg-8 col-xl-8 ml-0 pl-0">
+              <input type="text" [(ngModel)]="txtAnchosCalculo" class="form-control" placeholder="Anchos Cálculo">
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-4">Anchos Cálculo:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <input type="text" [(ngModel)]="txtAnchosCalculo" class="form-control" placeholder="Anchos Cálculo">
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-4">Largo Min. Progr:&nbsp;&nbsp;</span>
+            </div>
+            <div class="col-5 col-sm-5 col-md-5 col-lg-6 col-xl-6 mx-0 px-0">
+              <input type="number" [(ngModel)]="txtLargoMinProgr" class="form-control" placeholder="Largo Min. Progr">
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 ml-0 pl-0">
+              <span class="input-group-text">M.L.</span>
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-4">Largo Min. Progr:&nbsp;&nbsp;</span>
+            <input type="number" [(ngModel)]="txtLargoMinProgr" class="form-control" placeholder="Largo Min. Progr">
+            <span class="input-group-text">M.L.</span>
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-4">Aumento Pedido:&nbsp;&nbsp;</span>
+            </div>
+            <div class="col-5 col-sm-5 col-md-5 col-lg-6 col-xl-6 mx-0 px-0">
+              <input type="text" [(ngModel)]="txtAumentoPedido" class="form-control" placeholder="Aumento Pedido">
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 ml-0 pl-0">
+              <span class="input-group-text">%</span>
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-4">Aumento Pedido:&nbsp;&nbsp;</span>
+            <input type="text" [(ngModel)]="txtAumentoPedido" class="form-control" placeholder="Aumento Pedido">
+            <span class="input-group-text">%</span>
+          </div> -->
+
+          <div class="row">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4 mr-0 pr-0">
+              <span class="input-group-text pr-4">Scores Máximos:&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <div class="col-7 col-sm-7 col-md-7 col-lg-8 col-xl-8 ml-0 pl-0">
+              <input type="number" [(ngModel)]="txtScoresMaximos" class="form-control" placeholder="Scores Máximos">
+            </div>
+          </div>
+          <!-- <div class="input-group mt-1">
+            <span class="input-group-text pr-4">Scores Máximos:&nbsp;&nbsp;&nbsp;</span>
+            <input type="number" [(ngModel)]="txtScoresMaximos" class="form-control" placeholder="Scores Máximos">
+          </div> -->
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6">
+          <!-- <div class="row mt-2">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <progress class="w-100" max="100" [value]="avanceBarra"></progress>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" [ngStyle]="{'width': avanceBarra + '%'}"></div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row mt-2">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+              <button class="btn btn-info w-100" (click)="refrescarPantalla()">
+                <span class="fas fa-redo"></span>
+                REFRESCAR
+              </button>
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+              <button class="btn btn-warning w-100" (click)="openModalModificacionVariaciones()">
+                <span class="fas fa-edit"></span>
+                MOD. ANCHOS
+              </button>
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+              <button class="btn btn-success w-100" type="button" (click)="clickBtnAplicar()">
+                <!-- <span class="spinner-border spinner-border-sm" [ngStyle]="{visibility: visibleSpinnerAplicar ? 'visible' : 'hidden'}"></span> -->
+                <span class="fas fa-check"></span>
+                APLICAR
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <app-pie-pagina [pVersion]="version" [pTitulo]="tituloPie"></app-pie-pagina>
+</div>
+
+
+<ng-template #mdlModificacionVariaciones let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> MODIFICACION DE VARIACIONES</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <input type="checkbox" id="chkModificar" [(ngModel)]="chkModificar" (click)="clickChkModificar()">
+          <label for="chkModificar">&nbsp;Modificar</label>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <select name="txtTipoMaterial" id="txtTipoMaterial" class="form-control form-control-sm"
+            [ngStyle]="{display: visibleComboModal ? 'block' : 'none'}"
+            [(ngModel)]="valueSelected"
+            (change)="changeCombo()"
+          >
+            <option *ngFor="let dato of dtsDatosCombo" value="{{dato.codigo}}">
+              {{dato.descripcion}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div class="input-group">
+            <span class="input-group-text">Descripción:</span>
+            <input type="text" [(ngModel)]="descripcionSelected" class="form-control" placeholder="Ingrese la descripción">
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <div class="input-group">
+            <span class="input-group-text pr-4">Cantidad:&nbsp;&nbsp;</span>
+            <input type="number" [(ngModel)]="cantidadSelected" class="form-control" placeholder="Ingrese la cantidad">
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <button class="btn btn-danger" (click)="clickBtnEliminar()" [disabled]="!validaCamposLlenosDel()">
+            <span class="fas fa-trash">&nbsp;Eliminar</span>
+          </button>
+          <button class="btn btn-success ml-2" (click)="clickBtnGuardar()" [disabled]="!validaCamposLlenosAct()">
+            <span class="fas fa-check" [innerHtml]="btnGuardar"></span>
+          </button>
+        </div>
+        <!-- <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-end">
+
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close()">
+      <i class="fas fa-times"></i> Cancelar
+    </button>
+  </div>
+</ng-template>
+
+
+
+<block-ui></block-ui>

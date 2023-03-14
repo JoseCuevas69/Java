@@ -1,0 +1,5 @@
+<label>Tipo Remisionado:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="TipoRemisionadoValue" (ngModelChange)="TipoRemisionadoValueChange.emit(TipoRemisionadoValue)">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option *ngFor="let obj of TipoRemisionado " [ngValue]="obj.idTipoRemisionado">{{obj.tipoRemisionado}}</option>
+</select>

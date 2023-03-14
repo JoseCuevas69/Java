@@ -1,0 +1,5 @@
+<label>T. Variación:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="TipoVariacionValue" (ngModelChange)="TipoVariacionValueChange.emit(TipoVariacionValue)">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option *ngFor="let obj of TipoVariacion" [ngValue]="obj.idTipoVariacion">{{obj.descripcion}}</option>
+</select>

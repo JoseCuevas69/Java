@@ -1,0 +1,7 @@
+<label>Método de Pago:</label>
+<select class="form form-control form-control-sm" 
+        [(ngModel)]="seleccionar" 
+        [compareWith]="comparar" 
+        (ngModelChange)="changeMetodoPago($event)">
+    <option *ngFor="let metodoPago of MetodoPago" [ngValue]="metodoPago">{{metodoPago.descripcionMetodoPago}}</option>
+</select>

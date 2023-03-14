@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>{{label}}</label>
+    <select [(ngModel)]="TintaValue" [ngClass]="{'form-control':true, 'required':required}" (change)="TintaValueChange.emit(TintaValue)">
+            <option [ngValue]="0">SELECCIONAR...</option>
+            <option *ngFor="let item of ListaTinta" [ngValue]="item.idTinta">{{item.claveTinta}} , {{item.color}}</option>
+    </select>
+</div>

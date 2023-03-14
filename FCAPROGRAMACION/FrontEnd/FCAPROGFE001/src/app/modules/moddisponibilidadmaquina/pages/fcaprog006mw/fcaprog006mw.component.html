@@ -1,0 +1,96 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">DISPONIBILIDAD DE MÁQUINAS</label>
+  </div>
+  <div class="contenido mt-3">
+    <div id="Contenido" class="container-fluid">
+      <form class="mb-1">
+        <div class="row mt-4">
+          <div class="col-12">
+            <button type="button" class="btn btn-dark float-right add-button" (click)="btnAbrirModal()"><i class="fa fa-copy"></i>
+              Copiar</button>
+            <ng-modal [Size]="'lg'" [Titulo]="'COPIAR'" [IconoTitulo]="IconoTitulo" #mdl>
+              <mdl-copiar (ClickbtnCerrar)="btnCerrarModal()">
+              </mdl-copiar>
+            </ng-modal>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <fieldset class="fieldset">
+              <legend>Filtros</legend>
+              <div class="row">
+                <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                  <div class="form-group">
+                    <lista-maquina [label]="'Máquina:'" [(Value)]="filtros.maquina" (Change)="ChangeMaquina($event)">
+                    </lista-maquina>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="form-group">
+                    <label>Mes:</label>
+                    <select [(ngModel)]="filtros.mes" class="form-control" name="mes">
+                      <option [ngValue]="1">01 Enero</option>
+                      <option [ngValue]="2">02 Febrero</option>
+                      <option [ngValue]="3">03 Marzo</option>
+                      <option [ngValue]="4">04 Abril</option>
+                      <option [ngValue]="5">05 Mayo</option>
+                      <option [ngValue]="6">06 Junio</option>
+                      <option [ngValue]="7">07 Julio</option>
+                      <option [ngValue]="8">08 Agosto</option>
+                      <option [ngValue]="9">09 Septiembre</option>
+                      <option [ngValue]="10">10 Octubre</option>
+                      <option [ngValue]="11">11 Noviembre</option>
+                      <option [ngValue]="12">12 Diciembre</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="col-12 col-sm-2 col-md-2 col-lg-2">
+                  <div class="form-group">
+                    <label>Año:</label>
+                    <select [(ngModel)]="filtros.anio" class="form-control" name="anio">
+                      <option *ngFor="let item of Anios" [ngValue]="item">{{item}}</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                  <button type="button" class="btn btn-primary" (click)="btnBuscar()"><i
+                      class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+      </form>
+      <div class="row ">
+        <div class="col-12 ">
+          <grid-cs #gridPrincipal [(data)]="Datos" [rowsPerPage]="11" [columnDefs]="columnDefs"
+            [enablePagination]="true" [rowClassRules]="rowClassRules">
+          </grid-cs>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-12">
+          <button type="button" class="btn btn-success float-right add-button" (click)="btnGuardar()"
+            style="margin-left: 10px;"><i class="fas fa-save"></i> {{Accionbtn}}</button>
+          <button type="button" class="btn btn-danger float-right add-button" (click)="btnEliminar()"><i
+              class="fas fa-times"></i> Eliminar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center ">
+          <h5>Versión 23.11.2021.1</h5>
+          <h5>FCAPROG006MW - DISPONIBILIDAD DE MÁQUINAS</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

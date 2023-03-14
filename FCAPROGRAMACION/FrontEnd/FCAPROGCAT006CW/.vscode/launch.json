@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Edge",
+      "request": "launch",
+      "type": "pwa-msedge",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
+      "name": "Iniciar localhost",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    /*{
+      "name": "Abrir Articulos Prospectos",
+      "request": "launch",
+      "type": "pwa-msedge",
+      "url": "http://localhost:4200/auth/articulosprospectos/fcavent019cw?pUsuario=000100&pZona=01",
+      "webRoot": "${workspaceFolder}"
+    },*/
+
+  ]
+}

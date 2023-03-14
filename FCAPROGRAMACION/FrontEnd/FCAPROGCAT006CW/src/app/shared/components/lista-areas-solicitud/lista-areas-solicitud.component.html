@@ -1,0 +1,4 @@
+<select id="{{selectId ? selectId : ''}}" [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="value">
+    <option *ngIf="default" [ngValue]="default.idAreaSolMultiple">{{default.nombreAreaSolMultiple}}</option>
+    <option *ngFor="let areaSolicitud of areasSolicitud" [ngValue]="areaSolicitud.idAreaSolMultiple">{{areaSolicitud.nombreAreaSolMultiple}}</option>
+</select>

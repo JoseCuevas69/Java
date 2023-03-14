@@ -1,0 +1,159 @@
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <fieldset class="fieldset">
+                <legend>Datos Importantes</legend>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>CLAVEPAPEL: </label> <input name="strclavepapel" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.clavepapel" placeholder="clavepapel"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>TIPO PAPEL: </label> <input name="strtipopapel"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.tipopapel" placeholder="tipopapel"  /> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10 col-lg-10 form-group"> <label>NOMBRE: </label> <input name="strnombre"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.nombre" placeholder="nombre"  /> </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> 
+                            <label>PROVEEDOR: </label> 
+                            <input name="strproveedor"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.proveedor" placeholder="proveedor"  />
+                            <!--
+                            <input name="strproveedor"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.proveedor" placeholder="proveedor"  /> -->
+                           
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> 
+                            <label>TIPO PROVEEDOR: </label> 
+                            <select name ="strproveedor" class="form-control form-control" [(ngModel)]="DatFormulario.tipoproveedor"  >
+                                <option value="undefined">Seleccione Tipo Proveedor</option>
+                                <option value="AMERICANO">AMERICANO</option>
+                                <option value="INTERPLANTA">INTERPLANTA</option>
+                                <option value="FORANEO">FORANEO</option>
+                                <!--
+                                    FORANEO
+AMERICANO
+INTERPLANTA
+                                    Americano
+                                    InterPlanta
+                                    Foraneo
+                                    <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>-->
+                            </select>                        
+
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>GRAMAJE: </label> <input name="numgramaje"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.gramaje" placeholder="gramaje"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> 
+                            <label>PRESENTACION: </label> 
+                            <!--<input name="strpresentacion"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.presentacion" placeholder="presentacion"  />-->
+                            <select name ="strpresentacion" class="form-control form-control" [(ngModel)]="DatFormulario.presentacion"  >
+                                <option value="undefined">Seleccione Presentacion</option>
+                                <option value="BLANCO">BLANCO</option>
+                                <option value="KRAFT">KRAFT</option>
+                                <!--
+                                    BLANCO
+KRAFT
+                                    Americano
+                                    InterPlanta
+                                    Foraneo
+                                    <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>
+                                    <input name="strtipoproveedor"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.tipoproveedor" placeholder="tipoproveedor"  />     
+                                -->
+                            </select>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                    </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="IsVisField1" >
+        <div class="col-sm-12">
+            <fieldset class="fieldset">
+                <legend>Espesificaciones de Calidad</legend>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>RCT/CCT: </label> <input name="numrctcct" OnlyNumber="true"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.rctcct" placeholder="rctcct"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>CMT MEDIUM: </label> <input name="numcmtmedium" OnlyNumber="true"  type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.cmtmedium" placeholder="cmtmedium"  /> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>MULLEN LINER: </label> <input name="nummullenliner" OnlyNumber="true" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.mullenliner" placeholder="mullenliner"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>CALIBRE: </label> <input name="numcalibre"  OnlyNumber="true" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.calibre" placeholder="calibre"  /> </div>
+                    </div>
+                    <div class="row">
+                
+                    </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="IsVisField2" >
+        <div class="col-sm-12">
+            <fieldset class="fieldset">
+                <legend>Actualiza Datos de Papel Principal</legend>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>PAPEL PRINCIPAL: </label> <input name="strclaveprincipal" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.claveprincipal" placeholder="claveprincipal"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>PAPEL PRINCIPAL ACTUAL: </label> <input name="strclaveprincipal" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.claveprincipal" placeholder="claveprincipal"  /> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-4 form-group"> <label>GRAMAJE: </label> <input name="numgramaje"  readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.gramaje" placeholder="gramaje"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-4 form-group"> <label>PAPEL ALM ROLLOS: </label> <input name="strcodigopapel" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.codigopapel" placeholder="codigopapel"  /> </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2 form-group btnpading">
+                            <button class="btn btn-info btn-sm" (click)="buscarRollos()">
+                                <i class="fa fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>PRECIO/TON: </label> <input name="numprecio ton" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.precioton" placeholder="precio ton"  /> </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-4 form-group"> <label>PESOS M2: </label> <input name="numpesosm2" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.pesosm2" placeholder="pesosm2"  /> </div>
+                        <div class="col-sm-12 col-md-5 col-lg-4 form-group"> <label>PESOS/TONELADA: </label> <input name="numpesostonelada" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.pesostonelada" placeholder="pesostonelada"  /> </div>
+                        <div class="form-check form-check-inline">
+                            <mat-checkbox name="chkSeleccionada"  [(ngModel)]="DatFormulario.dolar" (change)="OnChangechkDollar($event)" >Dollar</mat-checkbox>
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-3 form-group"> <label>DOLAR: </label> <input name="boodolar" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.dolar" placeholder="dolar"  /> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>FLETE/ADUANA: </label> <input name="numfleteaduana" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.fleteaduana" placeholder="fleteaduana"  /> </div>
+                    </div>
+                    <div class="row">
+                
+                    </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="row">     
+        <!--
+
+
+        
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>USOCOSTOS: </label> <input name="boousocostos" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.usocostos" placeholder="usocostos"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>CAPTURACALIDAD: </label> <input name="boocapturacalidad" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.capturacalidad" placeholder="capturacalidad"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>CAPTURACOSTOS: </label> <input name="boocapturacostos" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.capturacostos" placeholder="capturacostos"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>CVEREFHOMO: </label> <input name="strcverefhomo" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.cverefhomo" placeholder="cverefhomo"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>ESTATUS: </label> <input name="booestatus" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.estatus" placeholder="estatus"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>USUARIOINSERT: </label> <input name="strusuarioinsert" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.usuarioinsert" placeholder="usuarioinsert"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>FECHAINSERT: </label> <input name="Dttfechainsert" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.fechainsert" placeholder="fechainsert"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>USUARIOUPDATE: </label> <input name="strusuarioupdate" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.usuarioupdate" placeholder="usuarioupdate"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>FECHAUPDATE: </label> <input name="Dttfechaupdate" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.fechaupdate" placeholder="fechaupdate"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>USUARIODELETE: </label> <input name="strusuariodelete" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.usuariodelete" placeholder="usuariodelete"  /> </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 form-group"> <label>FECHADELETE: </label> <input name="Dttfechadelete" readonly="false" type="text" class="form-control form-control-sm" [(ngModel)]="DatFormulario.fechadelete" placeholder="fechadelete"  /> </div>
+        -->
+    </div>  
+   
+</div>
+<div class="modal-footer ">
+    <button type="button " class="btn btn-danger" (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+    <button type="button " class="btn btn-success" (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+

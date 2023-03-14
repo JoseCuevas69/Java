@@ -1,0 +1,14 @@
+<ng-template #mdlBuscarUsuario let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-search"></i> BUSQUEDA DE USUARIOS ERP</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <i class="fas fa-times" aria-hidden="true"></i>
+  </button>
+    </div>
+    <div class="modal-body">
+        <modal-UsuarioErp #Modal (ItemData)="SeleccionItemData($event)"></modal-UsuarioErp>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close()"><i class="fas fa-times"></i> Cancelar</button>
+    </div>
+</ng-template>

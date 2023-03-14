@@ -1,0 +1,72 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 30px; margin-top: 10px;">CATALOGO DE PROCESOS</label>
+  </div>
+  <div class="contenido mt-3">
+    <div id="Contenido" class="container-fluid">
+      <form class="mb-1">
+        <div class="row">
+          <div class="col-sm-12">
+            <fieldset class="fieldset">
+              <legend>Filtros</legend>
+              <div class="row">
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                  <lista-tipomaquina [label]="'Tipo Maquina:'" [Value]="filtros.TipoMaquina" (ValueChange)="ChangeTipoMaquina($event)"></lista-tipomaquina>
+                </div>
+                <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                  <div class="form-group">
+                    <label>Clave y Descripción:</label>
+                    <input [(ngModel)]="filtros.filtro" name="filtro" type="text" class="form-control"
+                      placeholder="Buscar por Clave y Descripción" (keypress)="KeyPressBuscar($event)">
+                  </div>
+                </div>
+                <div class="col-12 col-sm-2 col-md-2 col-lg-2">
+                  <div class="form-group">
+                    <label>Estatus:</label>
+                    <select name="estatus" class="form-control" [ngModel]="filtros.Estatus" (ngModelChange)="ChangeEstatus($event)">
+                      <option [ngValue]="2">SELECCIONAR...</option>
+                      <option [ngValue]="1">Activo</option>
+                      <option [ngValue]="0">Inactivo</option>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                  <button type="button" class="btn btn-primary" (click)="btnBuscar()"><i
+                      class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregar()"><i
+                class="fa fa-plus"></i> Agregar</button>
+            <ng-modal [Size]="'lg'" [Titulo]="'PROCESO'" [IconoTitulo]="IconoTitulo" #mdl>
+                <mld-proceso [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mld-proceso>
+            </ng-modal>
+          </div>
+        </div>
+      </form>
+      <div class="row ">
+        <div class="col-12 ">
+          <grid-ss #gridPrincipal [serviceFunction]="Servicio.GetProceso" [rowsPerPage]="7" [columnDefs]="columnDefs"
+            [Filters]="filtros" [enablePagination]="true">
+          </grid-ss>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="Pie ">
+    <div class="container ">
+      <div class="row ">
+        <div class="col-xs-12 col-md-12 text-center ">
+          <h5>Versión 23.11.2021.1</h5>
+          <h5>FCAPROGCAT009CW - CATALOGO DE PROCESOS</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

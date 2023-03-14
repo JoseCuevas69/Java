@@ -1,0 +1,80 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+            <lista-cargoareacap #AreaCap [label]="'Área Captura:'" [filtro]="true" [Value]="this.DatFormulario.claveArea" (ValueChange)="ChangeAreaCaptura($event)" [required]="CamposObligatorios.claveArea" [disabled]="disArea"></lista-cargoareacap>
+          </div>
+          <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+            <button
+            type="button"
+            class="btn btn-success float-right add-button"
+            style="margin-top: 32px;"
+            (click)="btnAbrirAgregarAreasDes()"
+          >
+            <i class="fa fa-plus"></i>
+          </button>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Entra Al Balance?</legend>
+              <div class="row">
+                <div class="col-12">
+                  <mat-radio-group [(ngModel)]="DatFormulario.balance">
+                    <mat-radio-button [value]="true">SI </mat-radio-button>
+                    <mat-radio-button style="margin-left: 15px;" [value]="false">NO </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+            <lista-cargoareacap #AreaCar [label]="'Área Cargo:'"  [filtro]="false" [(Value)]="this.DatFormulario.claveCargo"  (ValueChange)="ChangeCargo($event)"  [required]="CamposObligatorios.claveCargo" [disabled]="disCargo"></lista-cargoareacap>
+          </div>
+          <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+            <button
+            type="button"
+            class="btn btn-success float-right add-button"
+            style="margin-top: 32px;"
+            (click)="btnAbrirAgregarAreasDes()"
+          >
+            <i class="fa fa-plus"></i>
+          </button>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="fieldset">
+              <legend>Objetivos</legend>
+              <div class="row">
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                    <input-camposobligatorios [Titulo]="'Estadar:'" [type]="'number'" [(Data)]="+DatFormulario.objetivoEst"
+                    [maxlength]="'10'" [min]="'0'"   (keypress)="keypressTipoNumero($event)" ></input-camposobligatorios>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                    <input-camposobligatorios [Titulo]="'Máximo:'" [type]="'number'" [(Data)]="+DatFormulario.objetivoMax"
+                    [maxlength]="'10'" [min]="'0'"    (keypress)="keypressTipoNumero($event)"  ></input-camposobligatorios>
+                  </div>
+              </div>
+            </fieldset>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <ng-modal [Size]="'md'" [Titulo]="'AGREGAR AREAS DESPERDICIO'" [IconoTitulo]="IconoTitulo" #mdl>
+              <mldagregarareadesperdicio [TipoAccion]="TipoAccion" [Datos]="DatosModal" (ClickbtnCerrar)="btnCerrarModal()"></mldagregarareadesperdicio>
+            </ng-modal>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>

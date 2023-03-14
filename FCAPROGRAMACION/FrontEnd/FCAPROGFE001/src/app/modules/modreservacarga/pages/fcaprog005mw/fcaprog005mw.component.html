@@ -1,0 +1,48 @@
+
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">FCAPROG005MW - CAPTURA DE RESERVA DE CARGA CORRUGADORA</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+
+
+            <div class="row mt-4" style="margin-top: 10px;">
+                <div class="col-12">
+                    <button type="button" class="btn btn-success float-right add-button"   (click)="btnAgregar()" > <i class="fa fa-plus"></i> Agregar</button>
+                    <ng-modal id="Modal" [Size]="'lg'" [Titulo]="'CAPTURA DE RESERVA'"  [IconoTitulo] = "IconoTitulo"  #mdlCapturaCarga>
+                        <!--
+                            [Size]="'lg'" [Titulo]="'CAPTURA DE PAROS'"  -->
+                        <app-mdlreservacarga  [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"  (ClickbtnActualizarGridPopup)="btnActualizarGridPopup()"   ></app-mdlreservacarga>
+                       
+                    </ng-modal>
+                                       
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-12 "> 
+                    <grid-ss #gridPrincipal  [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [serviceFunction]="reservacargaserviceService.listarReservas" [enablePagination]="true" >
+                    </grid-ss>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 23.11.2021.1</h5>
+                    <h5>FCAPROG005MW - CAPTURA DE RESERVA DE CARGA CORRUGADORA</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>U.M. de la Facturación:</label>
+    <select [(ngModel)]="UmFacturacionValue" [ngClass]="{'form-control':true, 'required':required}" (change)="ItemData.emit(UmFacturacionValue)">
+                    <option [ngValue]="0">SELECCIONAR...</option>
+                    <option *ngFor="let item of this.ListaUMFac" [ngValue]="item.idUnidadMedidaFac">{{item.unidadMedidaFac}}</option>
+                </select>
+</div>

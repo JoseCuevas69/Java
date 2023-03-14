@@ -1,0 +1,240 @@
+<div class="contenedor">
+  <div class="cabecera">
+    <label style="margin-left: 20px; margin-top: 10px;">Módulo 1</label>
+  </div>
+
+  <div class="container-fluid">
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Captura Producción</legend>
+
+      <div class="row mt-1">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <input name=""  type="text" class="form-control" placeholder="Programa" [(ngModel)]="programa">
+            <div class="input-group-append">
+              <button class="btn btn-info" type="button" (click)="btnBuscarPrograma()">
+                <span class="fas fa-search"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="txtHoraInicio">Hora Inicio:</label>
+            </div>
+            <input name=""  id="txtHoraInicio" type="time" class="form-control" placeholder="00:00" [(ngModel)]="txtHoraInicio">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="txtHoraFin">Hora Fin:</label>
+            </div>
+            <input name=""  id="txtHoraFin" type="time" class="form-control" placeholder="00:00" [(ngModel)]="txtHoraFin">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mt-2 mt-sm-2 mt-md-2 mt-lg-2 mt-xl-0">
+          <div class="form-check form-check-inline w-100">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="m2_chkUltimoProceso"
+                      [(ngModel)]="optTurno"
+                    />
+                  <label class="form-check-label" for="chkModTurno">Turno</label>
+                </div>
+              </div>
+              <select title="" name="turno" class="custom-select" [(ngModel)]="turno"  (change)="txtTurno_Change()" [value]="turno">
+                <option value="1"  [(ngModel)]="turno">Turno 1</option>
+                <option value="2"  [(ngModel)]="turno">Turno 2</option>
+                <option value="3"  [(ngModel)]="turno">Turno 3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-8 col-lg-8 col-xl-4 mt-2 mt-sm-2 mt-md-2 mt-lg-2 mt-xl-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="txtFecha">Fecha:</label>
+            </div>
+            <input name=""  id="txtFecha" type="date" class="form-control" [(ngModel)]="fecha">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 mt-2 mt-sm-2 mt-md-2 mt-lg-2 mt-xl-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="cbxSupervisor">Supervisor:</label>
+            </div>
+            <select  title="" name="supervisores" ngDefaultControl  id="m3_cbxSupervisor" class="custom-select" [(ngModel)]="supervisorSeleccionado">
+              <option *ngFor="let dato of cbxSupervisor" value="{{dato.claveSupervisor}}">
+                {{dato.nombre}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 mt-2 mt-sm-2 mt-md-2 mt-lg-2 mt-xl-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="cbxTripulacion">Tripulación:</label>
+            </div>
+            <select name="tripulaciones" ngDefaultControl  id="m3_cbxTripulacion" class="custom-select" [(ngModel)]="tripulacionSeleccionado">
+              <option *ngFor="let dato of cbxTripulaciones" value="{{dato.idTripulacion}}">
+                {{dato.tripulacion}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <label class="input-group-text justify-content-center">OP</label>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <label class="input-group-text justify-content-center">Artículo</label>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <label class="input-group-text justify-content-center">H. Buenas</label>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <label class="input-group-text justify-content-center">H. Malas</label>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <label class="input-group-text justify-content-center">Cortes</label>
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <label class="input-group-text justify-content-center">M2 Reales</label>
+        </div>
+      </div>
+      <div class="row mt-2" *ngFor="let dato of ops">
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <input name=""  type="text" class="form-control mt-1" readonly value="{{dato.op}}">
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <input name=""  type="text" class="form-control mt-1" readonly value="{{dato.articulo}}">
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+          <input name=""  type="text" class="form-control mt-1" (change)="txtBuenasChange(dato.op, $event, dato.malas)" (focus)="onFocus(dato.op)" value="{{dato.buenas}}">
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <input name=""  type="text" class="form-control mt-1" readonly  value="{{dato.malas}}">
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <input name=""  type="text" class="form-control mt-1" [(ngModel)]="dato.cortes">
+        </div>
+        <div class="col-6 col-sm-4 col-md-2 col-lg-2 col-xl-2 mt-2 mt-sm-2 mt-md-0 mt-lg-0 mt-xl-0">
+          <input name=""  type="text" class="form-control mt-1" readonly [(ngModel)]="dato.m2reales">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="row mt-2">
+      <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-6">
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">Desperdicio</legend>
+          <div class="input-group mt-1">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="txtOP">OP:</label>
+            </div>
+            <input name=""  id="txtOP" type="text" class="form-control" [(ngModel)]="desperdicioSeleccionado">
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <grid-cs #grid1 [columnDefs]="columnasGrid1" [(data)]="datosGrid1" [rowsPerPage]="10" [enablePagination]="true">
+              </grid-cs>
+            </div>
+          </div>
+
+          <input name=""  type="text" hidden>
+        </fieldset>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">Estadistica</legend>
+          <div class="input-group mt-1">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="txtMetrosL">Metros lineales:</label>
+            </div>
+            <input name=""  id="txtMetrosL" type="text" class="form-control"  [(ngModel)]="txtMetrosL">
+          </div>
+        </fieldset>
+
+        <fieldset class="scheduler-border">
+          <legend class="scheduler-border">Datos Calculados</legend>
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12">
+              <div class="input-group mt-1">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="txtM2Brutos">M2 Brutos:</label>
+                </div>
+                <input name=""  id="txtM2Brutos" type="text" class="form-control" readonly [(ngModel)]="txtM2brutos">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12">
+              <div class="input-group mt-1">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="txtM2Netos">M2 Netos:</label>
+                </div>
+                <input name=""  id="txtM2Netos" type="text" class="form-control" readonly [(ngModel)]="txtM2netos">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12">
+              <div class="input-group mt-1">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="txtKgPapel">Kg. Papel:</label>
+                </div>
+                <input name=""  id="txtKgPapel" type="text" class="form-control" readonly [(ngModel)]="txtKgPapel">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12">
+              <div class="input-group mt-1">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="txtHrProd">Hr. Producc:</label>
+                </div>
+                <input name=""  id="txtHrProd" type="text" class="form-control" readonly [(ngModel)]="txtMinutos">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-3 col-lg-2 col-xl-2 text-center mb-2">
+        <br><br>
+        <div class="row">
+          <div class="col-12 col-sm-4 col-md-12 col-lg-12 col-xl-12 mt-0 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0">
+            <button class="btn btn-primary w-100" (click)="btnCalcula()">
+              <span class="fas fa-calculator"></span> Calcula
+            </button>
+          </div>
+          <div class="col-12 col-sm-4 col-md-12 col-lg-12 col-xl-12 mt-2 mt-sm-0 mt-md-2 mt-lg-2 mt-xl-2">
+            <button class="btn btn-danger w-100">
+              <span class="fas fa-times"></span> Cancela
+            </button>
+          </div>
+          <div class="col-12 col-sm-4 col-md-12 col-lg-12 col-xl-12 mt-2 mt-sm-0 mt-md-2 mt-lg-2 mt-xl-2">
+            <button class="btn btn-success w-100" (click)="btnAcepta()">
+              <span class="fas fa-check"></span> {{modo}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<block-ui></block-ui>

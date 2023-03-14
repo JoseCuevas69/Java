@@ -1,0 +1,276 @@
+<div class="contenedor">
+  <app-cabecera-pagina [pTitulo]="tituloCabecera"></app-cabecera-pagina>
+
+  <div class="contenido my-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="
+          col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6
+          d-flex justify-content-start
+          d-md-flex justify-content-md-start
+          d-lg-flex justify-content-lg-start
+          d-xl-flex justify-content-xl-start
+        ">
+          <button type="button" class="btn btn-primary" (click)="clickAgregar()">
+            <span class="fas fa-plus"></span>
+            Agregar
+          </button>
+        </div>
+
+        <div class="
+          col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6
+          d-flex justify-content-end
+          d-md-flex justify-content-md-end
+          d-lg-flex justify-content-lg-end
+          d-xl-flex justify-content-xl-end
+        ">
+          <button type="button" class="btn btn-info mr-2" (click)="refrescarPantalla()">
+            <span class="fas fa-redo"></span>
+            Refrescar
+          </button>
+          <button type="button" class="btn btn-success" (click)="clickGrabarDatos()">
+            <span class="fas fa-check"></span>
+            Grabar
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12 co-md-12 col-lg-12 col-xl-12">
+          <div class="form-check">
+            <input class="form-check-input" [(ngModel)]="chkSelAll" (change)="clickSelAll()" type="checkbox" value="" id="chkSelAll">
+            <label class="form-check-label" for="chkSelAll">
+              Seleccionar todos
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #gridDatos
+            [columnDefs]="columnasGridDatos"
+            [(data)]="listaDatos"
+            [rowsPerPage]="10"
+            [enablePagination]="true">
+          </grid-cs>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-pie-pagina [pVersion]="version" [pTitulo]="tituloPie"></app-pie-pagina>
+</div>
+
+
+<ng-template #Cap002 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> AGREGAR COMBINACIÓN</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5">
+
+          <div class="input-group">
+            <span class="input-group-text">Clave</span>
+            <input type="text" class="form-control" [ngModel]="mdlCap002_ClaveResistencia" disabled>
+            <button type="button" class="btn btn-secondary" (click)="mdlBtnLeePapelesDefault()">
+              <!-- <span class="fa-brands fa-readme"></span> -->
+              Lee Papeles Default
+            </button>
+          </div>
+
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-7 mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0">
+          <div class="input-group">
+            <label class="input-group-text" for="inputGroupSelect01">Clave Preparación</label>
+            <select class="form-control" id="inputGroupSelect01" [(ngModel)]="cbxClaveProceso" >
+              <option *ngFor="let dato of dtsCap002CbxPreparacion" value="{{dato.claveProceso}}">
+                {{dato.descripcion}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #gridDatosLiner
+            [columnDefs]="columnasGridDatosLiners"
+            [(data)]="listaDatosLiners"
+            [rowsPerPage]="4"
+            [enablePagination]="false">
+          </grid-cs>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <grid-cs #gridDatosLiner
+            [columnDefs]="columnasGridDatosCorrugs"
+            [(data)]="listaDatosCorrugs"
+            [rowsPerPage]="3"
+            [enablePagination]="false">
+          </grid-cs>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+          <div class="input-group">
+            <span class="input-group-text">Ancho</span>
+            <input type="number" class="form-control" [(ngModel)]="mdlCap002_Ancho" disabled>
+          </div>
+        </div>
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-success mr-1" (click)="guardarDatos()">
+            <span class="fas fa-check"></span>
+            Guardar
+          </button>
+          <button type="button" class="btn btn-danger ml-1" (click)="modal.close()">
+            <span class="fas fa-times"></span> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close()">
+      <span class="fas fa-times"></span> Cancelar
+    </button>
+  </div> -->
+</ng-template>
+
+
+<ng-template #Cap003 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> SELECCIONAR PAPELES</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+      <!-- <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+          <fieldset>
+            <legend>Agregar</legend>
+            <div class="row">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-check">
+                  <input class="form-check-input" [(ngModel)]="rbtnAgregar" (change)="changeRbtn()" value="0" type="radio" name="rbtnAgregar" id="rbtnDefault">
+                  <label class="form-check-label" for="rbtnDefault">
+                    Default
+                  </label>
+                </div>
+              </div>
+              <div class="
+                col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6
+                d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex
+                justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+              ">
+                <div class="form-check">
+                  <input class="form-check-input" [(ngModel)]="rbtnAgregar" (change)="changeRbtn()" value="1" type="radio" name="rbtnAgregar" id="rbtnCotizacion">
+                  <label class="form-check-label" for="rbtnCotizacion">
+                    Cotización
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <fieldset>
+            <legend>Papeles por Default</legend>
+            <grid-cs #gridDatosPapelDefault
+              [columnDefs]="columnasGridDatosPapelDefault"
+              [(data)]="listaDatosPapelDefault"
+              [rowsPerPage]="3"
+              [enablePagination]="false">
+            </grid-cs>
+          </fieldset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <fieldset>
+            <legend>Papeles de Cotización</legend>
+            <grid-cs #gridDatosPapelCotizacion
+              [columnDefs]="columnasGridDatosPapelCotizacion"
+              [(data)]="listaDatosPapelCotizacion"
+              [rowsPerPage]="3"
+              [enablePagination]="false">
+            </grid-cs>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+<!-- <ng-template #Cap004 let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title"><i class="fa fa-pencil"></i> SE DETECTARON LOS SIGUIENTES ROLLOS EN TRÁNSITO</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); btnCap004NO();">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+          <grid-cs #gridCap004
+            [columnDefs]="columnasGridCap004"
+            [(data)]="objCap004"
+            [rowsPerPage]="5"
+            [enablePagination]="false"
+          >
+          </grid-cs>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7">
+          <label>¿Desea continuar guardando el proceso?</label>
+        </div>
+        <div class="
+          col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5
+          d-flex d-md-flex d-lg-flex d-xl-flex
+          justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end
+          mt-2 mt-sm-2 mt-md-2 mt-lg-0 mt-xl-0"
+        >
+          <button type="button" class="btn btn-success mr-1" (click)="btnCap004SI();">
+            <span class="fas fa-check"></span> SI
+          </button>
+          <button type="button" class="btn btn-danger ml-1" (click)="modal.close(); btnCap004NO();">
+            <span class="fas fa-times"></span> NO
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template> -->

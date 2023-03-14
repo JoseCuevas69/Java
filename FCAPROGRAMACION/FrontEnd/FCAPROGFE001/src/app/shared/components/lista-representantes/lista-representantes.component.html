@@ -1,0 +1,7 @@
+<label *ngIf="displayDefaultLabel">Representantes:</label>
+<select [disabled]="disabled" #select [ngClass]="{'form-control':true, 'required':required}"
+    [(ngModel)]="RepresentantesValue"
+    (ngModelChange)="valueChangeController($event)">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option *ngFor="let obj of Representantes" [ngValue]="obj.codigoRepresentante">{{obj.nombre}}</option>
+</select>

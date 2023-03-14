@@ -1,0 +1,49 @@
+<div class="contenedor">
+  <div class="cabecera">
+      <label style="margin-left: 30px; margin-top: 10px;">CAPTURA PRODUCCION REPORTE GERENCIAL</label>
+  </div>
+  <div class="contenido mt-3">
+      <div id="Contenido" class="container-fluid">
+          <form class="mb-1">
+              <div class="row">
+                  <div class="col-sm-12">
+
+                  </div>
+              </div>
+              <div class="row mt-4">
+                  <div class="col-12">
+                      <ng-modal [Size]="'lg'" [Titulo]="'EDICION DE INFORMACION'" [IconoTitulo]="IconoTitulo" #mdl>
+                          <app-mdl-capprodrepgerencial [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></app-mdl-capprodrepgerencial>
+                      </ng-modal>
+                  </div>
+              </div>
+          </form>
+          <div class="row ">
+              <div class="col-12 ">
+                <grid-ss #gridPrincipal
+                  [serviceFunction]="Servicio.GetData"
+                  [rowsPerPage]="7"
+                  [columnDefs]="columnDefs"
+                  [Filters]="filtros"
+                  [enablePagination]="true">
+                </grid-ss>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <div class="Pie ">
+      <div class="container ">
+          <div class="row ">
+              <div class="col-xs-12 col-md-12 text-center ">
+                  <h5>Versión 02.03.2022.1</h5>
+                  <h5>FCAPROG010MW - CATALOGO CAPTURA DE PRODUCCION</h5>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+

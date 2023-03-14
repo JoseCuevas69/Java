@@ -1,0 +1,25 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12">
+            <label>{{texto}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-checkbox name="ProImp" (change)="changeBorrarProgImp($event)" class="checkbox-label">Borrar Programación Impresoras
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="far fa-check-circle"></i> Aceptar</button>
+</div>
+
+<block-ui></block-ui>

@@ -1,0 +1,4 @@
+<label>Resistencia:</label>
+<select [ngClass]="{'form':true, 'form-control':true, 'required':required}" [(ngModel)]="seleccionar" [compareWith]="comparar" (ngModelChange)="changeResistencia($event)">
+    <option *ngFor="let resistencia of Resistencia" [ngValue]="resistencia">{{resistencia.claveResistencia}}</option>
+</select>

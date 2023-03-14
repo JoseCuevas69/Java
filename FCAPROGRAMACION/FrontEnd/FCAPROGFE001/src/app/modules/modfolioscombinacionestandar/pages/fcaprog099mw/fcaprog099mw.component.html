@@ -1,0 +1,321 @@
+
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">FCAPROG099MW - CAPTURA DE FOLIOS DE COMBINACION ESTANDAR</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+
+            <form class="mb-1">
+                <div>
+                    <mat-tab-group #tabGroup  mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+                        <mat-tab label="Folio">
+                            <div class="container tab-padd">                                
+                                <!--<app-tabfolio></app-tabfolio> -->
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <fieldset class="fieldset">
+                                            <legend>FILTROS</legend>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <fieldset class="fieldset">
+                                                            <legend>TIPO</legend>
+                                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+                                                                <div class="form-check form-check-inline">
+                                                                    <mat-radio-group name="Opciones" [(ngModel)]="strValueOpc">
+                                                                        <mat-radio-button aria-checked="true" value="1">Refile</mat-radio-button>
+                                                                        <mat-radio-button value="2">Cambio Combinacion</mat-radio-button>
+                                                                        <mat-radio-button value="3">Ambos</mat-radio-button>
+                                                                      </mat-radio-group>    
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group">
+                                                    <label>FOLIO: </label> 
+                                                    <div class="input-group">
+                                                        <input name="strfolio" type="text" class="form-control form-control-sm" [(ngModel)]="filtros.folio" placeholder="Folio a Buscar"/>
+                                                        <span class="input-group-btn">
+                                                            <button id="btnfolio" class="btn btn-primary" type="button" (click)="BuscarFolio()"> 
+                                                              <span class="fa fa-search"></span>
+                                                            </button>
+                                                        </span>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">                                   
+                                                    <div class="col-sm-12 col-md-3 col-lg-3 form-group"> 
+                                                        <label>PROGRAMA: </label>
+                                                        <div class="input-group">
+                                                            <input name="strprograma" type="text" [(ngModel)]="filtros.programa" [disabled]="isDisabled" class="form-control" placeholder="Programa a buscar"  /> 
+                                                            <span class="input-group-btn">
+                                                                <button id="btnprograma" class="btn btn-primary" type="button" [disabled]="isDisabled" (click)="BuscarPrograma()"> 
+                                                                  <span class="fa fa-search"></span>
+                                                                </button>
+                                                            </span>
+                                                        </div>  
+                                                    </div> 
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 form-group"> <label>SOLICITO: </label> <input name="strnombre" [(ngModel)]="Permisos.propiedad" disabled="true" type="text" class="form-control form-control-sm"  placeholder="Solicito"  /> </div>
+                                                </div>
+                            
+                                                <div class="row ">
+                                                    <div class="col-12 ">
+                                                        <grid-ss #gridPrincipal  [serviceFunction]="folioscombinacionestandarserviceService.getBuscarOPsxPrograma"  [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                                                        </grid-ss>                                        
+                                                    </div>
+                                                </div>
+                                        </fieldset>                          
+                                    </div>                    
+                                </div>
+
+
+
+                            </div>                            
+                        </mat-tab>
+                        <mat-tab label="Estandares vs Propuestas" [disabled]="booActivar" >
+                            <div class="container tab-padd">
+                                <!--<app-tab-estandaresvspropuestas></app-tab-estandaresvspropuestas>-->
+
+                                <form class="mb-1">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <fieldset class="fieldset">
+                                                <legend>Combinacion Estandar</legend>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Liner 1: </label> <input name="strCEL1" [(ngModel)]="tblDatos002.liner1" type="text"  class="form-control form-control-sm" placeholder="Liner 1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Corrugado1: </label> <input name="strCEC1" [(ngModel)]="tblDatos002.corrugado1" type="text" class="form-control form-control-sm" placeholder="Corrugado 1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Liner 2: </label> <input name="strCEL2" [(ngModel)]="tblDatos002.liner2" type="text" class="form-control form-control-sm" placeholder="Liner 2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Corrugado2: </label> <input name="strCEC2" [(ngModel)]="tblDatos002.corrugado2" type="text" class="form-control form-control-sm" placeholder="Corrugado 2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Liner 3: </label> <input name="strCEL3" [(ngModel)]="tblDatos002.liner3" type="text" class="form-control form-control-sm" placeholder="Liner 3"  /> 
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho L1: </label> <input name="strCEAL1"  [(ngModel)]="tblDatos002.anchol1" type="text" class="form-control form-control-sm" placeholder="Ancho L1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho C1: </label> <input name="strCEAC1" [(ngModel)]="tblDatos002.anchoc1" type="text" class="form-control form-control-sm" placeholder="Ancho C1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho L2: </label> <input name="strCEAL2" [(ngModel)]="tblDatos002.anchol2" type="text" class="form-control form-control-sm" placeholder="Ancho L2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho C2: </label> <input name="strCEAC2" [(ngModel)]="tblDatos002.anchoc2" type="text" class="form-control form-control-sm" placeholder="Ancho C2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho L3: </label> <input name="strCEAL3" [(ngModel)]="tblDatos002.anchol3" type="text" class="form-control form-control-sm" placeholder="Ancho L3"  /> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 10px;">
+                                                               
+                                                </div>                          
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <fieldset class="fieldset">
+                                                <legend>Costo Estandar</legend>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label>Liner 1: </label> <input name="strL1" type="text" class="form-control form-control-sm" placeholder="Liner 1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Corrugado1: </label> <input name="strC1" type="text" class="form-control form-control-sm" placeholder="Corrugado 1"  /> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 10px;">
+                                                               
+                                                </div>                          
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <fieldset class="fieldset">
+                                                <legend>Propuestas</legend>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Liner 1: </label> <input name="strliner1p1" [(ngModel)]="tblPropuestaCmbStd.liner1p1" type="text" class="form-control form-control-sm" placeholder="Liner 1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Corrugado1: </label> <input name="strcorrugado1p1" [(ngModel)]="tblPropuestaCmbStd.corrugado1p1" type="text" class="form-control form-control-sm" placeholder="Corrugado 1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Liner 2: </label> <input name="strliner2p1" [(ngModel)]="tblPropuestaCmbStd.liner2p1" type="text" class="form-control form-control-sm" placeholder="Liner 2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Corrugado2: </label> <input name="strcorrugado2p1" [(ngModel)]="tblPropuestaCmbStd.corrugado2p1" type="text" class="form-control form-control-sm" placeholder="Corrugado 2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Liner 3: </label> <input name="strliner3p1" [(ngModel)]="tblPropuestaCmbStd.liner3p1" type="text" class="form-control form-control-sm" placeholder="Liner 3"  /> 
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho L1: </label> <input name="stranchol1p1" [(ngModel)]="tblPropuestaCmbStd.anchol1p1" type="text" class="form-control form-control-sm" placeholder="Ancho L1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho C1: </label> <input name="stranchoc1p1" [(ngModel)]="tblPropuestaCmbStd.anchoc1p1" type="text" class="form-control form-control-sm" placeholder="Ancho C1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho L2: </label> <input name="stranchol2p1" [(ngModel)]="tblPropuestaCmbStd.anchol2p1" type="text" class="form-control form-control-sm" placeholder="Ancho L2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho C2: </label> <input name="stranchoc2p1" [(ngModel)]="tblPropuestaCmbStd.anchoc2p1" type="text" class="form-control form-control-sm" placeholder="Ancho C2"  /> 
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Ancho L3: </label> <input name="stranchol3p1" [(ngModel)]="tblPropuestaCmbStd.anchol3p1" type="text" class="form-control form-control-sm" placeholder="Ancho L3"  /> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 10px;">
+                                                               
+                                                </div>                          
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <fieldset class="fieldset">
+                                                <legend>Costo Propuesta</legend>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label>Liner 1: </label> <input name="strL1" type="text" class="form-control form-control-sm" placeholder="Liner 1"  /> 
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Corrugado1: </label> <input name="strC1" type="text" class="form-control form-control-sm" placeholder="Corrugado 1"  /> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 10px;">
+                                                               
+                                                </div>                          
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                 </form>                               
+
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Comentarios" [disabled]="booActivar"> 
+                            <div class="container tab-padd">
+                                <!--<app-tabcomentarios></app-tabcomentarios>-->
+                                <form class="mb-1">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                                <fieldset class="fieldset">
+                                                    <legend>-</legend>
+                                                    <div class="row">
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkAtrasoentpapelxcompras">Atraso en ent. Papel por Compras</mat-checkbox> </div>
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkOtros">Otros</mat-checkbox> </div>
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkAnchonodelinea">Ancho No de Linea</mat-checkbox> </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkAtrasoproveedor">Atraso Proveedor</mat-checkbox> </div>
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkCajafuerapresupuesto">Caja Fuera de Presupuesto </mat-checkbox> </div>
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkNosolicitarpapelplaneacion">No Solicitar Papel por Planeacion</mat-checkbox> </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkAgotarpapelsinmovimiento">Agotar Papel Sin Movimiento</mat-checkbox> </div>
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkPresupuestoMenoraSolicitado">Presupuesto Menor a lo Solicitado</mat-checkbox> </div>
+                                                        <div class="col-sm-4"> <mat-checkbox name="chkMenor1000mts">Menor a 1000 mts.</mat-checkbox> </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12"> <mat-checkbox name="chkActualizacioncombinacionestandar">Actualizacion de Combinacion Estandar</mat-checkbox> </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12"> <mat-checkbox name="chkDiferenciasdeanchos">Diferencias de Anchos</mat-checkbox> </div>
+                                                    </div>
+                                
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <label>Comentarios: </label> 
+                                                            <textarea class="form-control rounded-0" id="strComentarios" rows="2" placeholder="Comentarios" ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <label>Causa Modificacion: </label> 
+                                                            <textarea class="form-control rounded-0" id="strCausaModificacion" rows="2" placeholder="Causa Modificacion" ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 10px;">
+
+                                                    </div>
+                                                </fieldset>                                            
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Reporte">
+                            <div class="container tab-padd">
+                                <app-tabreporte></app-tabreporte>
+                            </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                      
+    
+                </div> 
+
+               
+
+                <div class="row mt-4" style="margin-top: 5px;">
+                    <div class="col-10">
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-sm-2">
+                                <button type="btnActivar" hidden="true"  class="btn btn-primary" (click)="btnAgregar()"> Activar</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="btnGenerar" class="btn btn-primary" (click)="btnGenerar()"> <i class="fa fa-plus"></i> Generar</button>
+
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="btnActualizar" ng-model="btnActualizar" [disabled]="isDisabled"  class="btn btn-primary"  (click)="btnGuardar()"> <i class="fa fa-plus"></i> Actualizar</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="btnCancelar" [disabled]="isDisabled" class="btn btn-primary"  (click)="btnCancelar()"> <i class="fa fa-plus"></i> Cancelar</button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="btnImprimir" disabled ={(booActivar)?true:false} class="btn btn-primary" (click)="btnImprimir()"> <i class="fa fa-plus"></i> Imprimir</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+
+
+        </div>
+
+    
+
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 23.11.2021.1</h5>
+                    <h5>FCAPROG099MW - CAPTURA DE FOLIOS DE COMBINACION ESTANDAR</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

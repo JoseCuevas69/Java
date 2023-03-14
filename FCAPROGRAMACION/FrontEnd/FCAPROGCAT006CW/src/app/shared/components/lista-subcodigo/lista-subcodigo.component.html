@@ -1,0 +1,5 @@
+<label>Subcodigo:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="SubcodigoValue" (ngModelChange)="SubcodigoValueChange.emit(SubcodigoValue)" [disabled]="Disabled">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option *ngFor="let obj of Subcodigo" [ngValue]="obj.subcodigo">{{obj.descripcion}}</option>
+</select>

@@ -1,0 +1,132 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">FCAPROG001MW - CATALOGO PARO PROGRAMADO DE MAQUINA</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="fieldset">
+                            <legend>Filtros</legend>
+                                <div class="row">
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <mat-button-toggle-group name="FilTipoParo" [(ngModel)]="filtros.TipoTiempo" aria-label="Font Style" >
+                                            <mat-button-toggle value="PM">Paros Maquina</mat-button-toggle>
+                                            <mat-button-toggle value="EX">Tiempo Extra</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <mat-button-toggle-group name="FilTipoMaquina"  [(ngModel)]="filtros.TipoMaquina" (change)="onValChange($event.value)" aria-label="Font Style" >
+                                            <mat-button-toggle value="IM">Impresora</mat-button-toggle>
+                                            <mat-button-toggle value="CO">Corrugadora</mat-button-toggle>
+                                            <mat-button-toggle value="AC">Especialidades</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label> <strong>Maquina:</strong> </label>   
+                                        <select name ="xx" class="form-control form-control-sm" [(ngModel)]="filtros.ClaveMaquina">
+                                            <option value="undefined">Seleccione una Maquina</option>  
+                                            <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label> <strong>Fecha:</strong> </label>   
+                                        <input name="strFecha" class="form-control form-control-sm" [(ngModel)]="filtros.Fecha"  type="date">
+                                    </div>
+
+                                    <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                                        <button type="button" class="btn btn-primary"  (click)="BuscarParos()" ><i class="fa fa-search"></i> Buscar</button>
+                                    </div>
+                                </div>                          
+                        </fieldset>
+                    </div>                    
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success float-right add-button"  (click)="mostrarModal(content)"  ><i class="fa fa-plus"></i> Agregar</button>
+                        <!--
+                       
+                         <app-mdl-paromaquinas  ></app-mdl-paromaquina>
+                        -->
+                        <ng-modal [Size]="'lg'" [Titulo]="'CONCEPTOS'" [IconoTitulo]="IconoTitulo" #mdlparomaquina>
+                            <mdl-paromaquina></mdl-paromaquina>
+                        </ng-modal>
+                        
+                    </div>
+                </div>
+            </form>
+
+            <div class="row ">
+                <div class="col-12 ">
+                    <grid-ss #gridPrincipal [serviceFunction]="paromaquinaservice.listarParos" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                    </grid-ss>
+                                        
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 23.11.2021.1</h5>
+                    <h5>FCAPROG001MW - CATALOGO PARO PROGRAMADO DE MAQUINA</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Busqueda de Clientes</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                <label> <strong>Inicio Paro:</strong> </label>   
+                <input name="strInicioParo" class="form-control form-control-sm" [(ngModel)]="paro.horaini"  type="datetime-local">
+            </div>
+            <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                <label> <strong>Fin Paro:</strong> </label>   
+                <input name="strFinParo" class="form-control form-control-sm" [(ngModel)]="paro.horafin"  type="datetime-local">
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+                <label>Duracion:</label>
+                <input name="strDuracionParo" type="text" class="form-control form-control-sm" [(ngModel)]="paro.tiempomin" placeholder="Duracion Minutos"  />
+            </div>                 
+        </div>  
+        <div class="row">
+            <div class="col-sm-12 col-md-5 col-lg-5 form-group">
+                <label>Comnetario:</label>
+                <input name="strComentarioParo" type="text" class="form-control form-control-sm" [(ngModel)]="paro.comentario" placeholder="Comentarios"  />
+            </div>      
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 form-group btnpading">
+                <button class="btn btn-info btn-sm"  (click)="AgregarParo()" >
+                    <i class="fa fa-search"></i> Guardar
+                </button>
+            </div>
+        </div>     
+    </div>
+    <div class="modal-footer"></div>
+</ng-template>

@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label for="selZona">Tipo Cliente:</label>
+    <select [(ngModel)]="TipoClienteValue" [ngClass]="{'form-control':true, 'required':required}" id="selTipoCliente" (change)="ItemData.emit(TipoClienteValue)">
+                    <option [ngValue]="0">SELECCIONAR...</option>
+                    <option *ngFor="let item of this.ListaTipoCliente" [ngValue]="item.idTipoCliente">{{item.nomTipoCliente}} ({{item.descripcion}})</option>
+                </select>
+</div>

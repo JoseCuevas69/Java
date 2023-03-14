@@ -1,0 +1,5 @@
+<label>Estatus:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="EstadoSolicitudValue" (ngModelChange)="EstadoSolicitudValueChange.emit(EstadoSolicitudValue)" [disabled]="Disabled">
+    <option [ngValue]="0">SELECCIONAR...</option>
+    <option  *ngFor="let obj of EstadoSolicitud" [ngValue]="obj.idEstatusSeguimiento">{{obj.descripcionEstatus}}</option>
+</select>

@@ -1,0 +1,36 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <section style="display: inline-grid;">
+              <mat-checkbox [ngModel]="chkMod" (ngModelChange)="Changechkmod($event)">Modificar</mat-checkbox>
+            </section>
+          </div>
+          <div *ngIf="MosModificar" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <lista-codvariacion [(Value)]="codVariacion" (Change)="ChangeVariacion($event)"></lista-codvariacion>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <input-camposobligatorios [Titulo]="'Descripción:'" [type]="'text'" [(Data)]="DatFormulario.descripcion"
+              [maxlength]="'30'" [(required)]="CamposObligatorios.descripcion"></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Cantidad:'" [type]="'number'"
+              [(Data)]="+DatFormulario.cantidad" [maxlength]="'15'" [min]="'0'" (event)="keypressTipoNumero($event)" [(required)]="CamposObligatorios.Cantidad"></input-camposobligatorios>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>

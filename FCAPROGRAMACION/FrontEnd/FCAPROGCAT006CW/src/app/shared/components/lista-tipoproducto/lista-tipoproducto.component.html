@@ -1,0 +1,5 @@
+<label>Tipo Producto:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="TipoProductoValue" (ngModelChange)="TipoProductoValueChange.emit(TipoProductoValue)" [disabled]="Disabled">
+    <option [ngValue]="''">SELECCIONAR...</option>
+    <option [disabled]="BloquearDosPiezas && (obj.idTipoProducto === 'BK' || obj.idTipoProducto === 'FT')" *ngFor="let obj of TipoProducto" [ngValue]="obj.idTipoProducto">{{obj.idTipoProducto}} - {{obj.tipoProducto}}</option>
+</select>

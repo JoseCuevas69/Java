@@ -1,0 +1,54 @@
+<div class="contenedor">
+    <div class="cabecera">
+      <label style="margin-left: 30px; margin-top: 10px;">Listado de Flautas</label>
+    </div>
+    <div class="contenido mt-3">
+      <div id="Contenido" class="container-fluid">
+          <form class="mb-1">
+            <div class="row">
+                <div class="col-sm-12">
+                    <fieldset class="fieldset">
+                        <legend>Filtros</legend>
+                        <div class="row">
+                            <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                                <div class="form-group">
+                                    <label>Flauta:</label>
+                                    <input [(ngModel)]="filtros.filtro"  name="filtro" type="text" class="form-control" placeholder="Buscar por Flautas" >
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                                <button type="button" class="btn btn-primary" (click)="btnBuscar()"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-12">
+                <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregar()" ><i class="fa fa-plus"></i> Agregar</button>
+                <ng-modal [Size]="'lg'" [Titulo]="'Flautas'" [IconoTitulo]="IconoTitulo" #mld>
+                  <mld-flautas [TipoAccion]="TipoAccion" [Datos]="Datos" (ClickbtnCerrar)="btnCerrarModal()"></mld-flautas>
+                 </ng-modal>
+              </div>
+          </div>
+        </form>
+          <div class="row ">
+              <div class="col-12 ">
+                <grid-ss #gridFlautas [serviceFunction]="Servicio.ListarFlautas" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                </grid-ss>
+              </div>
+          </div>
+
+      </div>
+  </div>
+    <div class="Pie">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 text-center ">
+            <h5>Versión 08.12.2021.1</h5>
+            <h5>ERPGRALFE001 - Catalogo de Flautas</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

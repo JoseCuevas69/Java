@@ -1,0 +1,104 @@
+<!--<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">FCAPROGCAT006CW - CATALOGO HORARIOS DE OPERACION DE MAQUINA</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <fieldset class="fieldset">
+                            <legend>Filtros</legend>
+
+                                <div class="row">
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label> <strong>Maquina:</strong> </label>   
+                                        <select name ="xx" class="form-control form-control-sm" [(ngModel)]="filtros.ClaveMaquina">
+                                            <option value="undefined">Seleccione una Maquina</option>  
+                                            <option  [ngValue]="maquina.claveMaquina" *ngFor="let maquina of Maquinas" >{{maquina.nombre}}</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label> <strong>Fecha:</strong> </label>   
+                                        <input name="strFecha" class="form-control form-control-sm" [(ngModel)]="filtros.Fecha"  type="date">
+                                    </div>
+
+                                    <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                                        <button type="button" class="btn btn-primary"  (click)="BuscarParos()" ><i class="fa fa-search"></i> Buscar</button>
+                                    </div>
+                                </div>    
+                                <div class="row">
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label> <strong>Inicio Primero:</strong> </label>   
+                                        <input name="inicioprimero" class="form-control form-control-sm" [(ngModel)]="filtros.Fecha"  type="time">
+                                    </div>
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                        <label> <strong>Fin Primero:</strong> </label>   
+                                        <input name="inicioprimero" class="form-control form-control-sm" [(ngModel)]="filtros.Fecha"  type="time">
+                                    </div>
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-4" style="margin-top: 10px;">
+                                         <div class="form-check">
+                                            <input
+                                              mdbCheckbox
+                                              class="form-check-input"
+                                              type="checkbox"
+                                              value=""
+                                              id="flexCheckDefault"
+                                            />
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Activo Primero
+                                            </label>
+                                          </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                </div>
+                                <div class="row">
+                                    
+                                </div>
+
+                        </fieldset>
+                    </div>                    
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success float-right add-button"  (click)="mostrarModal(content)"  ><i class="fa fa-plus"></i> Agregar</button>
+
+                        <ng-modal [Size]="'lg'" [Titulo]="'CONCEPTOS'" [IconoTitulo]="IconoTitulo" #mdlparomaquina>
+                            <mdl-paromaquina></mdl-paromaquina>
+                        </ng-modal>
+                        
+                    </div>
+                </div>
+            </form>
+
+            <div class="row ">
+                <div class="col-12 ">
+                    <grid-ss #gridPrincipal [serviceFunction]="paromaquinaservice.listarParos" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true">
+                    </grid-ss>
+                                        
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 23.11.2021.1</h5>
+                    <h5>FCAPROGCAT006CW - CATALOGO HORARIOS DE OPERACION DE MAQUINA</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->

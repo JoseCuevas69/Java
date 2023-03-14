@@ -1,0 +1,56 @@
+﻿USE [CecsoPlan01]
+GO
+
+/****** Object:  UserDefinedTableType [dbo].[CMODAT020TD_001]    Script Date: 02/11/2022 01:50:35 p.m. ******/
+CREATE TYPE [dbo].[CMODAT020TD_001] AS TABLE(
+	[Value00] [int] NULL,
+	[Value01] [varchar](50) NULL,
+	[Value02] [varchar](50) NULL,
+	[Value03] [varchar](50) NULL,
+	[Value04] [int] NULL,
+	[Value05] [int] NULL,
+	[Value06] [bit] NULL,
+	[Value07] [int] NULL,
+	[Value08] [bit] NULL,
+	[Value09] [varchar](50) NULL,
+	[Value10] [varchar](50) NULL,
+	[Value11] [varchar](50) NULL,
+	[Value12] [int] NULL,
+	[Value13] [varchar](50) NULL,
+	[Value14] [varchar](50) NULL,
+	[Value15] [int] NULL,
+	[Value16] [varchar](50) NULL,
+	[Value17] [varchar](50) NULL,
+	[Value18] [varchar](50) NULL,
+	[Value19] [varchar](50) NULL,
+	[Value20] [varchar](50) NULL,
+	[Value21] [varchar](50) NULL,
+	[Value22] [varchar](50) NULL,
+	[Value23] [varchar](50) NULL,
+	[Value24] [bit] NULL,
+	[Value25] [bit] NULL,
+	[Value26] [bit] NULL,
+	[Value27] [decimal](18, 2) NULL,
+	[Value28] [decimal](18, 2) NULL,
+	[Value29] [varchar](50) NULL,
+	[Value30] [decimal](18, 2) NULL,
+	[Value31] [decimal](18, 2) NULL,
+	[Value32] [varchar](50) NULL,
+	[Value33] [bit] NULL,
+	[Value34] [bit] NULL,
+	[LargoDesarrollo] [decimal](18, 2) NULL,
+	[AnchoDesarrollo] [decimal](18, 2) NULL,
+	[PrimerColor] [varchar](50) NULL,
+	[SegundoColor] [varchar](50) NULL,
+	[TercerColor] [varchar](50) NULL,
+	[CuartoColor] [varchar](50) NULL,
+	[MinutosProduccion] [int] NULL,
+	[Electronico] [bit] NULL,
+	[Status] [varchar](50) NULL,
+	[LiberadoDS] [int] NULL,
+	[PSI] [decimal](18, 2) NULL,
+	[EnAtencion] [int] NULL
+)
+GO
+
+

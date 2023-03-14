@@ -1,0 +1,7 @@
+<div class="form-group">
+  <label>{{label}}</label>
+  <select [(ngModel)]="Value" [ngClass]="{'form-control':true, 'required':required}"  (change)="change(Value)">
+          <option [ngValue]="''">SELECCIONAR...</option>
+          <option *ngFor="let item of Lista" [ngValue]="item.claveMaquina">{{item.claveMaquina}} , {{item.nombre}}</option>
+  </select>
+</div>

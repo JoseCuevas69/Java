@@ -1,0 +1,422 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">CATALOGO DE MAQUINAS</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <!--<div class="row" [hidden]="!ocultarCaptura">
+                <div class="col-4">
+                    <button type="button" (click)="Captura()" class="btn btn-success float-left add-button" ><i class="fa fa-plus"></i> Agregar Maquina</button>
+                </div>
+                <div class="col-8">
+
+                </div>
+            </div>-->
+            <div class="row mt-2" [hidden]="!ocultarCaptura">
+                <div class="col-12">
+                    <div class="card text-center">
+                       <!-- <div class="card-header">
+                          Listado de Maquinas
+                        </div>-->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-5 col-md-5 col-lg-5">
+                                    <div class="form-group">
+                                        <label>Clave Maquina:</label>
+                                        <input [(ngModel)]="filtros.filtro"  name="filtro" type="text" class="form-control" placeholder="Buscar por Clave de Maquina" >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-2 col-md-2 col-lg-2" style="margin-top: 30px;">
+                                    <button type="button" class="btn btn-primary" (click)="btnBuscar()"><i class="fa fa-search"></i></button>
+                                </div>
+                                <div class="col-lg-5" style="margin-top: 30px;">
+                                    <button type="button" (click)="Captura()" class="btn btn-success float-right add-button" ><i class="fa fa-plus"></i> Agregar Maquina</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 co-md-12">
+                                    <grid-ss #gridPrincipal [serviceFunction]="maquinasService.ListarMaquinas" [rowsPerPage]="10" [columnDefs]="columnDefs" [Filters]="filtros"[enablePagination]="true"></grid-ss>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 border" [hidden]="ocultarCaptura">
+                <div class="col-6">
+                    <div class="row mt-1">
+                        <div class="col-4">
+                            <div class="form-row">
+                                <label class="col-form-label">Tipo Maquina</label>
+                                <div class="form-group">
+                                    <select class="form-control" [(ngModel)]="maquinaSelec.tipoMaquina"> 
+                                        <option value="AC">AC</option>
+                                        <option value="IM">IM</option>
+                                        <option value="ES">ES</option>
+                                        <option value="CO">CO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-row">
+                                <label class="col-form-label">Clave Maquina</label>
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="maquinaSelec.claveMaquina" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <div class="form-row">
+                                <label class="col-form-label col-lg-3">Nombre Maquina</label>
+                                <div class="form-group col-lg-9">
+                                    <input type="text" [(ngModel)]="maquinaSelec.nombre" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                                <label>Tintas</label>
+                                <input type="number" [(ngModel)]="maquinaSelec.tintasMax" class="form-control ml-1">
+                        </div>
+                        <div class="col-4">
+                            <label>AnchoMax</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.anchoMax" class="form-control">
+                        </div>
+                        <div class="col-4">
+                                <label>AnchoMaxT</label>
+                                <input type="number" [(ngModel)]="maquinaSelec.anchoMaxT" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                    
+                        <div class="col-4">
+                            
+                                <label>AnchoMaxAlt</label>
+                                <input type="number" [(ngModel)]="maquinaSelec.anchoMaxAlt" class="form-control">
+                            
+                        </div>
+                        <div class="col-4">
+                            
+                            <label>AnchoMin</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.anchoMin" class="form-control">
+                        
+                        </div>
+                        <div class="col-4">
+                        
+                            <label>LargoMAx</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.largoMax" class="form-control">
+                        
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-4">
+                        
+                            <label>LargoMaxT</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.largoMaxT" class="form-control">
+                        
+                        </div>
+                        <div class="col-4">
+                            
+                                <label>LargoMin</label>
+                                <input type="number" [(ngModel)]="maquinaSelec.largoMin" class="form-control">
+                            
+                        </div>
+                        <div class="col-4">
+                            
+                            <label>Costo Minuto</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.costoMinuto" class="form-control">
+                        
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-4">
+                            <label>Cap. Semanal</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.capacidadSemanal" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            
+                            <label>M2 Hora</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.m2Hora" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <label>Eficiencia</label>
+                            <input type="number" [(ngModel)]="maquinaSelec.eficiencia" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-4">
+                            <label>Salarios Truno</label>
+                            <input type="number" [disabled]="true" [(ngModel)]="maquinaSelec.salariosTurno"  class="form-control">
+                        </div>
+                        <div class="col-4">
+                            
+                        </div>
+                        <div class="col-4">
+                            
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <div class="form-row">
+                                <label class="col-form-label co-lg-2">Proceso</label>
+                                <div class="form-group col-lg-10">
+                                    <select class="form-control" [(ngModel)]="maquinaSelec.tproceso">
+                                        <option *ngFor="let pcs of procesos" [value]="pcs.tProceso">{{pcs.descripcion}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <label class="form-inline" >
+                            <input type="checkbox" [(ngModel)]="maquinaSelec.default" class="form-control">Máquina Default dentro del proceso seleccionado</label>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-6">
+                            <div class="form-row">
+                                <label class="col-form-label col-lg-6">Minutos Estandar</label>
+                                <div class="form-group col-lg-6">
+                                    <input type="number" [(ngModel)]="maquinaSelec.minStd" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-row">
+                                <label class="col-form-label col-lg-6">Turnos por dia</label>
+                                <div class="form-group col-lg-6">
+                                    <input type="number" [(ngModel)]="maquinaSelec.turnosxDia" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <div class="form-row">
+                                <label class="col-form-label col-lg-2">Evaluaciones</label>
+                                <div class="form-group col-lg-10">
+                                    <select class="form-control" [(ngModel)]="maquinaSelec.codEvaluacion" (change)="changeEvalua()">
+                                        <option *ngFor="let evlc of evaluaciones" [value]="evlc.codEvaluacion">{{evlc.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-6">
+                            <label class="form-inline">
+                                <input type="checkbox" (change)="checkEvl($event)" [(ngModel)]="maquinaSelec.evaluaMtto" [disabled]="desabilitaEvaluacion" class="form-control">Evaluacion de Mantenimiento</label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-row">
+                                <label class="col-form-lable col-lg-6">Porcentaje</label>
+                                <div class="form-group col-lg-6">
+                                    <input type="number" [(ngModel)]="maquinaSelec.porcenEvaluaMtto" [disabled]="desabilitaPorcEval" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row mt-1">
+                        <div class="col-4">
+                            <label class="form-inline">
+                                <input type="checkbox" [(ngModel)]="maquinaSelec.troquela">Troquela</label>
+                        </div>
+                        <div class="col-4">
+                            
+                        </div>
+                        <div class="col-4">
+                            <button type="button"  class="btn btn-success float-left add-button" (click)="agregaDesperdicio()" ><i class="fa fa-plus"></i> Agregar Desperdicios</button>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-1">
+                        <div class="col-12">
+                            <grid-cs #gridDesperdicioscap
+                            [rowsPerPage]="7"
+                            [columnDefs]="columnDefsDesperdicioscap"
+                            [(data)]="desperdicioDatacap"
+                            (onReady)="gridReadycap($event)">
+                            </grid-cs>  
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-4">
+                            
+                                
+                        </div>
+                        <div class="col-4">
+                            
+                        </div>
+                        <div class="col-4">
+                            <button type="button"  class="btn btn-primary float-right" (click)="abrirModalPuestos()" ><i class="fa fa-eye"></i>Ver Plantilla </button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    Tripulaciones
+                                </div>
+                                <div class="card-body caja">
+                                    <ul class="tripulaciones">
+                                        <li *ngFor="let tplc of tripulaciones"
+                                          [class.selected]="tplc === tripulacionSeleccionada"
+                                          (click)="onSelect(tplc)">
+                                          {{tplc.nombre}}
+                                        </li>
+                                      </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2  ">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="button" (click)="agregaraAsignadas()"  class="btn btn-primary btn-sm" ><i class="fa fa-arrow-right"></i></button>
+                                </div>
+                                <div class="col-6 ml-3">
+                                    <button type="button" (click)=" devolverAsignadas()"  class="btn btn-primary btn-sm mt-4" ><i class="fa fa-arrow-left"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    Tripulaciones Asignadas
+                                </div>
+                                <div class="card-body caja">
+                                    <ul class="tripulaciones">
+                                        <li *ngFor="let tplcm of tripulacionesPorMaquina"
+                                          [class.selected]="tplcm === tripulacionPorMaquinaSeleccionada"
+                                          (click)=" onSelectPormaq(tplcm)">
+                                          {{tplcm.nombre}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row" [hidden]="ocultarCaptura">
+                <div class="col-8">
+
+                </div>
+                <div class="col-4">
+                    <button type="button" class="btn btn-danger float-right add-button ml-2" (click)="limpia()" ><i class="fas fa-times"></i>Cancelar</button>
+                    <button  class="btn btn-success float-right add-button ml-2" (click)="btnGuarda()" ><i class="fas fa-save">{{nombreAccion}}</i></button>
+                </div>
+            </div>
+        </div>
+              
+    </div>
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h6>Versión 10.12.2021.1</h6>
+                    <h6>FCAPROGCAT008CW - CATALOGO DE MAQUINAS</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+
+<block-ui></block-ui>
+
+
+<ng-template #mdlDesperdicio let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Rango de Desperdicio de maquina: {{this.maquinaSeleccionada.claveMaquina}}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                <grid-cs #gridDesperdiciosview
+               [rowsPerPage]="7"
+               [columnDefs]="columnDefsDesperdiciosview"
+               [(data)]="desperdicioDataview"
+               (onReady)="gridReadyview($event)">
+               </grid-cs>               
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+       
+    </div>
+</ng-template>
+
+<!--Modal captura desperdicio-->
+<ng-template #mdlCapDesperdicio let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Parametros de desperdicio:Corrugadora</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <label>Rango Inicial</label>
+                    <input type="number" [(ngModel)]="varInicial" class="form-control">
+                        
+                </div>
+                <div class="col-4">
+                    <label>Rango Final</label>
+                    <input type="number" [(ngModel)]="varFinal" class="form-control">
+                        
+                </div>
+                <div class="col-4">
+                    <label>Desperdicio</label>
+                    <input type="number" [(ngModel)]="varDesperdicio" class="form-control">
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success float-right add-button" (click)="guardarDesperdicio()" ><i class="fas fa-save"></i>Guarda</button>
+      
+    </div>
+</ng-template>
+
+<!--Modal Puestos-->
+<ng-template #mdlPuestos let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Puestos Autorizados Por Maquina</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                  <grid-ss #gridPuestos [serviceFunction]="maquinasService.ListarPuestos" [rowsPerPage]="10" [columnDefs]="columnDefsPuestos" [enablePagination]="true" [Filters]="maquinaSelec"></grid-ss>          
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+       
+    </div>
+</ng-template>
+
+

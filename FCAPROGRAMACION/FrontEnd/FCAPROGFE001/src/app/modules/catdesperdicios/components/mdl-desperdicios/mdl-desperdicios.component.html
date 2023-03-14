@@ -1,0 +1,183 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+            <input-camposobligatorios
+              [Titulo]="'Descripción Desperdicio:'"
+              [type]="'text'"
+              [(Data)]="DatFormulario.descripcionDesperdicio"
+              [maxlength]="'100'"
+              [min]="'0'"
+              (keyup)="keyupDescripcionMayus($event)"
+              [style]="'text-transform:uppercase;'"
+              [(required)]="CamposObligatorios.descripcionDesperdicio"
+            ></input-camposobligatorios>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <fieldset class="fieldset">
+              <legend>Aplica En</legend>
+              <div class="row">
+                <div class="col-6" style="display: grid">
+                  <mat-checkbox [(ngModel)]="DatFormulario.aplicaImpresora"> Impresoras</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="DatFormulario.aplicaCorrugadora" > Corrugadora</mat-checkbox>
+                </div>
+                <div class="col-6" style="display: grid">
+                  <mat-checkbox [(ngModel)]="DatFormulario.aplicaAcabado"> Acabados</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="DatFormulario.aplicaRecuperacionCaja"> Recuperacion Caja</mat-checkbox>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <fieldset class="fieldset">
+              <legend>Configuaración de Areas Desperdicios</legend>
+              <div class="row">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                  <lista-cargoareacap #AreaCap [label]="'Área Captura:'" [filtro]="true" [Value]="this.DatFormularioConfig.claveArea" (ValueChange)="ChangeAreaCapturaConfig($event)" [required]="CamposObligatoriosConfig.claveArea" [disabled]="disArea"></lista-cargoareacap>
+                </div>
+                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                  <button
+                  type="button"
+                  class="btn btn-success float-right add-button"
+                  style="margin-top: 32px;"
+                  (click)="btnAbrirAgregarAreasDes()"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                  <fieldset class="fieldset">
+                    <legend>Entra Al Balance?</legend>
+                    <div class="row">
+                      <div class="col-12">
+                        <mat-radio-group [(ngModel)]="DatFormularioConfig.balance">
+                          <mat-radio-button [value]="true">SI </mat-radio-button>
+                          <mat-radio-button style="margin-left: 15px;" [value]="false">NO </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                  <lista-cargoareacap #AreaCar [label]="'Área Cargo:'"  [filtro]="false" [(Value)]="this.DatFormularioConfig.claveCargo"  (ValueChange)="ChangeCargoConfig($event)"  [required]="CamposObligatoriosConfig.claveCargo" [disabled]="disCargo"></lista-cargoareacap>
+                </div>
+                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                  <button
+                  type="button"
+                  class="btn btn-success float-right add-button"
+                  style="margin-top: 32px;"
+                  (click)="btnAbrirAgregarAreasDes()"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                  <fieldset class="fieldset">
+                    <legend>Objetivos</legend>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                          <input-camposobligatorios [Titulo]="'Estándar:'" [type]="'number'" [(Data)]="+DatFormularioConfig.objetivoEst"
+                          [maxlength]="'10'" [min]="'0'"   (keypress)="keypressTipoNumero($event)" [(required)]="CamposObligatoriosConfig.estandar"></input-camposobligatorios>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                          <input-camposobligatorios [Titulo]="'Máximo:'" [type]="'number'" [(Data)]="+DatFormularioConfig.objetivoMax"
+                          [maxlength]="'10'" [min]="'0'"    (keypress)="keypressTipoNumero($event)" [(required)]="CamposObligatoriosConfig.maximo"  ></input-camposobligatorios>
+                        </div>
+                    </div>
+                  </fieldset>
+                </div>
+
+              </div>
+              <div class="row mb-2">
+                <div class="col-12">
+                  <button
+                    type="button"
+                    class="btn btn-success float-right add-button"
+                    style="margin-top: 20px;"
+                    (click)="btnGuardarConfig()"
+                  >
+                    <i class="fa fa-plus"></i> {{btnNombreConfig}}
+                  </button>
+                  <button
+                  type="button"
+                  class="btn btn-warning float-right add-button"
+                  style="margin-top: 20px; margin-right: 4px;"
+                  (click)="LimpiarConfig()"
+                >
+                  <i class="fas fa-eraser"></i> Limpiar
+                </button>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <ng-modal [Size]="'md'" [Titulo]="'AGREGAR AREAS DESPERDICIO'" [IconoTitulo]="IconoTitulo" #mdl>
+                    <mldagregarareadesperdicio [TipoAccion]="'A'" [Datos]="DatosModal" (ClickbtnCerrar)="btnCerrarModalConfig()"></mldagregarareadesperdicio>
+                  </ng-modal>
+                   <!-- <ng-modal [Size]="'lg'" [Titulo]="'AGREGAR CONFIG. DE AREAS DESPERDICIO'" [IconoTitulo]="IconoTitulo" #mdl>
+                    <mldconfig-area-desperdicio [TipoAccion]="TipoAccionConfig" [Datos]="DatosModal" (ClickbtnCerrar)="btnCerrarModal()" (GuardarConfig)="GuardarConfig($event)"></mldconfig-area-desperdicio>
+                  </ng-modal> -->
+                </div>
+              </div>
+
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <fieldset class="fieldset">
+          <legend>Filtros Areas Desperdicios</legend>
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <lista-cargoareacap
+                [label]="'Área Captura:'"
+                [filtro]="true"
+                [Value]="this.filtros.ClaveArea"
+                (ValueChange)="ChangeAreaCapturaDes($event)"
+              ></lista-cargoareacap>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <lista-cargoareacap
+                [label]="'Área Cargo:'"
+                [filtro]="false"
+                [(Value)]="this.filtros.ClaveCargo"
+                (ValueChange)="ChangeCargoDes($event)"
+              ></lista-cargoareacap>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <grid-cs
+                #gridPrincipal
+                [data]="DatosFiltrados"
+                [rowsPerPage]="7"
+                [columnDefs]="columnDefs"
+                [enablePagination]="true"
+              >
+              </grid-cs>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button " class="btn btn-danger" (click)="btnCerrar()">
+    <i class="fas fa-times"></i> Cerrar
+  </button>
+  <button type="button " class="btn btn-success" (click)="btnGuardar()">
+    <i class="fas fa-save"></i> Guardar
+  </button>
+</div>
+
+<block-ui></block-ui>

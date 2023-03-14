@@ -1,0 +1,57 @@
+
+.contenedor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecera {
+  background: #ffb240;
+  flex: 0.01;
+  color: white;
+  background-color: #ffb240;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.contenido {
+  flex: 1;
+}
+
+.Pie {
+  flex: 0;
+  background: #ffb240;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.Pie h5 {
+  font-size: medium;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.vacios {
+  color: red;
+}
+
+.lbldatos{
+ margin-left: 2%;
+}
+
+.lol {
+  font-size: 34px;
+  color: #FFC300;
+}

@@ -1,0 +1,130 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <label style="margin-left: 30px; margin-top: 10px;">CAPTURA RUTAS DE PROCESOS</label>
+    </div>
+    <div class="contenido mt-3">
+        <div id="Contenido" class="container-fluid">
+            <form class="mb-1">
+                <div class="row">
+                    <div class="col-6 border-right">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button"  class="btn btn-success float-left add-button" (click)="btnAgregar_click()" ><i class="fa fa-plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <grid-ss #gridRutas [serviceFunction]="rutasServices.ListarRutas" [rowsPerPage]="10" [columnDefs]="columnDefs" [enablePagination]="true"></grid-ss>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button"  class="btn btn-primary float-right add-button" (click)="verReporte_click()" ><i class="fa fa-chart-bar"></i> Reporte</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" [hidden]="!captura_visible">
+                        <div class="row">
+                            <div class="col-5">
+                                <fieldset class="fieldset">
+                                    <legend>Captura Ruta de Proceso</legend>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="input-group">
+                                                <label class="mt-2">Clave</label>
+                                                <input type="text" class="form-control ml-2" [(ngModel)]="encabezadoRutasProcesos.clave" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                                <label>Descripcion:</label>
+                                                <textarea class="form-control" style="resize: none;" [(ngModel)]="encabezadoRutasProcesos.descripcion" [ngModelOptions]="{standalone: true}"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-7">
+                                <fieldset class="fieldset">
+                                    <legend>Secuancia del Proceso</legend>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6>Maq1. <span class="badge badge-secondary">{{encabezadoRutasProcesos.m1}}</span></h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <mat-checkbox [(ngModel)]="detalles.mx2M1" name="mx21">Procesar 2 veces</mat-checkbox>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-checkbox [(ngModel)]="detalles.pegaM1" name="pega1">Pega</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6>Maq2. <span class="badge badge-secondary">{{encabezadoRutasProcesos.m2}}</span></h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <mat-checkbox [(ngModel)]="detalles.mx2M2" name="mx22">Procesar 2 veces</mat-checkbox>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-checkbox [(ngModel)]="detalles.pegaM2" name="pega2">Pega</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6>Maq3. <span class="badge badge-secondary">{{encabezadoRutasProcesos.m3}}</span></h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <mat-checkbox [(ngModel)]="detalles.mx2M3" name="mx23">Procesar 2 veces</mat-checkbox>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-checkbox [(ngModel)]="detalles.pegaM3" name="pega3">Pega</mat-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6>Maq4. <span class="badge badge-secondary">{{encabezadoRutasProcesos.m4}}</span></h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <mat-checkbox [(ngModel)]="detalles.mx2M4" name="mx24">Procesar 2 veces</mat-checkbox>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <mat-checkbox [(ngModel)]="detalles.pegaM4" name="pega4">Pega</mat-checkbox>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <grid-cs #gridProcesos
+                                [rowsPerPage]="10"
+                                [columnDefs]="columnDefsPro"
+                                [(data)]="procesosRutas"
+                                (onReady)="gridReady($event)">
+                                </grid-cs>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button type="button"  class="btn btn-danger float-right add-button ml-2 " (click)="btnCancela_click()" ><i class="fa fa-times"></i> Cancelar</button>
+                                <button type="button"  class="btn btn-success float-right add-button " (click)="btnGuarda_click()" ><i class="fa fa-save"></i> Guardar</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> 
+    <div class="Pie ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-xs-12 col-md-12 text-center ">
+                    <h5>Versión 05.01.2022.1</h5>
+                    <h5>FCAPROD002MW - CAPTURA ESTANDARES IMPRESORAS</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<block-ui></block-ui>

@@ -1,0 +1,65 @@
+.contenedor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecera {
+  background: #ffb240;
+  flex: 0.09;
+  color: white;
+  background-color: #ffb240;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contenido {
+  flex: 1;
+}
+
+.Pie {
+  flex: 0;
+  background: #ffb240;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.Pie h5 {
+  font-size: medium;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.vacios {
+  color: red;
+}
+
+.borderHoja {
+  border-top: 2px dashed rgb(5, 45, 85);
+  border-bottom: 2px dashed rgb(5, 45, 85);
+  margin-top: 4px;
+  height: 90px;
+}
+
+.DivDesarrollo {
+  border: 1px solid #369;
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  box-shadow: 2px 2px 5px #999;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

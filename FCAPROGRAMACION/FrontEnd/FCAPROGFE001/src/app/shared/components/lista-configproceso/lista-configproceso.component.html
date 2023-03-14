@@ -1,0 +1,7 @@
+<label>Proceso:</label>
+<div class="input-group mb-3">
+    <select id="Control" [ngClass]="{'form':true, 'form-control':true, 'required':required}" [(ngModel)]="seleccionar" (change)="change(seleccionar)" [disabled]="Disabled">
+      <option [ngValue]="0">SELECCIONAR...</option>
+      <option *ngFor="let proceso of Proceso" [ngValue]="proceso.idProceso">{{proceso.nombre}}</option>
+    </select>
+</div>

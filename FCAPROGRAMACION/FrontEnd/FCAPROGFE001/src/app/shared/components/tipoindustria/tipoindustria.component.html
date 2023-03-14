@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label>Industria:</label>
+    <select [(ngModel)]="IndustriaValue" [ngClass]="{'form-control':true, 'required':required}" (change)="ItemData.emit(IndustriaValue)">
+                    <option value="sel">SELECCIONAR...</option>
+                    <option *ngFor="let item of this.ListaIndustria" [value]="item.codTipoIndustria">{{item.descripcion}}</option>
+    </select>
+</div>

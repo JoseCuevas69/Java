@@ -1,0 +1,90 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Clave:'" [type]="'text'" [(Data)]="DatFormulario.clave"
+              [maxlength]="'10'" [(required)]="CamposObligatorios.clave" [Disabled]="disClv"></input-camposobligatorios>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Clave Inglés:'" [type]="'text'" [(Data)]="DatFormulario.claveIngles"
+              [maxlength]="'15'"></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <lista-presentacion [PresentacionValue]="DatFormulario.presentacion"
+              (PresentacionValueChange)="ChangePresentacion($event)" [required]="CamposObligatorios.presentacion">
+            </lista-presentacion>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregarMedium()" ><i class="fa fa-plus"></i> Agregar Medium</button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-success float-right add-button" (click)="btnAgregarLiner()" ><i class="fa fa-plus"></i> Agregar Liner</button>
+          </div>
+          <ng-modal [Size]="'lg'" [Titulo]="'BUSQUEDA DE PAPEL'" [IconoTitulo]="'fa fa-search'" #mdl>
+            <mdl-buscarpapel (dataChange)="ChangeBuscarPapel($event)" [filtro]="TipoPapel" (cancel)="btnCerrarModal()"></mdl-buscarpapel>
+          </ng-modal>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <label>Medium:</label>
+            <div *ngFor="let item of ArrMedium; let i=index" class="input-group mb-3">
+              <label style="margin-right: 5px;">Medium {{i+1}}</label>
+              <input [ngModel]="item.clave" type="text" class="form-control" disabled>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="btnEditarMedium(i)" type="button"><i class='far fa-edit'></i></button>
+                <button class="btn btn-outline-secondary" (click)="btnEliminarMedium(i)" type="button"><i class="far fa-window-close"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <label>Liner:</label>
+            <div *ngFor="let item of ArrLiner; let i=index" class="input-group mb-3">
+              <label style="margin-right: 5px;">Liner {{i+1}}</label>
+              <input [ngModel]="item.clave" type="text" class="form-control" disabled>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="btnEditarLiner(i)" type="button"><i class='far fa-edit'></i></button>
+                <button class="btn btn-outline-secondary" (click)="btnEliminarLiner(i)" type="button"><i class="far fa-window-close"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+           <lista-flauta [(ListaFlautaValue)]="DatFormulario.primeraFlauta" [Label]="'Prim. Flauta:'"></lista-flauta>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <lista-flauta [(ListaFlautaValue)]="DatFormulario.segundaFlauta" [Label]="'Seg. Flauta:'"></lista-flauta>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+           <lista-flauta [(ListaFlautaValue)]="DatFormulario.terceraFlauta" [Label]="'Terc. Flauta:'"></lista-flauta>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input-camposobligatorios [Titulo]="'Peso M2:'" [type]="'number'" [(Data)]="+DatFormulario.pesoM2"
+              [maxlength]="'10'" [min]="'0'"  [(required)]="CamposObligatorios.pesoM2" (keypress)="keypressTipoNumero($event)" ></input-camposobligatorios>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label>Descripción:</label>
+            <textarea [(ngModel)]="DatFormulario.descripcion" [ngClass]="{'form-control':true, 'required':CamposObligatorios.descripcion}" class="form-control" maxlength="40" (blur)="blurDescripcion($event)"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer ">
+  <button type="button " class="btn btn-danger " (click)="btnCerrar()"><i class="fas fa-times "></i> Cerrar</button>
+  <button type="button " class="btn btn-success " (click)="btnGuardar()"><i class="fas fa-save "></i> Guardar</button>
+</div>
+
+<block-ui></block-ui>

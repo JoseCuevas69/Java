@@ -1,0 +1,36 @@
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <label *ngIf="Tipo !== ''">{{Tipo === 'clientes' ? 'Cliente:' : 'Prospecto:'}}</label>
+                        <mat-radio-group (change)="radioChange()" *ngIf="Tipo === ''" [(ngModel)]="TipoListar">
+                            <mat-radio-button value="CL">Cliente </mat-radio-button>
+                            <mat-radio-button class="ml-4" value="PR">Prospecto </mat-radio-button>
+                        </mat-radio-group>
+                        <custom-textbox
+                            textBoxId="txtCliente"
+                            [placeholder]="'Clave o Nombre del ' + (TipoListar === 'CL' ? 'Cliente' : 'Prospecto')"
+                            maxlength="50"
+                            [enableSearch]="true"
+                            buttonClass="btn btn-outline-primary"
+                            closeClass="color-primary"
+                            (clearClick)="buscar()"
+                            (searchClick)="buscar()"
+                            [(text)]="filtros.filtro"
+                        ></custom-textbox>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <grid-ss #grid [serviceFunction]="TipoListar === 'CL' ? Servicios.ListarClientes : Servicios.ListarProspectos" [rowsPerPage]="7" [columnDefs]="columnDefs" [Filters]="filtros" [enablePagination]="true"></grid-ss>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="cancelar($event)"><i class="fas fa-times"></i> Cancelar</button>
+</div>

@@ -1,0 +1,5 @@
+<label>{{label}}</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="PaisValue" (ngModelChange)="PaisValueChange.emit(PaisValue)" [disabled]="Disabled">
+    <option [ngValue]="'sel'">SELECCIONAR...</option>
+    <option *ngFor="let obj of Pais" [ngValue]="obj.clavePais">{{obj.nombrePais}}</option>
+</select>

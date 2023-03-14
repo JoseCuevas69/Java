@@ -1,0 +1,5 @@
+<label>CFDI:</label>
+<select [ngClass]="{'form-control':true, 'required':required}" [(ngModel)]="CFDIValue" (ngModelChange)="CFDIValueChange.emit(CFDIValue)">
+    <option [ngValue]="'sel'">SELECCIONAR...</option>
+    <option *ngFor="let cfdi of UsoCFDI" [ngValue]="cfdi.idUsoCfdi">{{cfdi.descripcionCFDI}}</option>
+</select>
